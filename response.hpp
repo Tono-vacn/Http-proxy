@@ -55,6 +55,11 @@ public:
   
   void checkChunked();
 
+  bool getPublic()
+  {
+    return public_;
+  }
+
   std::string getDate()
   {
     return date;
