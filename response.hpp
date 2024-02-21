@@ -14,7 +14,7 @@ class Response
   std::string date;
   std::string last_modified;
   std::string content_type;
-  int content_length = NULL;
+  int content_length = 0;
 
   bool no_cache = false;
   bool no_store = false;
@@ -22,8 +22,10 @@ class Response
   bool public_ = false;
   bool must_revalidate = false;
   bool is_chunked = false;
-  int max_stale = NULL;
-  int max_age = NULL;
+  bool have_max_stale = false;
+  int max_stale = 0;
+  bool have_max_age = false;
+  int max_age = 0;
 
   // std::ofstream &to_log;
   // pthread_mutex_t &mlock;
@@ -58,6 +60,16 @@ public:
   
   void checkChunked();
 
+  bool haveMaxAge()
+  {
+    return have_max_age;
+  }
+
+  bool haveMaxStale()
+  {
+    return have_max_stale;
+  }
+
   bool getPublic()
   {
     return public_;
@@ -76,6 +88,11 @@ public:
   std::string getLastModified()
   {
     return last_modified;
+  }
+
+  std::string getExpires()
+  {
+    return expires;
   }
 
   std::string getContentType()
@@ -113,7 +130,7 @@ public:
     return max_age;
   }
 
-  bool getCache()
+  bool getNoCache()
   {
     return no_cache;
   }
@@ -248,6 +265,7 @@ void Response::readCacheControl(){
 
   size_t max_stale_pos = cache_control.find("max-stale=");
   if(max_stale_pos != std::string::npos){
+    have_max_stale = true;
     size_t max_stale_end = cache_control.find(",", max_stale_pos);
     if(max_stale_end == std::string::npos){
       max_stale_end = pos_end;
@@ -257,6 +275,7 @@ void Response::readCacheControl(){
 
   size_t max_age_pos = cache_control.find("max-age=");
   if(max_age_pos != std::string::npos){
+    have_max_age = true;
     size_t max_age_end = cache_control.find(",", max_age_pos);
     if(max_age_end == std::string::npos){
       max_age_end = pos_end;

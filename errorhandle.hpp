@@ -25,4 +25,12 @@ void outError(const char *msg)
   std::cerr << "Error: " << msg <<std::endl;// strerror(errno) << std::endl;
 }
 
+void outMessage(const char *msg)
+{
+  pthread_mutex_lock(&mlock);
+  to_log << "Message: " << msg << std::endl;
+  pthread_mutex_unlock(&mlock);
+  std::cout << "Message: " << msg << std::endl;
+}
+
 #endif
