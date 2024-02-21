@@ -25,11 +25,13 @@ class Proxy
   const char *port;
   int sc_fd;
   int cc_fd;
+  Cache cache;
+  Server serverP;
 
   public:
-  Proxy(const char *host, const char *port):host_name(host), port(port){}
-  Proxy():host_name(NULL), port(NULL){}
-  Proxy(const char *port):host_name(NULL), port(port){}
+  Proxy(const char *host, const char *port):host_name(host), port(port),cache(100),serverP(port){}
+  Proxy():host_name(NULL), port(NULL),cache(100),serverP(port){}
+  Proxy(const char *port):host_name(NULL), port(port), cache(100), serverP(port){}
 
   void Deamonlize(); 
   void mainProcess(); 
@@ -100,7 +102,7 @@ void Proxy::Deamonlize()
 
 void Proxy::mainProcess()
 {
-  Server serverP(port);
+  
 }
 
 
