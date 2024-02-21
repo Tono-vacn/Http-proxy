@@ -190,6 +190,7 @@ Response * Cache::getResponseFromCache(Request req, int fd){
   // }
   // return &cachePool[k];
 }
+}
   
 
 #endif
