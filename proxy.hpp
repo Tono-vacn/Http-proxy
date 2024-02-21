@@ -5,6 +5,7 @@
 #include "server.hpp"
 #include "response.hpp"
 #include "request.hpp"
+#include "cache.hpp"
 
 #include <sys/stat.h>
 #include<fstream>
