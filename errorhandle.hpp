@@ -13,7 +13,7 @@ void putError(const char* error){//, std::ofstream& to_log, pthread_mutex_t &mlo
   to_log << error << std::endl;
   pthread_mutex_unlock(&mlock);
   std::cerr << error << std::endl;
-  throw  std::exception();
+  throw std::exception();
   //exit(EXIT_FAILURE);
 }
 

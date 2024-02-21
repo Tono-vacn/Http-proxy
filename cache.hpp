@@ -22,11 +22,11 @@
 
 class Cache{
   size_t max_size;
-  std::ofstream & to_log;
+  //std::ofstream & to_log;
   std::queue<std::string> cacheQueue;
   std::map<std::string, Response> cachePool;
 public:
-  Cache(size_t max_size, std::ofstream & to_log):max_size(max_size), to_log(to_log){};
+  Cache(size_t max_size):max_size(max_size){};
   static std::time_t formatTime(const std::string & time){
     std::tm tm = {};
     std::istringstream s(time);
@@ -181,16 +181,25 @@ Response * Cache::getResponseFromCache(Request req, int fd){
   if(new_res->getCode() == "304"){
     to_log << req.getID() << " : Not modified" << std::endl;
     return res;
-  }else if(new_res->getCode() == "200"){
+  }
+  if(new_res->getCode() == "200"){
     to_log << req.getID() << " : Modified" << std::endl;
     cacheRec(*new_res, req);
     return new_res;
+  }
+
+  putError("Invalid response code in Cache::getResponseFromCache");
+  //this one should not be reached
+  exit(EXIT_FAILURE);
+
   // if(cachePool.find(k) == cachePool.end()){
   //   return nullptr;
   // }
   // return &cachePool[k];
 }
-}
+
+
+//}
   
 
 #endif
