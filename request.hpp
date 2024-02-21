@@ -27,6 +27,10 @@ class Request{
       checkCache();
     }
 
+    bool getCache(){
+      return is_cache;
+    }
+
     std::string getRequest(){
       return request;
     }
@@ -50,9 +54,7 @@ class Request{
       return max_stale;
     }
 
-    bool getCache(){
-      return is_cache;
-    }
+
 
     void readMethod();
     //void readPost();

@@ -9,7 +9,7 @@ int main(){
   // std::cout << res.getExpires() << std::endl;
   std::cout << res.getLastModified() << std::endl;
   std::cout << res.getContentLength() << std::endl;
-  std::cout << res.getCache() << std::endl;
+  std::cout << res.getNoCache()<< std::endl;
   std::cout << res.getChunked() << std::endl;
   // std::cout << res.getNoCache() << std::endl;
   // std::cout << res.getNoStore() << std::endl;
@@ -18,6 +18,7 @@ int main(){
   std::cout << res.getMaxStale() << std::endl;
   std::cout << res.getMaxAge() << std::endl;
   std::cout << res.getResponse() << std::endl;
+  // outError("test");
   // std::cout << res.getResponseCode() << std::endl;
   // std::cout << res.getResponseStatus() << std::endl;
   return 0;

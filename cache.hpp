@@ -166,7 +166,25 @@ Response * Cache::getResponseFromCache(Request req, int fd){
   int status = send(fd, validate_req.c_str(), validate_req.length(), 0);
   if(status<0){
     putError("Failed to send validate request");
-  }  
+  }
+
+  std::vector<char> char_buffer(1024);
+  std::string response_recv;
+  while((status = recv(fd, char_buffer.data(), char_buffer.size(), 0)) > 0){
+    response_recv.append(char_buffer.begin(), char_buffer.begin()+status);
+  }
+
+  Response * new_res = new Response(response_recv);
+  outMessage("Received response from Server in Cache::getResponseFromCache");
+  outMessage(new_res->getEtag().c_str());
+
+  if(new_res->getCode() == "304"){
+    to_log << req.getID() << " : Not modified" << std::endl;
+    return res;
+  }else if(new_res->getCode() == "200"){
+    to_log << req.getID() << " : Modified" << std::endl;
+    cacheRec(*new_res, req);
+    return new_res;
   // if(cachePool.find(k) == cachePool.end()){
   //   return nullptr;
   // }
