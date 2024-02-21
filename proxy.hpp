@@ -10,18 +10,13 @@
 #include<fstream>
 #include<fcntl.h>
 #include<vector>
+#include "basic_log.hpp"
 
-std::ofstream to_log("./logs/log.txt", std::ios::app);
+// std::ofstream to_log("./logs/log.txt", std::ios::app);
 
-pthread_mutex_t mlock = PTHREAD_MUTEX_INITIALIZER;
+// pthread_mutex_t mlock = PTHREAD_MUTEX_INITIALIZER;
 
-void outError(const char *msg)
-{
-  pthread_mutex_lock(&mlock);
-  to_log << "Error: " << msg << strerror(errno) << std::endl;
-  pthread_mutex_unlock(&mlock);
-  std::cerr << "Error: " << msg << strerror(errno) << std::endl;
-}
+
 
 class Proxy
 {

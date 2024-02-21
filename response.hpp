@@ -18,7 +18,7 @@ class Response
 
   bool no_cache = false;
   bool no_store = false;
-  //bool private_ = false;
+  bool private_ = false;
   bool public_ = false;
   bool must_revalidate = false;
   bool is_chunked = false;
@@ -61,6 +61,11 @@ public:
   bool getPublic()
   {
     return public_;
+  }
+
+  bool getPrivate()
+  {
+    return private_;
   }
 
   std::string getDate()
@@ -273,6 +278,10 @@ void Response::readCacheControl(){
 
   if(cache_control.find("public") != std::string::npos){
     public_ = true;
+  }
+
+  if(cache_control.find("private") != std::string::npos){
+    private_ = true;
   }
 
 
