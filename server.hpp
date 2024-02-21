@@ -20,8 +20,11 @@ class Server{
     struct addrinfo *host_info_list;
     const char *port;
     const char *host_name;
+    // std::ofstream & to_log;
+    // pthread_mutex_t & mlock;
 
     Server(const char *port, const char *host_name):socket_fd(0),status(0), host_info_list(NULL) ,port(port),host_name(host_name){initServer();};
+    Server(const char *port):socket_fd(0),status(0), host_info_list(NULL) ,port(port),host_name(NULL){initServer();};
 
     void initServer();
     int acceptConnection(std::string &client_ip);
@@ -49,6 +52,8 @@ class Client{
     struct addrinfo *host_info_list;
     const char *port;
     const char *host_name;
+    // std::ofstream & to_log;
+    // pthread_mutex_t & mlock;
 
     Client(const char *port, const char *host_name):socket_fd(0),status(0), host_info_list(NULL) ,port(port),host_name(host_name){initClient();};
 

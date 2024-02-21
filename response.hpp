@@ -14,7 +14,7 @@ class Response
   std::string date;
   std::string last_modified;
   std::string content_type;
-  int content_length = 0;
+  int content_length = NULL;
 
   bool no_cache = false;
   bool no_store = false;
@@ -22,8 +22,11 @@ class Response
   bool public_ = false;
   bool must_revalidate = false;
   bool is_chunked = false;
-  int max_stale = 0;
-  int max_age = 0;
+  int max_stale = NULL;
+  int max_age = NULL;
+
+  // std::ofstream &to_log;
+  // pthread_mutex_t &mlock;
 
 public:
 
@@ -110,6 +113,11 @@ public:
     return no_cache;
   }
 
+  bool getNoStore()
+  {
+    return no_store;
+  }
+
   bool getRevalidate()
   {
     return must_revalidate;
@@ -146,8 +154,11 @@ void Response::readStatus()
 void Response::readDate()
 {
   size_t pos = response.find("Date: ");
+  if(pos == std::string::npos){
+    return;
+  }
   size_t pos_end = response.find("\r\n", pos);
-  if (pos == std::string::npos || pos_end == std::string::npos)
+  if (pos_end == std::string::npos)
   {
     putError("Invalid response, fail to read date in response");
   }
@@ -157,8 +168,11 @@ void Response::readDate()
 void Response::readExpires()
 {
   size_t pos = response.find("Expires: ");
+  if(pos == std::string::npos){
+    return;
+  }
   size_t pos_end = response.find("\r\n", pos);
-  if (pos == std::string::npos || pos_end == std::string::npos)
+  if (pos_end == std::string::npos)
   {
     putError("Invalid response, fail to read expires in response");
   }
@@ -168,8 +182,11 @@ void Response::readExpires()
 void Response::readEtag()
 {
   size_t pos = response.find("ETag: ");
+  if(pos == std::string::npos){
+    return;
+  }
   size_t pos_end = response.find("\r\n", pos);
-  if (pos == std::string::npos || pos_end == std::string::npos)
+  if (pos_end == std::string::npos)
   {
     putError("Invalid response, fail to read etag in response");
   }
