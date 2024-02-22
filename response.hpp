@@ -9,7 +9,7 @@ class Response
   std::string response;
   std::string response_status;
   std::string response_code;
-  std::string expires; 
+  std::string expires;
   std::string etag;
   std::string date;
   std::string last_modified;
@@ -31,8 +31,9 @@ class Response
   // pthread_mutex_t &mlock;
 
 public:
-
-  Response(std::string raw_response):response(raw_response){
+  Response() = default;
+  Response(std::string raw_response) : response(raw_response)
+  {
     readStatus();
     readEtag();
     readDate();
@@ -42,9 +43,9 @@ public:
     readContentLength();
     readCacheControl();
     checkChunked();
-    //checkCache();
-    // checkRevalidate();
-    // checkMaxStale();
+    // checkCache();
+    //  checkRevalidate();
+    //  checkMaxStale();
   }
   void readStatus();
   void readEtag();
@@ -57,7 +58,7 @@ public:
   // void checkRevalidate();
   // void checkMaxStale();
   void readCacheControl();
-  
+
   void checkChunked();
 
   bool haveMaxAge()
@@ -176,7 +177,8 @@ void Response::readStatus()
 void Response::readDate()
 {
   size_t pos = response.find("Date: ");
-  if(pos == std::string::npos){
+  if (pos == std::string::npos)
+  {
     return;
   }
   size_t pos_end = response.find("\r\n", pos);
@@ -186,11 +188,12 @@ void Response::readDate()
   }
   date = response.substr(pos + 6, pos_end - pos - 6);
 }
-  
+
 void Response::readExpires()
 {
   size_t pos = response.find("Expires: ");
-  if(pos == std::string::npos){
+  if (pos == std::string::npos)
+  {
     return;
   }
   size_t pos_end = response.find("\r\n", pos);
@@ -204,7 +207,8 @@ void Response::readExpires()
 void Response::readEtag()
 {
   size_t pos = response.find("ETag: ");
-  if(pos == std::string::npos){
+  if (pos == std::string::npos)
+  {
     return;
   }
   size_t pos_end = response.find("\r\n", pos);
@@ -218,7 +222,8 @@ void Response::readEtag()
 void Response::readLastModified()
 {
   size_t pos = response.find("Last-Modified: ");
-  if(pos == std::string::npos){
+  if (pos == std::string::npos)
+  {
     return;
   }
   size_t pos_end = response.find("\r\n", pos);
@@ -232,7 +237,8 @@ void Response::readLastModified()
 void Response::readContentLength()
 {
   size_t pos = response.find("Content-Length: ");
-  if(pos == std::string::npos){
+  if (pos == std::string::npos)
+  {
     return;
   }
   size_t pos_end = response.find("\r\n", pos);
@@ -246,14 +252,17 @@ void Response::readContentLength()
 void Response::checkChunked()
 {
   size_t pos = response.find("chunked");
-  if(pos != std::string::npos){
+  if (pos != std::string::npos)
+  {
     is_chunked = true;
   }
 }
 
-void Response::readCacheControl(){
+void Response::readCacheControl()
+{
   size_t pos = response.find("Cache-Control: ");
-  if(pos == std::string::npos){
+  if (pos == std::string::npos)
+  {
     return;
   }
   size_t pos_end = response.find("\r\n", pos);
@@ -264,49 +273,53 @@ void Response::readCacheControl(){
   std::string cache_control = response.substr(pos, pos_end - pos);
 
   size_t max_stale_pos = cache_control.find("max-stale=");
-  if(max_stale_pos != std::string::npos){
+  if (max_stale_pos != std::string::npos)
+  {
     have_max_stale = true;
     size_t max_stale_end = cache_control.find(",", max_stale_pos);
-    if(max_stale_end == std::string::npos){
+    if (max_stale_end == std::string::npos)
+    {
       max_stale_end = pos_end;
     }
     max_stale = stoul(cache_control.substr(max_stale_pos + 10, max_stale_end - max_stale_pos - 10));
   }
 
   size_t max_age_pos = cache_control.find("max-age=");
-  if(max_age_pos != std::string::npos){
+  if (max_age_pos != std::string::npos)
+  {
     have_max_age = true;
     size_t max_age_end = cache_control.find(",", max_age_pos);
-    if(max_age_end == std::string::npos){
+    if (max_age_end == std::string::npos)
+    {
       max_age_end = pos_end;
     }
     max_age = stoul(cache_control.substr(max_age_pos + 8, max_age_end - max_age_pos - 8));
   }
 
-  if(cache_control.find("no-cache") != std::string::npos){
+  if (cache_control.find("no-cache") != std::string::npos)
+  {
     no_cache = false;
   }
 
-  if(cache_control.find("must-revalidate") != std::string::npos){
+  if (cache_control.find("must-revalidate") != std::string::npos)
+  {
     must_revalidate = true;
   }
 
-  if(cache_control.find("no-store") != std::string::npos){
+  if (cache_control.find("no-store") != std::string::npos)
+  {
     no_store = true;
   }
 
-  if(cache_control.find("public") != std::string::npos){
+  if (cache_control.find("public") != std::string::npos)
+  {
     public_ = true;
   }
 
-  if(cache_control.find("private") != std::string::npos){
+  if (cache_control.find("private") != std::string::npos)
+  {
     private_ = true;
   }
-
-
-
-
 }
-
 
 #endif

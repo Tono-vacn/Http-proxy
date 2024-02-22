@@ -8,16 +8,14 @@
 #include "cache.hpp"
 
 #include <sys/stat.h>
-#include<fstream>
-#include<fcntl.h>
-#include<vector>
+#include <fstream>
+#include <fcntl.h>
+#include <vector>
 #include "basic_log.hpp"
 
 // std::ofstream to_log("./logs/log.txt", std::ios::app);
 
 // pthread_mutex_t mlock = PTHREAD_MUTEX_INITIALIZER;
-
-
 
 class Proxy
 {
@@ -33,14 +31,33 @@ class Proxy
   Proxy():host_name(NULL), port(NULL),cache(100),serverP(port){}
   Proxy(const char *port):host_name(NULL), port(port), cache(100), serverP(port){}
 
-  void Deamonlize(); 
-  void mainProcess(); 
+  void Deamonlize();
+  void mainProcess();
+  void handleRequest(Request &request);
 };
 
+void Proxy::handleRequest(Request &request)
+{
+  if (request.getMethod() == "GET")
+  {
+    if (cache.inCache(request))
+    {
+      // Respond from cache
+    }
+    else
+    {
+      // Forward request to server
+      // client?
+      // Response response = client.sendRequest(request);
+      // Cache the response
+      // cache.cacheRec(response,request);
+    }
+  }
+}
 void Proxy::Deamonlize()
 {
   pid_t m_pid = fork();
-  if(m_pid < 0)
+  if (m_pid < 0)
   {
     // pthread_mutex_lock(&mlock);
     // to_log << "Error: fail to fork()" << strerror(errno) << std::endl;
@@ -49,30 +66,31 @@ void Proxy::Deamonlize()
     outError("fail to fork()");
     exit(EXIT_FAILURE);
   }
-  if(m_pid > 0)
+  if (m_pid > 0)
   {
     std::cout << "Daemon process created with pid: " << m_pid << std::endl;
     exit(EXIT_SUCCESS);
   }
   pid_t n_sid = setsid();
-  if(n_sid < 0)
+  if (n_sid < 0)
   {
     outError("fail to create new session");
     exit(EXIT_FAILURE);
   }
 
-  if(chdir("/") < 0)
+  if (chdir("/") < 0)
   {
     outError("fail to change directory to /");
     exit(EXIT_FAILURE);
   }
 
   int null_fd = open("/dev/null", O_RDWR);
-  if(null_fd !=-1){
+  if (null_fd != -1)
+  {
     dup2(null_fd, STDIN_FILENO);
     dup2(null_fd, STDOUT_FILENO);
     dup2(null_fd, STDERR_FILENO);
-    if(null_fd > 2)
+    if (null_fd > 2)
     {
       close(null_fd);
     }
@@ -86,14 +104,14 @@ void Proxy::Deamonlize()
   umask(0);
 
   pid_t l_pid = fork();
-  if(l_pid < 0)
+  if (l_pid < 0)
   {
     outError("fail to fork()");
     exit(EXIT_FAILURE);
   }
-  if(l_pid > 0)
+  if (l_pid > 0)
   {
-    //std::cout << "Daemon process created with pid: " << pid << std::endl;
+    // std::cout << "Daemon process created with pid: " << pid << std::endl;
     exit(EXIT_SUCCESS);
   }
 
@@ -104,7 +122,4 @@ void Proxy::mainProcess()
 {
   
 }
-
-
-
 #endif
