@@ -67,7 +67,7 @@ public:
 
   void initClient();
   // void connectToServer();
-  Response sendRequest(Request& request);
+  //Response sendRequest(Request& request);
 
   ~Client()
   {

@@ -34,10 +34,18 @@ class Proxy
 
   void Deamonlize();
   void mainProcess();
-  static void* handleRequest(void *args);
+
+  //functions for threads
+  static void* recvRequest(void *args);
+  static void* sendGET(Request req, int client_fd, int req_id);
 };
 
-void* Proxy::handleRequest(void *args)
+void * Proxy::sendGET(Request req, int client_fd, int req_id){
+  Client client(req.getPort().c_str(), req.getHost().c_str());
+  
+}
+
+void* Proxy::recvRequest(void *args)
 {
   thread_data *data = static_cast<thread_data*>(args);
   int client_fd = data->client_fd;
@@ -62,6 +70,15 @@ void* Proxy::handleRequest(void *args)
 
   std::string req_str(request_msg.begin(), request_msg.begin() + bytes_recieved);
   Request req(req_str, req_id);
+
+  if(req.getMethod()=="GET"){
+
+  }
+  if(req.getMethod()=="POST"){}
+  if(req.getMethod()=="CONNECT"){}
+  close(client_fd);
+  pthread_exit(NULL);
+  return NULL;
   
 }
 
@@ -149,7 +166,7 @@ void Proxy::mainProcess()
     to_thread_data.client_ip = client_ip;
 
     pthread_t thread;
-    pthread_create(&thread, NULL, handleRequest, &to_thread_data);
+    pthread_create(&thread, NULL, recvRequest, &to_thread_data);
 
   }
   
