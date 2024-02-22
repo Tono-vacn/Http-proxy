@@ -77,21 +77,21 @@ public:
   // int client_fd;
 };
 
-Response Client::sendRequest(Request& request){
-  int status = send(socket_fd, request.getRequest().c_str(), request.getRequest().length(), 0);
-  if(status<0){
-    putError("Failed to send request from client");
-    return Response();
-  }
-  char buffer[4096];
-  int bytes_received = recv(socket_fd, buffer, sizeof(buffer), 0);
-  if(bytes_received<0){
-    putError("Failed to receive response from server");
-    return Response();
-  }
-  Response response(std::string(buffer, bytes_received));
-  return response;
-}
+// Response Client::sendRequest(Request& request){
+//   int status = send(socket_fd, request.getRequest().c_str(), request.getRequest().length(), 0);
+//   if(status<0){
+//     putError("Failed to send request from client");
+//     //return Response();
+//   }
+//   char buffer[4096];
+//   int bytes_received = recv(socket_fd, buffer, sizeof(buffer), 0);
+//   if(bytes_received<0){
+//     putError("Failed to receive response from server");
+//     //return Response();
+//   }
+//   Response response(std::string(buffer, bytes_received));
+//   return response;
+// }
 
 void Server::initServer()
 {

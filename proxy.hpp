@@ -39,32 +39,38 @@ class Proxy
 
 void* Proxy::handleRequest(void *args)
 {
-  // thread_data *data = (thread_data *)request;
-  // if (request.getMethod() == "GET")
-  // {
-  //   if (cache.inCache(request))
-  //   {
-  //     // Respond from cache
-  //   }
-  //   else
-  //   {
-  //     // Forward request to server
-  //     // client?
-  //     // Response response = client.sendRequest(request);
-  //     // Cache the response
-  //     // cache.cacheRec(response,request);
-  //   }
-  // }
+  thread_data *data = static_cast<thread_data*>(args);
+  int client_fd = data->client_fd;
+  int req_id = data->req_id;
+  std::string client_ip = data->client_ip;
+
+  //recieve request from client
+
+  std::vector<char> request_msg(1024*1024);
+  //request_msg.resize(1000*1000);
+  int bytes_recieved = recv(client_fd, request_msg.data(), request_msg.size(), 0);
+  if(bytes_recieved < 0){
+    putError("fail to recieve request from client");
+    //close(client_fd);
+    //return NULL;
+  }
+  if(bytes_recieved == 0){
+    //putError("client closed connection");
+    close(client_fd);
+    return NULL;
+  }
+
+  std::string req_str(request_msg.begin(), request_msg.begin() + bytes_recieved);
+  Request req(req_str, req_id);
+  
 }
+
+
 void Proxy::Deamonlize()
 {
   pid_t m_pid = fork();
   if (m_pid < 0)
   {
-    // pthread_mutex_lock(&mlock);
-    // to_log << "Error: fail to fork()" << strerror(errno) << std::endl;
-    // pthread_mutex_unlock(&mlock);
-    // std::cerr << "Error: fail to fork()" << strerror(errno) << std::endl;
     outError("fail to fork()");
     exit(EXIT_FAILURE);
   }
