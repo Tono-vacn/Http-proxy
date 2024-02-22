@@ -6,6 +6,7 @@
 #include "response.hpp"
 #include "request.hpp"
 #include "cache.hpp"
+#include "tothread.hpp"
 
 #include <sys/stat.h>
 #include <fstream>
@@ -33,26 +34,27 @@ class Proxy
 
   void Deamonlize();
   void mainProcess();
-  void handleRequest(Request &request);
+  static void* handleRequest(void *args);
 };
 
-void Proxy::handleRequest(Request &request)
+void* Proxy::handleRequest(void *args)
 {
-  if (request.getMethod() == "GET")
-  {
-    if (cache.inCache(request))
-    {
-      // Respond from cache
-    }
-    else
-    {
-      // Forward request to server
-      // client?
-      // Response response = client.sendRequest(request);
-      // Cache the response
-      // cache.cacheRec(response,request);
-    }
-  }
+  // thread_data *data = (thread_data *)request;
+  // if (request.getMethod() == "GET")
+  // {
+  //   if (cache.inCache(request))
+  //   {
+  //     // Respond from cache
+  //   }
+  //   else
+  //   {
+  //     // Forward request to server
+  //     // client?
+  //     // Response response = client.sendRequest(request);
+  //     // Cache the response
+  //     // cache.cacheRec(response,request);
+  //   }
+  // }
 }
 void Proxy::Deamonlize()
 {
@@ -120,6 +122,30 @@ void Proxy::Deamonlize()
 
 void Proxy::mainProcess()
 {
+  int req_id = -1;
+  int client_fd;
+  std::string client_ip;
+  while(true){
+    client_fd = serverP.acceptConnection(client_ip);
+    if(client_fd < 0){
+      outError("fail to accept connection");
+      continue;
+    }
+
+    pthread_mutex_lock(&mlock);
+    req_id++;
+    pthread_mutex_unlock(&mlock);
+
+    thread_data to_thread_data;
+
+    to_thread_data.req_id = req_id;
+    to_thread_data.client_fd = client_fd;
+    to_thread_data.client_ip = client_ip;
+
+    pthread_t thread;
+    pthread_create(&thread, NULL, handleRequest, &to_thread_data);
+
+  }
   
 }
 #endif
