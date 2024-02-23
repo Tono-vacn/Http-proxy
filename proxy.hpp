@@ -70,6 +70,9 @@ void * Proxy::error502(int client_fd, int req_id){
   return nullptr;   
 }
 
+void * Proxy::sendCONNECT(Request req, int client_fd, int req_id){
+}
+
 void * Proxy::sendPOST(Request req, int client_fd, int req_id){
 
 
