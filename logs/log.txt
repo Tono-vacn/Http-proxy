@@ -1,0 +1,523 @@
+Message: Initializing server
+Message: Binding socket
+Message: Server is listening on port 0.0.0.012345
+Message: Proxy started
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: test done
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+fail to recieve request from client
+Message: Initializing server
+Message: Binding socket
+Message: Server is listening on port 0.0.0.012345
+Message: Proxy started
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: test done
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: test done
+fail to recieve request from client
+Message: Initializing server
+Message: Binding socket
+Message: Server is listening on port 0.0.0.012345
+Message: Proxy started
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: CONNECT
+Message: test done
+Message: CONNECT
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: CONNECT
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: CONNECT
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: CONNECT
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: CONNECT
+Message: test done
+fail to recieve request from client
+Message: Initializing server
+Message: Binding socket
+Message: Server is listening on port 0.0.0.012345
+Message: Proxy started
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Initializing server
+Message: Binding socket
+Message: Server is listening on port 0.0.0.012345
+Message: Proxy started
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: CONNECTogs.google.com443ogs.google.com:443
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: ONNECTogs.google.com443ogs.google.com:443
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: NNECTclients4.google.com443clients4.google.com:443
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: NECTwww.google.com443www.google.com:443
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: ECTwww.google.com443www.google.com:443
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: CTwww.google.com443www.google.com:443
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Twww.google.com443www.google.com:443
+Message: Waiting for connection in
+Message: beacons.gcp.gvt2.com443beacons.gcp.gvt2.com:443
+Message: test done
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: test donegoogle.com443google.com:443
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: t donewww.google.com443www.google.com:443
+fail to recieve request from client
+Message: Initializing server
+Message: Binding socket
+Message: Server is listening on port 0.0.0.012345
+Message: Proxy started
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: CONNECTplay.google.com443play.google.com:443
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: ONNECTclients2.google.com443clients2.google.com:443
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: NNECTbeacons5.gvt2.com443beacons5.gvt2.com:443
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: NECTbeacons.gcp.gvt2.com443beacons.gcp.gvt2.com:443
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: test done
+Message: ECTbeacons5.gvt3.com443beacons5.gvt3.com:443
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Tbeacons.gvt2.com443beacons.gvt2.com:443
+Message: test done
+fail to recieve request from client
+Message: Initializing server
+Message: Binding socket
+Message: Server is listening on port 0.0.0.012345
+Message: Proxy started
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: CONNECTwww.google.com443www.google.com:443
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: ONNECTwww.google.com443www.google.com:443
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: NNECToptimizationguide-pa.googleapis.com443optimizationguide-pa.googleapis.com:443
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: NECTwww.google.com443www.google.com:443
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: ECTwww.google.com443www.google.com:443
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: CToptimizationguide-pa.googleapis.com443optimizationguide-pa.googleapis.com:443
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Twww.google.com443www.google.com:443
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: www.google.com443www.google.com:443
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: test doneoptimizationguide-pa.googleapis.com443optimizationguide-pa.googleapis.com:443
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: est donewww.google.com443www.google.com:443
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: st donewww.google.com443www.google.com:443
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: t doneclients2.google.com443clients2.google.com:443
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message:  doneclients4.google.com443clients4.google.com:443
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: donewww.google.com443www.google.com:443
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: onebeacons4.gvt2.com443beacons4.gvt2.com:443
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: neoptimizationguide-pa.googleapis.com443optimizationguide-pa.googleapis.com:443
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: ewww.google.com443www.google.com:443
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: www.google.com443www.google.com:443
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: fail to fork()www.google.com443www.google.com:443
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: il to fork()www.google.com443www.google.com:443
+Message: test done
+fail to recieve request from client
+Message: Initializing server
+Message: Binding socket
+Message: Server is listening on port 0.0.0.012345
+Message: Proxy started
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Initializing server
+Message: Binding socket
+Message: Server is listening on port 0.0.0.012345
+Message: Proxy started
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: 
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: 
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: 
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: 
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: 
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: 
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: 
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: 
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: 
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: 
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: 
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: test done
+Message: Waiting for connection in
+Message: 
+Message: test done
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: 
+Message: 
+Message: test done
+Message: test done
+fail to recieve request from client
