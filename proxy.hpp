@@ -43,7 +43,19 @@ class Proxy
   static void* recvRequest(void *args);
   static void* sendGET(Request req, int client_fd, int req_id);
   static void* error502(int client_fd, int req_id);
+  static void* error400(int client_fd, int req_id);
 };
+
+void * Proxy::error400(int client_fd, int req_id){
+  std::string error_msg = "HTTP/1.1 400 Bad Request\r\nContent-Type: text/html\r\nContent-Length: 0\r\n\r\n";
+  int status = send(client_fd, error_msg.c_str(), error_msg.length(), 0);
+  if (status < 0)
+  {
+    putError("fail to send 400 error to client");
+    return nullptr;
+  }
+  return nullptr;
+}
 
 void * Proxy::error502(int client_fd, int req_id){
   std::string error_msg = "HTTP/1.1 502 Bad Gateway\r\nContent-Type: text/html\r\nContent-Length: 0\r\n\r\n";
