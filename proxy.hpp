@@ -41,6 +41,8 @@ class Proxy
 
   //functions for threads
   static void* recvRequest(void *args);
+  static void* sendPOST(Request req, int client_fd, int req_id);
+  static void* sendCONNECT(Request req, int client_fd, int req_id);
   static void* sendGET(Request req, int client_fd, int req_id);
   static void* error502(int client_fd, int req_id);
   static void* error400(int client_fd, int req_id);
@@ -68,6 +70,11 @@ void * Proxy::error502(int client_fd, int req_id){
   return nullptr;   
 }
 
+void * Proxy::sendPOST(Request req, int client_fd, int req_id){
+
+
+}
+
 void * Proxy::sendGET(Request req, int client_fd, int req_id){
   
   Client client(req.getPort().c_str(), req.getHost().c_str());
@@ -87,7 +94,7 @@ void * Proxy::sendGET(Request req, int client_fd, int req_id){
     }
 
     outMessage(std::to_string(req_id)+"response sent from cache to client"+std::string(res->getStatus()));
-    close(client_fd);
+    //close(client_fd);
     return nullptr;
   }
 
@@ -151,10 +158,12 @@ void * Proxy::sendGET(Request req, int client_fd, int req_id){
   }
 
   outMessage(std::to_string(req_id)+"response sent from server to client"+std::string(final_res.getStatus()));
-  
-  cache_c.cacheRec(final_res, req);
-  
-  close(client_fd);
+  if(final_res.getChunked()==false){
+    pthread_mutex_lock(&mlock);
+    cache_c.cacheRec(final_res, req);
+    pthread_mutex_unlock(&mlock);
+  }
+  //close(client_fd);
 }
 
 void* Proxy::recvRequest(void *args)
