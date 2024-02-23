@@ -24,13 +24,13 @@ class Proxy
   const char *port;
   int sc_fd;
   int cc_fd;
-  Cache cache;
+  // Cache cache;
   Server serverP;
 
   public:
-  Proxy(const char *host, const char *port):host_name(host), port(port),cache(100),serverP(port){}
-  Proxy():host_name(NULL), port(NULL),cache(100),serverP(port){}
-  Proxy(const char *port):host_name(NULL), port(port), cache(100), serverP(port){
+  Proxy(const char *host, const char *port):host_name(host), port(port),serverP(port){}
+  Proxy():host_name(NULL), port(NULL),serverP(port){}
+  Proxy(const char *port):host_name(NULL), port(port),serverP(port){
     //serverP.initServer();
   }
 
@@ -43,7 +43,30 @@ class Proxy
 };
 
 void * Proxy::sendGET(Request req, int client_fd, int req_id){
+  
   Client client(req.getPort().c_str(), req.getHost().c_str());
+
+  if (cache_c.inCache(req))
+  {
+    Response *res = cache_c.getResponseFromCache(req, client.socket_fd);
+    if (res == NULL)
+    {
+      putError("fail to get response from cache");
+    }
+
+    int status = send(client_fd, res->getResponse().c_str(), res->getResponse().length(), 0);
+    if (status < 0)
+    {
+      putError("fail to send response from cache to client");
+    }
+
+    outMessage(std::to_string(req_id)+"response sent from cache to client"+std::string(res->getStatus()));
+    close(client_fd);
+    return;
+  }
+
+
+
 
   
 

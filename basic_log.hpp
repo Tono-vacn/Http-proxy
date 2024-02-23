@@ -8,8 +8,12 @@
 #include<unistd.h>
 #include<cstring>
 
+#include "cache.hpp"
+
 std::ofstream to_log("./logs/log.txt", std::ios::app);
 
 pthread_mutex_t mlock = PTHREAD_MUTEX_INITIALIZER;
+
+Cache cache_c(100);
 
 #endif
