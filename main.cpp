@@ -2,9 +2,10 @@
 #include "server.hpp"
 
 int main(int argc, char * argv[]) {
-  const char * port = "12345";
-  Proxy myProxy(port);
-  myProxy.Deamonlize();
+  std::string port = "12345";
+  Proxy myProxy(port.c_str());
+  //myProxy.Deamonlize();
+  myProxy.mainProcess();
 
   return 0;
 }

@@ -13,4 +13,4 @@ $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
-		rm -f $(TARGETS)
+	rm -f $(TARGET) main.o

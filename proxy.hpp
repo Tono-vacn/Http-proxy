@@ -30,7 +30,9 @@ class Proxy
   public:
   Proxy(const char *host, const char *port):host_name(host), port(port),cache(100),serverP(port){}
   Proxy():host_name(NULL), port(NULL),cache(100),serverP(port){}
-  Proxy(const char *port):host_name(NULL), port(port), cache(100), serverP(port){}
+  Proxy(const char *port):host_name(NULL), port(port), cache(100), serverP(port){
+    //serverP.initServer();
+  }
 
   void Deamonlize();
   void mainProcess();
@@ -83,6 +85,7 @@ void* Proxy::recvRequest(void *args)
 
   }
   close(client_fd);
+  outMessage("test done");
   pthread_exit(NULL);
   return NULL;
   
@@ -151,11 +154,15 @@ void Proxy::Deamonlize()
 
 void Proxy::mainProcess()
 {
+  serverP.initServer();
   int req_id = -1;
   int client_fd;
   std::string client_ip;
+  outMessage("Proxy started");
   while(true){
+    outMessage("waiting for connection out");
     client_fd = serverP.acceptConnection(client_ip);
+    outMessage("connection accepted");
     if(client_fd < 0){
       outError("fail to accept connection");
       continue;

@@ -15,8 +15,8 @@ class Request{
   std::string host_name;
   std::string port;
   bool is_cache = false;
-  int max_stale = NULL;
-  int id = NULL;
+  int max_stale = 0;
+  int id = 0;
 
   public:
     Request(std::string raw_request, int id):request(raw_request),id(id){

@@ -94,6 +94,8 @@ bool Cache::cacheRec(Response res, Request req){
   cacheQueue.push(k_a);
   cachePool[k_a] = res;
 
+  return true;
+
     
 }
 
