@@ -170,6 +170,8 @@ Response * Cache::getResponseFromCache(Request req, int fd){
     putError("Failed to send validate request");
   }
 
+
+  // do i need to implement a recv loop here?
   std::vector<char> char_buffer(1024);
   std::string response_recv;
   while((status = recv(fd, char_buffer.data(), char_buffer.size(), 0)) > 0){

@@ -15,6 +15,7 @@ class Response
   std::string last_modified;
   std::string content_type;
   int content_length = 0;
+  int header_length = 0;
 
   bool no_cache = false;
   bool no_store = false;
@@ -35,6 +36,7 @@ public:
   Response(std::string raw_response) : response(raw_response)
   {
     readStatus();
+    readHeadLength();
     readEtag();
     readDate();
     readExpires();
@@ -60,6 +62,12 @@ public:
   void readCacheControl();
 
   void checkChunked();
+  void readHeadLength();
+
+  int getHeaderLength()
+  {
+    return header_length;
+  }
 
   bool haveMaxAge()
   {
@@ -256,6 +264,16 @@ void Response::checkChunked()
   {
     is_chunked = true;
   }
+}
+
+void Response::readHeadLength()
+{
+  size_t pos = response.find("\r\n\r\n");
+  if (pos == std::string::npos)
+  {
+    putError("Invalid response, fail to read head length in response");
+  }
+  header_length = pos + 4;
 }
 
 void Response::readCacheControl()
