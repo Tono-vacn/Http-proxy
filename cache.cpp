@@ -1,53 +1,4 @@
-#ifndef CACHE_HPP
-#define CACHE_HPP
-
-#include"request.hpp"
-#include"response.hpp"
-#include"errorhandle.hpp"
-#include"basic_log.hpp"
-
-#include<signal.h>
-#include<sys/stat.h>
-
-#include<fstream>
-#include<fcntl.h>
-#include<unistd.h>
-#include<ctime>
-#include<sstream>
-#include<iomanip>
-
-#include<unordered_map>
-#include<map>
-#include<queue>
-
-class Cache{
-  size_t max_size;
-  //std::ofstream & to_log;
-  std::queue<std::string> cacheQueue;
-  std::map<std::string, Response> cachePool;
-public:
-  Cache(size_t max_size):max_size(max_size){};
-  static std::time_t formatTime(const std::string & time){
-    std::tm tm = {};
-    std::istringstream s(time);
-    s >> std::get_time(&tm, "%a, %d %b %Y %H:%M:%S GMT");
-    if(s.fail()){
-      outError("Failed to parse time");
-      //return -1;
-    }
-    tm.tm_isdst = 0;
-    return timegm(&tm);
-  };
-  bool cacheRec(Response res, Request req);
-  bool checkResponse(Response res);
-  bool inCache(Request req);
-  bool checkResponseInCache(Request req, Response res, int res_id);
-  Response *getResponseFromCache(Request req, int fd);
-  //bool  sendResponseFromCache(Request * req, int fd);
-  std::string generateValidateRequest(Request req, Response * res);
-    
-  
-};
+#include "cache.hpp"
 
 bool Cache::checkResponse(Response res){
   if(res.getNoStore() == true){
@@ -199,6 +150,3 @@ Response * Cache::getResponseFromCache(Request req, int fd){
   // }
   // return &cachePool[k];
 }
-  
-
-#endif

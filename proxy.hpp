@@ -18,6 +18,8 @@
 
 // pthread_mutex_t mlock = PTHREAD_MUTEX_INITIALIZER;
 
+Cache cache_c(100);
+
 class Proxy
 {
   const char *host_name;
@@ -62,14 +64,22 @@ void * Proxy::sendGET(Request req, int client_fd, int req_id){
 
     outMessage(std::to_string(req_id)+"response sent from cache to client"+std::string(res->getStatus()));
     close(client_fd);
-    return;
+    return nullptr;
   }
 
+  int status = send(client.socket_fd, req.getRequest().c_str(), req.getRequest().length(), 0);
 
-
-
+  outMessage("request sent to server"+std::to_string(req_id)+" "+req.getHost()+": "+req.getRequest());
   
+  char res_buffer[1024*1024];
+  int bytes_received = recv(client.socket_fd, res_buffer, sizeof(res_buffer), 0);
+  if (bytes_received < 0)
+  {
 
+    outError("fail to recieve response from outer server");
+    close(client.socket_fd);
+    return nullptr;
+  }
 }
 
 void* Proxy::recvRequest(void *args)
