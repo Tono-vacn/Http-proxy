@@ -27,47 +27,48 @@ class Proxy
   Cache cache;
   Server serverP;
 
-  public:
-  Proxy(const char *host, const char *port):host_name(host), port(port),cache(100),serverP(port){}
-  Proxy():host_name(NULL), port(NULL),cache(100),serverP(port){}
-  Proxy(const char *port):host_name(NULL), port(port), cache(100), serverP(port){
-    //serverP.initServer();
+public:
+  Proxy(const char *host, const char *port) : host_name(host), port(port), cache(100), serverP(port) {}
+  Proxy() : host_name(NULL), port(NULL), cache(100), serverP(port) {}
+  Proxy(const char *port) : host_name(NULL), port(port), cache(100), serverP(port)
+  {
+    // serverP.initServer();
   }
 
   void Deamonlize();
   void mainProcess();
 
-  //functions for threads
-  static void* recvRequest(void *args);
-  static void* sendGET(Request req, int client_fd, int req_id);
+  // functions for threads
+  static void *recvRequest(void *args);
+  static void *sendGET(Request req, int client_fd, int req_id);
 };
 
-void * Proxy::sendGET(Request req, int client_fd, int req_id){
+void *Proxy::sendGET(Request req, int client_fd, int req_id)
+{
   Client client(req.getPort().c_str(), req.getHost().c_str());
-
-  
-
 }
 
-void* Proxy::recvRequest(void *args)
+void *Proxy::recvRequest(void *args)
 {
-  thread_data *data = static_cast<thread_data*>(args);
+  thread_data *data = static_cast<thread_data *>(args);
   int client_fd = data->client_fd;
   int req_id = data->req_id;
   std::string client_ip = data->client_ip;
 
-  //recieve request from client
+  // recieve request from client
 
-  std::vector<char> request_msg(1024*1024);
-  //request_msg.resize(1000*1000);
+  std::vector<char> request_msg(1024 * 1024);
+  // request_msg.resize(1000*1000);
   int bytes_recieved = recv(client_fd, request_msg.data(), request_msg.size(), 0);
-  if(bytes_recieved < 0){
+  if (bytes_recieved < 0)
+  {
     putError("fail to recieve request from client");
-    //close(client_fd);
-    //return NULL;
+    // close(client_fd);
+    // return NULL;
   }
-  if(bytes_recieved == 0){
-    //putError("client closed connection");
+  if (bytes_recieved == 0)
+  {
+    // putError("client closed connection");
     close(client_fd);
     return NULL;
   }
@@ -75,22 +76,24 @@ void* Proxy::recvRequest(void *args)
   std::string req_str(request_msg.begin(), request_msg.begin() + bytes_recieved);
   Request req(req_str, req_id);
 
-  if(req.getMethod()=="GET"){
-    
+  const char *message = "hi there!";
+  if (req.getMethod() == "GET")
+  {
+    outMessage("GET");
   }
-  if(req.getMethod()=="POST"){
-
+  if (req.getMethod() == "POST")
+  {
+    outMessage("POST");
   }
-  if(req.getMethod()=="CONNECT"){
-
+  if (req.getMethod() == "CONNECT")
+  {
+    outMessage("CONNECT");
   }
   close(client_fd);
   outMessage("test done");
   pthread_exit(NULL);
   return NULL;
-  
 }
-
 
 void Proxy::Deamonlize()
 {
@@ -159,11 +162,13 @@ void Proxy::mainProcess()
   int client_fd;
   std::string client_ip;
   outMessage("Proxy started");
-  while(true){
+  while (true)
+  {
     outMessage("waiting for connection out");
     client_fd = serverP.acceptConnection(client_ip);
     outMessage("connection accepted");
-    if(client_fd < 0){
+    if (client_fd < 0)
+    {
       outError("fail to accept connection");
       continue;
     }
@@ -180,8 +185,6 @@ void Proxy::mainProcess()
 
     pthread_t thread;
     pthread_create(&thread, NULL, recvRequest, &to_thread_data);
-
   }
-  
 }
 #endif
