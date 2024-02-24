@@ -14,6 +14,7 @@ std::ofstream to_log("./logs/log.txt", std::ios::app);
 
 pthread_mutex_t mlock = PTHREAD_MUTEX_INITIALIZER;
 
+pthread_mutex_t cache_lock = PTHREAD_MUTEX_INITIALIZER;
 //Cache cache_c(100);
 
 #endif

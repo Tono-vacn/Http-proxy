@@ -47,6 +47,12 @@
     "typeinfo": "cpp",
     "map": "cpp",
     "ctime": "cpp",
-    "iomanip": "cpp"
+    "iomanip": "cpp",
+    "chrono": "cpp",
+    "condition_variable": "cpp",
+    "ratio": "cpp",
+    "future": "cpp",
+    "mutex": "cpp",
+    "thread": "cpp"
   }
 }

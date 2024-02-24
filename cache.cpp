@@ -31,9 +31,9 @@ bool Cache::inCache(Request req){
 }
 
 bool Cache::cacheRec(Response res, Request req){
-  if(checkResponse(res) == false){
-    return false;
-  }
+  // if(checkResponse(res) == false){
+  //   return false;
+  // }
 
   if(cachePool.size() == max_size){
     std::string k_r = cacheQueue.front();

@@ -26,73 +26,75 @@ public:
   // std::ofstream & to_log;
   // pthread_mutex_t & mlock;
 
-  Server(const char *port, const char *host_name) : socket_fd(0), status(0), host_info_list(NULL), port(port), host_name(host_name) { initServer(); };
-  Server(const char *port) : socket_fd(0), status(0), host_info_list(NULL), port(port), host_name(NULL) { }//initServer(); };
-
-  void initServer(){
-  outMessage("Initializing server");
-  memset(&host_info, 0, sizeof(host_info));
-  host_info.ai_family = AF_UNSPEC;
-  host_info.ai_socktype = SOCK_STREAM;
-  host_info.ai_flags = AI_PASSIVE;
-  status = getaddrinfo(host_name, port, &host_info, &host_info_list);
-  if (status != 0)
+  Server(const char *port, const char *host_name) : socket_fd(0), status(0), host_info_list(NULL), port(port), host_name(host_name)
   {
-    putError("getaddrinfo error in initServer");
-  }
-  socket_fd = socket(host_info_list->ai_family, host_info_list->ai_socktype, host_info_list->ai_protocol);
-  if (socket_fd == -1)
-  {
-    putError("socket error in initServer");
-  }
+    initServer();
+  };
+  Server(const char *port) : socket_fd(0), status(0), host_info_list(NULL), port(port), host_name(NULL) {} // initServer(); };
 
-  // bind?
-
-  outMessage("Binding socket");
-
-  int yes = 1;
-  status = setsockopt(socket_fd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int));
-  if (status == -1)
+  void initServer()
   {
-    putError("setsockopt error in initServer");
-  }
-  
+    outMessage("Initializing server");
+    memset(&host_info, 0, sizeof(host_info));
+    host_info.ai_family = AF_UNSPEC;
+    host_info.ai_socktype = SOCK_STREAM;
+    host_info.ai_flags = AI_PASSIVE;
+    status = getaddrinfo(host_name, port, &host_info, &host_info_list);
+    if (status != 0)
+    {
+      putError("getaddrinfo error in initServer");
+    }
+    socket_fd = socket(host_info_list->ai_family, host_info_list->ai_socktype, host_info_list->ai_protocol);
+    if (socket_fd == -1)
+    {
+      putError("socket error in initServer");
+    }
 
-  status = bind(socket_fd, host_info_list->ai_addr, host_info_list->ai_addrlen);
-  if (status == -1)
-  {
-    putError("bind error in initServer");
+    // bind?
+
+    outMessage("Binding socket");
+
+    int yes = 1;
+    status = setsockopt(socket_fd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int));
+    if (status == -1)
+    {
+      putError("setsockopt error in initServer");
+    }
+
+    status = bind(socket_fd, host_info_list->ai_addr, host_info_list->ai_addrlen);
+    if (status == -1)
+    {
+      putError("bind error in initServer");
+    }
+    status = listen(socket_fd, 100);
+    if (status == -1)
+    {
+      putError("listen error in initServer");
+    }
+    outMessage(("Server is listening on port " + hostName(socket_fd) + std::to_string(portNum(socket_fd))).c_str());
   }
-  status = listen(socket_fd, 100);
-  if (status == -1)
-  {
-    putError("listen error in initServer");
-  }
-  outMessage(("Server is listening on port " +hostName(socket_fd) +std::to_string(portNum(socket_fd))).c_str());
-}
 
   int acceptConnection(std::string &client_ip)
   {
-  struct sockaddr_storage socket_addr;
-  socklen_t addr_size = sizeof(socket_addr);
+    struct sockaddr_storage socket_addr;
+    socklen_t addr_size = sizeof(socket_addr);
 
-  outMessage("Waiting for connection in");
+    outMessage("Waiting for connection in");
 
-  int client_fd = accept(socket_fd, (struct sockaddr *)&socket_addr, &addr_size);
-  if (client_fd == -1)
-  {
-    putError("accept error in acceptConnection");
-  }
+    int client_fd = accept(socket_fd, (struct sockaddr *)&socket_addr, &addr_size);
+    if (client_fd == -1)
+    {
+      putError("accept error in acceptConnection");
+    }
 
-  outMessage("Connection accepted");
+    outMessage("Connection accepted");
 
-  // char ipstr[INET6_ADDRSTRLEN];
-  struct sockaddr_in *s = (struct sockaddr_in *)&socket_addr;
-  client_ip = inet_ntoa(s->sin_addr);
+    // char ipstr[INET6_ADDRSTRLEN];
+    struct sockaddr_in *s = (struct sockaddr_in *)&socket_addr;
+    client_ip = inet_ntoa(s->sin_addr);
 
-  return client_fd;
-};
-
+    return client_fd;
+  };
 
   int portNum(int socket_fd)
   {
@@ -136,12 +138,32 @@ public:
   // std::ofstream & to_log;
   // pthread_mutex_t & mlock;
 
-  Client(const char *port, const char *host_name) : socket_fd(0), status(0), host_info_list(NULL), port(port), host_name(host_name) { initClient(); };
-  Client() : socket_fd(0), status(0), host_info_list(NULL), port("8080"), host_name("localhost"){ initClient(); }
+  Client(const char *port, const char *host_name) : socket_fd(0), status(0), host_info_list(NULL), port(port), host_name(host_name) { 
+    // int attempts = 0;
+    // bool connected = false;
+    // while (!connected && attempts < 10)
+    // {
+    //   try
+    //   {
+        initClient();
+    //     connected = true;
+    //   }
+    //   catch (std::exception e)
+    //   {
+    //     outError("Error initializing client ");
+    //     ++attempts;
+    //   }
+    // }
+    // if(!connected){
+    //   throw("failed to initializing client");
+    // }
+  
+  };
+  Client() : socket_fd(0), status(0), host_info_list(NULL), port("8080"), host_name("localhost") { initClient(); }
 
   void initClient();
   // void connectToServer();
-  //Response sendRequest(Request& request);
+  // Response sendRequest(Request& request);
 
   ~Client()
   {
@@ -167,11 +189,9 @@ public:
 //   return response;
 // }
 
-//void Server::initServer()
+// void Server::initServer()
 
-
-//int Server::acceptConnection(std::string &client_ip)
-
+// int Server::acceptConnection(std::string &client_ip)
 
 void Client::initClient()
 {
@@ -196,6 +216,7 @@ void Client::initClient()
   {
     putError("connect error in initClient");
   }
+  outMessage("init client successfully");
 }
 
 #endif

@@ -80,20 +80,21 @@ bool Cache::inCache(Request req){
 }
 
 bool Cache::cacheRec(Response res, Request req){
-  if(checkResponse(res) == false){
-    return false;
-  }
-
+  std::cout <<"cache start"<<std::endl;
+  // if(checkResponse(res) == false){
+  //   return false;
+  // }
+std::cout <<"after check response"<<std::endl;
   if(cachePool.size() == max_size){
     std::string k_r = cacheQueue.front();
     cachePool.erase(k_r);
     cacheQueue.pop();
   }
-
+std::cout <<"before get URI"<<std::endl;
   std::string k_a = req.getURI();
   cacheQueue.push(k_a);
   cachePool[k_a] = res;
-
+std::cout <<"before cahce return"<<std::endl;
   return true;
 
     

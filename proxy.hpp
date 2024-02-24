@@ -49,7 +49,18 @@ class Proxy
   static void* sendGET(Request req, int client_fd, int req_id);
   static void* error502(int client_fd, int req_id);
   static void* error400(int client_fd, int req_id);
+  static void* error404(int client_fd, int req_id);
 };
+
+void * Proxy::error404(int client_fd, int req_id){
+  std::string error_msg = "HTTP/1.1 404 Not Found\r\nContent-Type: text/html\r\nContent-Length: 0\r\n\r\n";
+  int status = send(client_fd, error_msg.c_str(),error_msg.length(),0);
+  if(status<0){
+    putError("fail to send 404 error to client");
+    return nullptr;
+  }
+  return nullptr;
+}
 
 void * Proxy::error400(int client_fd, int req_id){
   std::string error_msg = "HTTP/1.1 400 Bad Request\r\nContent-Type: text/html\r\nContent-Length: 0\r\n\r\n";
@@ -98,6 +109,7 @@ void * Proxy::error502(int client_fd, int req_id){
 // }
 
 void * Proxy::sendCONNECT(Request req, int client_fd, int req_id){
+  outMessage("start to send CONNECT"+req.getPort()+req.getHost());
   Client client(req.getPort().c_str(), req.getHost().c_str());
 
   //not sure whether to send 200 OK or other response
@@ -178,6 +190,7 @@ void * Proxy::sendCONNECT(Request req, int client_fd, int req_id){
 }
 
 void * Proxy::sendPOST(Request req, int client_fd, int req_id){
+  outMessage("start to send post");
   Client client(req.getPort().c_str(), req.getHost().c_str());
   int status = send(client.socket_fd, req.getRequest().c_str(), req.getRequest().length(), 0);
   outMessage("request sent to server"+std::to_string(req_id)+" "+req.getHost()+": "+req.getRequest());
@@ -245,6 +258,7 @@ void * Proxy::sendPOST(Request req, int client_fd, int req_id){
 
 void * Proxy::sendGET(Request req, int client_fd, int req_id){
   
+  outMessage("start to send GET"+req.getPort()+req.getHost());
   Client client(req.getPort().c_str(), req.getHost().c_str());
 
   if (cache_c.inCache(req))
@@ -331,10 +345,19 @@ void * Proxy::sendGET(Request req, int client_fd, int req_id){
 
   outMessage(std::to_string(req_id)+"response sent from server to client"+std::string(final_res.getStatus()));
   if(final_res.getChunked()==false){
-    pthread_mutex_lock(&mlock);
-    cache_c.cacheRec(final_res, req);
-    pthread_mutex_unlock(&mlock);
+    pthread_mutex_lock(&cache_lock);
+    if(
+    cache_c.cacheRec(final_res, req)){
+      to_log << "cache successfully" << std::endl;
+      std::cout <<"cache successfully"<<std::endl;
+    }
+    else{
+      to_log << "cache failed" << std::endl;
+      std::cout <<"cache failed"<<std::endl;
+    }
+    pthread_mutex_unlock(&cache_lock);
   }
+  outMessage("after cache");
   //close(client_fd);
 }
 
@@ -358,14 +381,14 @@ void* Proxy::recvRequest(void *args)
     int bytes_recieved = recv(client_fd, request_msg.data(), request_msg.size(), 0);
     try{
     if(bytes_recieved < 0){
-      putError("fail to recieve request from client");
+      outError("fail to recieve request from client");
       //std::this_thread::sleep_for(std::chrono::seconds(1));
       //close(client_fd);
-      //return NULL;
+      return NULL;
     }
     if(bytes_recieved == 0){
-      //putError("client closed connection");
-      close(client_fd);
+      outError("client closed connection");
+      //close(client_fd);
       return NULL;
     }
 
@@ -378,34 +401,6 @@ void* Proxy::recvRequest(void *args)
       success = false;
     }
   }
-  // std::vector<char> request_msg(1024*1024);
-  //   //request_msg.resize(1000*1000);
-
-  //   // 接收请求并处理
-  //   while (!success) {
-  //       int bytes_received = recv(client_fd, request_msg.data(), request_msg.size(), 0);
-  //       try {
-  //           if (bytes_received < 0) {
-  //               // 发生错误时启动一个异步任务来处理错误
-  //               auto fut = std::async(std::launch::async, errorHandlingFunction, client_fd);
-  //               // 等待一段时间后再继续执行程序
-  //               std::future_status status;
-  //               do {
-  //                   status = fut.wait_for(std::chrono::milliseconds(100)); // 每隔100毫秒检查一次任务状态
-  //               } while (status != std::future_status::ready);
-  //           }
-  //           if (bytes_received == 0) {
-  //               close(client_fd);
-  //               return NULL;
-  //           }
-
-  //           std::string req_str(request_msg.begin(), request_msg.begin() + bytes_received);
-  //           success = true;
-  //           // 这里可以继续处理请求
-  //       } catch(std::exception e) {
-  //           success = false;
-  //       }
-  //   }
 
   if(reqPtr->getMethod()=="GET"){
     sendGET(*reqPtr, client_fd, req_id);
