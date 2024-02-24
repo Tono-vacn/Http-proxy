@@ -15,11 +15,21 @@
 #include <thread>
 #include <chrono>
 #include <future>
+
+#include <boost/asio.hpp>
+#include <boost/beast.hpp>
+
 #include "basic_log.hpp"
 
 // std::ofstream to_log("./logs/log.txt", std::ios::app);
 
 // pthread_mutex_t mlock = PTHREAD_MUTEX_INITIALIZER;
+
+namespace asio = boost::asio;
+namespace beast = boost::beast;
+namespace http = beast::http;
+
+using tcp = asio::ip::tcp;
 
 Cache cache_c(100);
 
@@ -367,52 +377,83 @@ void* Proxy::recvRequest(void *args)
   int client_fd = data->client_fd;
   int req_id = data->req_id;
   std::string client_ip = data->client_ip;
-  bool success = false;
-  Request* reqPtr;
+
+  std::string req_get;
+
+  asio::io_context ioc;
+  tcp::socket socket(ioc);
+  boost::system::error_code ec;
+  int new_client_fd = dup(client_fd);
+  socket.assign(tcp::v4(), new_client_fd, ec);
+  if(ec){
+    std::cerr<<"Failed to assign socket"<<std::endl;
+    return nullptr;
+  }
+  try{
+    beast::flat_buffer buffer;
+    http::request<http::string_body> req;
+    http::read(socket, buffer, req, ec);
+    if(ec){
+      std::cerr<<"Failed to read request: "<<ec.message()<<std::endl;
+      to_log<<"Failed to read request"<<ec.message()<<std::endl;
+      return nullptr;
+    }
+
+    std::ostringstream ss;
+    ss<<req;
+    req_get = ss.str();
+  }catch(std::exception &e){
+    std::cerr<< "Exception: "<< e.what()<<std::endl;
+    return nullptr;
+  }
+  // bool success = false;
+  // Request* reqPtr;
 
   //recieve request from client
 
 
   // is recv loop needed here?
 
-  while(!success){
-    std::vector<char> request_msg(1024*1024);
-    //request_msg.resize(1000*1000);
-    int bytes_recieved = recv(client_fd, request_msg.data(), request_msg.size(), 0);
-    try{
-    if(bytes_recieved < 0){
-      outError("fail to recieve request from client");
-      //std::this_thread::sleep_for(std::chrono::seconds(1));
-      //close(client_fd);
-      return NULL;
-    }
-    if(bytes_recieved == 0){
-      outError("client closed connection");
-      //close(client_fd);
-      return NULL;
-    }
+  // while(!success){
+  //   std::vector<char> request_msg(1024*1024);
+  //   //request_msg.resize(1000*1000);
+  //   int bytes_recieved = recv(client_fd, request_msg.data(), request_msg.size(), 0);
+  //   try{
+  //   if(bytes_recieved < 0){
+  //     outError("fail to recieve request from client");
+  //     //std::this_thread::sleep_for(std::chrono::seconds(1));
+  //     //close(client_fd);
+  //     return NULL;
+  //   }
+  //   if(bytes_recieved == 0){
+  //     outError("client closed connection");
+  //     //close(client_fd);
+  //     return NULL;
+  //   }
 
-    std::string req_str(request_msg.begin(), request_msg.begin() + bytes_recieved);
-    success = true;
+  //   std::string req_str(request_msg.begin(), request_msg.begin() + bytes_recieved);
+  //   success = true;
     
-      reqPtr = new Request(req_str, req_id);
-    }
-    catch(std::exception e){
-      success = false;
-    }
+  //     reqPtr = new Request(req_str, req_id);
+  //   }
+  //   catch(std::exception e){
+  //     success = false;
+  //   }
+  // }
+
+  Request reqPtr(req_get, req_id);
+
+  if(reqPtr.getMethod()=="GET"){
+    sendGET(reqPtr, client_fd, req_id);
+  }
+  if(reqPtr.getMethod()=="POST"){
+    sendPOST(reqPtr, client_fd, req_id);
+  }
+  if(reqPtr.getMethod()=="CONNECT"){
+    sendCONNECT(reqPtr, client_fd, req_id);
   }
 
-  if(reqPtr->getMethod()=="GET"){
-    sendGET(*reqPtr, client_fd, req_id);
-  }
-  if(reqPtr->getMethod()=="POST"){
-    sendPOST(*reqPtr, client_fd, req_id);
-  }
-  if(reqPtr->getMethod()=="CONNECT"){
-    sendCONNECT(*reqPtr, client_fd, req_id);
-  }
-
-  if(reqPtr->getMethod()!="GET" && reqPtr->getMethod()!="POST" && reqPtr->getMethod()!="CONNECT"){
+  if(reqPtr.getMethod()!="GET" && reqPtr.getMethod()!="POST" && reqPtr.getMethod()!="CONNECT"){
     error400(client_fd, req_id);
   }
 
