@@ -12,6 +12,9 @@
 #include <fstream>
 #include <fcntl.h>
 #include <vector>
+#include <thread>
+#include <chrono>
+#include <future>
 #include "basic_log.hpp"
 
 // std::ofstream to_log("./logs/log.txt", std::ios::app);
@@ -64,11 +67,35 @@ void * Proxy::error502(int client_fd, int req_id){
   int status = send(client_fd, error_msg.c_str(), error_msg.length(), 0);
   if (status < 0)
   {
-    putError("fail to send 502 error to client");
+    perror("send() failed");
+    if (errno == EPIPE) {
+        // Socket closed by remote end
+        // Handle the situation appropriately
+        putError("socket closed by the remote");
+    } else if (errno == ENOTCONN) {
+        putError("connection not established");
+    } else if (errno == EAGAIN || errno == EWOULDBLOCK) {
+        putError("socket operation would block");
+    } else if (errno == EINTR) {
+        putError("operation interrupted by a signal");
+    } else if (errno == ENOMEM) {
+        putError("insufficient memory");
+    } else if (errno == EFAULT) {
+        putError("invalid send buffer");
+    } else {
+        putError("fail to send 502 error to client");
+    }
     return nullptr;
   }
   return nullptr;   
 }
+
+// void errorHandlingFunction(int client_fd) {
+//     // 在这里执行错误处理逻辑，比如等待一段时间后重试、关闭连接等
+//     std::this_thread::sleep_for(std::chrono::seconds(1));
+//     std::cout << "Error handling function executed" << std::endl;
+//     // 你可以在这里添加其他错误处理逻辑
+// }
 
 void * Proxy::sendCONNECT(Request req, int client_fd, int req_id){
   Client client(req.getPort().c_str(), req.getHost().c_str());
@@ -212,7 +239,7 @@ void * Proxy::sendPOST(Request req, int client_fd, int req_id){
   if (final_status < 0)
   {
     outError("fail to send response from server to client");
-    return;
+    return nullptr;
   }
 }
 
@@ -317,39 +344,80 @@ void* Proxy::recvRequest(void *args)
   int client_fd = data->client_fd;
   int req_id = data->req_id;
   std::string client_ip = data->client_ip;
+  bool success = false;
+  Request* reqPtr;
 
   //recieve request from client
 
 
   // is recv loop needed here?
-  std::vector<char> request_msg(1024*1024);
-  //request_msg.resize(1000*1000);
-  int bytes_recieved = recv(client_fd, request_msg.data(), request_msg.size(), 0);
-  if(bytes_recieved < 0){
-    putError("fail to recieve request from client");
-    //close(client_fd);
-    //return NULL;
+
+  while(!success){
+    std::vector<char> request_msg(1024*1024);
+    //request_msg.resize(1000*1000);
+    int bytes_recieved = recv(client_fd, request_msg.data(), request_msg.size(), 0);
+    try{
+    if(bytes_recieved < 0){
+      putError("fail to recieve request from client");
+      //std::this_thread::sleep_for(std::chrono::seconds(1));
+      //close(client_fd);
+      //return NULL;
+    }
+    if(bytes_recieved == 0){
+      //putError("client closed connection");
+      close(client_fd);
+      return NULL;
+    }
+
+    std::string req_str(request_msg.begin(), request_msg.begin() + bytes_recieved);
+    success = true;
+    
+      reqPtr = new Request(req_str, req_id);
+    }
+    catch(std::exception e){
+      success = false;
+    }
   }
-  if(bytes_recieved == 0){
-    //putError("client closed connection");
-    close(client_fd);
-    return NULL;
+  // std::vector<char> request_msg(1024*1024);
+  //   //request_msg.resize(1000*1000);
+
+  //   // 接收请求并处理
+  //   while (!success) {
+  //       int bytes_received = recv(client_fd, request_msg.data(), request_msg.size(), 0);
+  //       try {
+  //           if (bytes_received < 0) {
+  //               // 发生错误时启动一个异步任务来处理错误
+  //               auto fut = std::async(std::launch::async, errorHandlingFunction, client_fd);
+  //               // 等待一段时间后再继续执行程序
+  //               std::future_status status;
+  //               do {
+  //                   status = fut.wait_for(std::chrono::milliseconds(100)); // 每隔100毫秒检查一次任务状态
+  //               } while (status != std::future_status::ready);
+  //           }
+  //           if (bytes_received == 0) {
+  //               close(client_fd);
+  //               return NULL;
+  //           }
+
+  //           std::string req_str(request_msg.begin(), request_msg.begin() + bytes_received);
+  //           success = true;
+  //           // 这里可以继续处理请求
+  //       } catch(std::exception e) {
+  //           success = false;
+  //       }
+  //   }
+
+  if(reqPtr->getMethod()=="GET"){
+    sendGET(*reqPtr, client_fd, req_id);
+  }
+  if(reqPtr->getMethod()=="POST"){
+    sendPOST(*reqPtr, client_fd, req_id);
+  }
+  if(reqPtr->getMethod()=="CONNECT"){
+    sendCONNECT(*reqPtr, client_fd, req_id);
   }
 
-  std::string req_str(request_msg.begin(), request_msg.begin() + bytes_recieved);
-  Request req(req_str, req_id);
-
-  if(req.getMethod()=="GET"){
-    sendGET(req, client_fd, req_id);
-  }
-  if(req.getMethod()=="POST"){
-    sendPOST(req, client_fd, req_id);
-  }
-  if(req.getMethod()=="CONNECT"){
-    sendCONNECT(req, client_fd, req_id);
-  }
-
-  if(req.getMethod()!="GET" && req.getMethod()!="POST" && req.getMethod()!="CONNECT"){
+  if(reqPtr->getMethod()!="GET" && reqPtr->getMethod()!="POST" && reqPtr->getMethod()!="CONNECT"){
     error400(client_fd, req_id);
   }
 

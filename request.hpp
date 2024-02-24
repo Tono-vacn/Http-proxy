@@ -21,6 +21,7 @@ class Request
   int id = 0;
 
 public:
+  Request() = default;
   Request(std::string raw_request, int id) : request(raw_request), id(id)
   {
     // parseRequest();
@@ -95,7 +96,7 @@ void Request::readHost()
   size_t pos_end = request.find("\r\n", pos);
   if (pos == std::string::npos || pos_end == std::string::npos)
   {
-    putError("Invalid request, fail to read host");
+    putError(("Invalid request, fail to read host"+request).c_str());
   }
   // request = request.substr(pos+6);
   // pos = request.find("\r\n");
