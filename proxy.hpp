@@ -71,11 +71,149 @@ void * Proxy::error502(int client_fd, int req_id){
 }
 
 void * Proxy::sendCONNECT(Request req, int client_fd, int req_id){
+  Client client(req.getPort().c_str(), req.getHost().c_str());
+
+  //not sure whether to send 200 OK or other response
+  std::string res_msg = "HTTP/1.1 200 OK\r\n\r\n";
+  int status = send(client_fd, res_msg.c_str(), res_msg.length(), 0);
+
+  outMessage("response sent to client"+std::to_string(req_id)+" "+req.getHost()+": "+res_msg);
+
+  fd_set fd2;
+  int fdMaxV = std::max(client.socket_fd, client_fd);
+
+  while(true){
+    FD_ZERO(&fd2);
+    FD_SET(client.socket_fd, &fd2);
+    FD_SET(client_fd, &fd2);
+
+    int status = select(fdMaxV+1, &fd2, NULL, NULL, NULL);
+
+    if(status<0){
+      error502(client_fd, req_id);
+      outError("fail to select");
+      close(client.socket_fd);
+      return nullptr;
+    }
+
+    if(FD_ISSET(client_fd, &fd2)){
+      //might need to change buffer size
+      //and also need to initialize buffer
+      char buffer[BUFSIZ];
+      int bytes_received = recv(client_fd, buffer, BUFSIZ, 0);
+      if(bytes_received<0){
+        error502(client_fd, req_id);
+        close(client.socket_fd);
+        return nullptr;
+      }
+      if(bytes_received==0){
+        return nullptr;
+      }
+
+
+      int status = send(client.socket_fd, buffer, bytes_received, 0);
+      if(status<0){
+        error502(client_fd, req_id);
+        close(client.socket_fd);
+        return nullptr;
+      }
+      if(bytes_received==0){
+        return nullptr;
+      }
+
+    }
+
+    if(FD_ISSET(client.socket_fd, &fd2)){
+      char buffer[BUFSIZ];
+      int bytes_received = recv(client.socket_fd, buffer, BUFSIZ, 0);
+      if(bytes_received<0){
+        error502(client_fd, req_id);
+        close(client.socket_fd);
+        return nullptr;
+      }
+      if(bytes_received==0){
+        return nullptr;
+      }
+
+      int status = send(client_fd, buffer, bytes_received, 0);
+      if(status<0){
+        error502(client_fd, req_id);
+        close(client.socket_fd);
+        return nullptr;
+      }
+      if(bytes_received==0){
+        return nullptr;
+      }
+    }
+  }
+
+
 }
 
 void * Proxy::sendPOST(Request req, int client_fd, int req_id){
+  Client client(req.getPort().c_str(), req.getHost().c_str());
+  int status = send(client.socket_fd, req.getRequest().c_str(), req.getRequest().length(), 0);
+  outMessage("request sent to server"+std::to_string(req_id)+" "+req.getHost()+": "+req.getRequest());
 
 
+  char res_buffer[1000];
+  int bytes_received = recv(client.socket_fd, res_buffer, 1000, 0);
+  if (bytes_received < 0)
+  {
+    error502(client_fd, req_id);
+    outError("fail to recieve response from outer server");
+    close(client.socket_fd);
+    return nullptr;
+  }
+
+  std::string res_str(res_buffer, res_buffer + bytes_received);
+  Response res_head(res_str);
+  char res_buffer2[BUFSIZ];
+  if(res_head.getContentLength()==0){
+    while(true){
+      bytes_received = recv(client.socket_fd, res_buffer2, BUFSIZ, 0);
+      if(bytes_received<0){
+        error502(client_fd, req_id);
+        close(client.socket_fd);
+        return nullptr;
+      }
+      if(bytes_received==0){
+        break;
+      }
+      res_str.append(res_buffer2, bytes_received);
+      if(res_str.find("\r\n0\r\n")!=std::string::npos){
+        break;
+      }
+    }
+  }else{
+    int lth = res_head.getContentLength()+res_head.getHeaderLength();
+    while(bytes_received<lth){
+      int bytes = recv(client.socket_fd, res_buffer2, BUFSIZ, 0);
+      if(bytes<0){
+        error502(client_fd, req_id);
+        close(client.socket_fd);
+        return nullptr;
+      }
+      if(bytes==0){
+        break;
+      }
+      bytes_received += bytes;
+      res_str.append(res_buffer2, bytes);
+      if(res_str.find("\r\n0\r\n")!=std::string::npos){
+        break;
+      }
+    }
+  }
+
+  Response final_res(res_str);
+  outMessage("response recieved from server"+std::to_string(req_id)+" "+req.getHost()+": "+final_res.getResponse());
+
+  int final_status = send(client_fd, res_str.c_str(), res_str.length(), 0);
+  if (final_status < 0)
+  {
+    outError("fail to send response from server to client");
+    return;
+  }
 }
 
 void * Proxy::sendGET(Request req, int client_fd, int req_id){
@@ -148,6 +286,10 @@ void * Proxy::sendGET(Request req, int client_fd, int req_id){
       }
       bytes_received += bytes;
       res_str.append(res_buffer2, bytes);
+      if(res_str.find("\r\n0\r\n")!=std::string::npos){
+        break;
+      }
+
     }
   }
 
@@ -198,14 +340,19 @@ void* Proxy::recvRequest(void *args)
   Request req(req_str, req_id);
 
   if(req.getMethod()=="GET"){
-    
+    sendGET(req, client_fd, req_id);
   }
   if(req.getMethod()=="POST"){
-
+    sendPOST(req, client_fd, req_id);
   }
   if(req.getMethod()=="CONNECT"){
-
+    sendCONNECT(req, client_fd, req_id);
   }
+
+  if(req.getMethod()!="GET" && req.getMethod()!="POST" && req.getMethod()!="CONNECT"){
+    error400(client_fd, req_id);
+  }
+
   close(client_fd);
   outMessage("test done");
   pthread_exit(NULL);
