@@ -16,9 +16,18 @@
 #include<sstream>
 #include<iomanip>
 
+#include <boost/asio.hpp>
+#include <boost/beast.hpp>
+
 #include<unordered_map>
 #include<map>
 #include<queue>
+
+namespace asio = boost::asio;
+namespace beast = boost::beast;
+namespace http = beast::http;
+
+using tcp = asio::ip::tcp;
 
 class Cache{
   size_t max_size;
@@ -181,13 +190,47 @@ Response * Cache::getResponseFromCache(Request req, int fd, int req_id){
 
 
   // do i need to implement a recv loop here?
-  std::vector<char> char_buffer(1024);
-  std::string response_recv;
-  while((status = recv(fd, char_buffer.data(), char_buffer.size(), 0)) > 0){
-    response_recv.append(char_buffer.begin(), char_buffer.begin()+status);
+  // std::vector<char> char_buffer(1024);
+  // std::string response_recv;
+  // while((status = recv(fd, char_buffer.data(), char_buffer.size(), 0)) > 0){
+  //   response_recv.append(char_buffer.begin(), char_buffer.begin()+status);
+  // }
+
+  //refactor this with boost
+
+  std::string req_get;
+
+  asio::io_context ioc;
+  tcp::socket socket(ioc);
+  boost::system::error_code ec;
+  int new_client_fd = dup(fd);
+  socket.assign(tcp::v4(), new_client_fd, ec);
+  if(ec){
+    // std::cerr<<"Failed to assign socket"<<std::endl;
+    //printError(req_id, "Failed to assign socket in Cache::getResponseFromCache");
+    return nullptr;
+  }
+  try{
+    beast::flat_buffer buffer;
+    http::request<http::dynamic_body> req;
+    http::read(socket, buffer, req, ec);
+    if(ec){
+      std::cerr<<"Failed to read request: "<<ec.message()<<std::endl;
+      to_log<<"Failed to read request"<<ec.message()<<std::endl;
+      return nullptr;
+    }
+
+    std::ostringstream ss;
+    ss<<req;
+    req_get = ss.str();
+  }catch(std::exception &e){
+    std::cerr<< "Exception: "<< e.what()<<std::endl;
+    return nullptr;
   }
 
-  Response * new_res = new Response(response_recv);
+
+  ////
+  Response * new_res = new Response(req_get);
   outMessage("Received response from Server in Cache::getResponseFromCache");
   outMessage(new_res->getEtag().c_str());
 
