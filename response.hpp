@@ -14,6 +14,7 @@ class Response
   std::string date;
   std::string last_modified;
   std::string content_type;
+  std::string response_line;
   int content_length = 0;
   int header_length = 0;
 
@@ -45,6 +46,7 @@ public:
     readContentLength();
     readCacheControl();
     checkChunked();
+    readResponseLine();
     // checkCache();
     //  checkRevalidate();
     //  checkMaxStale();
@@ -63,6 +65,12 @@ public:
 
   void checkChunked();
   void readHeadLength();
+  void readResponseLine();
+
+  std::string getResponseLine()
+  {
+    return response_line;
+  }
 
   int getHeaderLength()
   {
@@ -164,6 +172,16 @@ public:
     return response;
   }
 };
+
+void Response::readResponseLine()
+{
+  size_t pos = response.find("\r\n");
+  if (pos == std::string::npos)
+  {
+    putError("Invalid response, fail to read response line");
+  }
+  response_line = response.substr(0, pos);
+}
 
 void Response::readStatus()
 {

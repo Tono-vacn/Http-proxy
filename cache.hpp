@@ -51,17 +51,17 @@ public:
 
 bool Cache::checkResponse(Response res){
   if(res.getNoStore() == true){
-    outError("No store in response");
+    outMessage("No store in response");
     return false;
   }
 
   if(res.getPublic() == false && res.getPrivate() == true){
-    outError("response is private");
+    outMessage("response is private");
     return false;
   }
 
   if(res.getEtag().empty() && res.getLastModified().empty()){
-    outError("No etag or last modified in response");
+    outMessage("No etag or last modified in response");
     return false;
   }
 
@@ -114,7 +114,8 @@ std::tm expire_tm_utc;
 std::time_t response_tm = formatTime(res.getDate());
 
 if(res.getNoCache()){
-  to_log <<req_id<< " : No cache in response" << std::endl;
+  outRawMessage(std::to_string(req_id)+": in cache, requires validation");
+  //to_log <<req_id<< " : No cache in response" << std::endl;
   return false;
 }
 
@@ -125,7 +126,11 @@ if(res.haveMaxAge()){
   expire_tm = formatTime(res.getExpires());
   gmtime_r(&expire_tm, &expire_tm_utc);
 }else{
+  if(res.getRevalidate()){
   //to_log <<req_id<< " : No max age or expires in response, valid" << std::endl;
+  outRawMessage(std::to_string(req_id)+": in cache, requires validation");
+  return false;
+  }
   return true;
 }
 
@@ -150,7 +155,8 @@ std::string Cache::generateValidateRequest(Request req, Response * res){
   validate_req += "Host: " + req.getHost() + "\r\n";
   if(!(res->getEtag().empty())){
     validate_req += "If-None-Match: " + res->getEtag() + "\r\n";
-  }else{
+  }
+  if(!(res->getLastModified().empty())){
     validate_req += "If-Modified-Since: " + res->getLastModified() + "\r\n";
   }
   validate_req += "Connection: close\r\n\r\n";

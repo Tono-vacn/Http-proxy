@@ -120,7 +120,9 @@ void * Proxy::error502(int client_fd, int req_id){
 
 void * Proxy::sendCONNECT(Request req, int client_fd, int req_id){
   try{
-  outMessage("start to send CONNECT"+req.getPort()+req.getHost());
+  //outMessage("start to send CONNECT"+req.getPort()+req.getHost());
+  outRawMessage(std::to_string(req_id)+": Requesting \""+req.getRequestLine()+"\" from "+req.getHost());
+
   Client client(req.getPort().c_str(), req.getHost().c_str());
 
   //not sure whether to send 200 OK or other response
@@ -206,9 +208,11 @@ void * Proxy::sendCONNECT(Request req, int client_fd, int req_id){
 
 void * Proxy::sendPOST(Request req, int client_fd, int req_id){
   outMessage("start to send post");
+
   Client client(req.getPort().c_str(), req.getHost().c_str());
   int status = send(client.socket_fd, req.getRequest().c_str(), req.getRequest().length(), 0);
-  outMessage("request sent to server"+std::to_string(req_id)+" "+req.getHost()+": "+req.getRequest());
+  //outMessage("request sent to server"+std::to_string(req_id)+" "+req.getHost()+": "+req.getRequest());
+  outRawMessage(std::to_string(req_id)+": Requesting \""+req.getRequestLine()+"\" from "+req.getHost());
 
 
   char res_buffer[1000];
@@ -261,7 +265,9 @@ void * Proxy::sendPOST(Request req, int client_fd, int req_id){
   }
 
   Response final_res(res_str);
-  outMessage("response recieved from server"+std::to_string(req_id)+" "+req.getHost()+": "+final_res.getResponse());
+  //outMessage("response recieved from server"+std::to_string(req_id)+" "+req.getHost()+": "+final_res.getResponse());
+  outRawMessage(std::to_string(req_id)+": Responding \""+final_res.getResponseLine()+"\"");
+
 
   int final_status = send(client_fd, res_str.c_str(), res_str.length(), 0);
   if (final_status < 0)
@@ -275,6 +281,8 @@ void * Proxy::sendPOST(Request req, int client_fd, int req_id){
 void * Proxy::sendGET(Request req, int client_fd, int req_id){
   try{
   outMessage("start to send GET"+req.getPort()+req.getHost());
+ // outRawMessage(std::to_string(req_id)+": Requesting \""+req.getRequestLine()+"\" from "+req.getHost());
+
   Client client(req.getPort().c_str(), req.getHost().c_str());
 
   if (cache_c.inCache(req))
@@ -284,6 +292,7 @@ void * Proxy::sendGET(Request req, int client_fd, int req_id){
     {
       putError("fail to get response from cache");
     }
+
 
     int status = send(client_fd, res->getResponse().c_str(), res->getResponse().length(), 0);
     if (status < 0)
@@ -300,7 +309,10 @@ void * Proxy::sendGET(Request req, int client_fd, int req_id){
 
   int status = send(client.socket_fd, req.getRequest().c_str(), req.getRequest().length(), 0);
 
-  outMessage("request sent to server"+std::to_string(req_id)+" "+req.getHost()+": "+req.getRequest());
+  //outMessage("request sent to server"+std::to_string(req_id)+" "+req.getHost()+": "+req.getRequest());
+  //outRawMessage(std::to_string(req_id)+": Received \""+res->getResponse().c_str()+"\" from "+req.getHost());
+  outRawMessage(std::to_string(req_id)+": Requesting \""+req.getRequestLine()+"\" from "+req.getHost());
+
   
   std::string res_get;
   beast::flat_buffer buffer;
@@ -326,6 +338,13 @@ void * Proxy::sendGET(Request req, int client_fd, int req_id){
     close(client.socket_fd);
     return nullptr;
   }
+
+  std::ostringstream ss;
+  ss<<res;
+  res_get = ss.str();
+  Response final_res(res_get);
+  outRawMessage(std::to_string(req_id)+": Received \""+final_res.getResponseLine().c_str()+"\" from "+req.getHost());
+
 
   // boost::beast::flat_buffer buffer_send;
   // std::size_t bytes_trans = boost::beast::http::serialize(buffer_send);
@@ -406,12 +425,13 @@ void * Proxy::sendGET(Request req, int client_fd, int req_id){
   }
 
 
-  std::ostringstream ss;
-  ss<<res;
-  res_get = ss.str();
-  Response final_res(res_get);
+  // std::ostringstream ss;
+  // ss<<res;
+  // res_get = ss.str();
+  // Response final_res(res_get);
 
-  outMessage(std::to_string(req_id)+"response sent from server to client"+std::string(final_res.getStatus()));
+  //outMessage(std::to_string(req_id)+"response sent from server to client"+std::string(final_res.getStatus()));
+  outRawMessage(std::to_string(req_id)+": Responding \""+final_res.getResponseLine()+"\"");
   if(final_res.getChunked()==false){
     pthread_mutex_lock(&cache_lock);
     if(
@@ -516,7 +536,7 @@ void* Proxy::recvRequest(void *args)
   std::tm* ctime_utc = std::gmtime(&ctime);
   std::string ctime_str = std::asctime(ctime_utc);
 
-  outRawMessage(std::to_string(req_id)+": "+reqPtr.getRequestLine()+" from "+reqPtr.getHost()+" @ "+ctime_str);
+  outRawMessage(std::to_string(req_id)+": \""+reqPtr.getRequestLine()+"\" from "+reqPtr.getHost()+" @ "+ctime_str);
 
   if(reqPtr.getMethod()=="GET"){
     sendGET(reqPtr, client_fd, req_id);
@@ -534,6 +554,7 @@ void* Proxy::recvRequest(void *args)
 
   close(client_fd);
   outMessage("test done"+std::to_string(req_id));
+  outRawMessage(std::to_string(req_id)+": Tunnel closed");
   pthread_exit(NULL);
   return NULL;
   

@@ -8,242 +8,803 @@ Message: Connection accepted
 Message: connection accepted
 Message: waiting for connection out
 Message: Waiting for connection in
-0: GET http://www.httpwatch.com/httpgallery/chunked/chunkedimage.aspx HTTP/1.1 from www.httpwatch.com @ Sun Feb 25 09:41:13 2024
-
-Message: start to send GET80www.httpwatch.com
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-Message: init client successfully
-0: not in cache
-Message: request sent to server0 www.httpwatch.com: GET http://www.httpwatch.com/httpgallery/chunked/chunkedimage.aspx HTTP/1.1
-Host: www.httpwatch.com
-Proxy-Connection: keep-alive
-Cache-Control: max-age=0
-Upgrade-Insecure-Requests: 1
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
-Accept-Encoding: gzip, deflate
-Accept-Language: en,zh-CN;q=0.9,zh;q=0.8
-
-
-Message: 0response sent from server to clientHTTP/1.1 200 OK
-Message: after cache
-Message: test done0
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-2: CONNECT beacons.gcp.gvt2.com:443 HTTP/1.1 from beacons.gcp.gvt2.com @ Sun Feb 25 09:41:17 2024
-
-Message: start to send CONNECT443beacons.gcp.gvt2.com
-Message: init client successfully
-Message: response sent to client2 beacons.gcp.gvt2.com: HTTP/1.1 200 OK
-
-
-1: GET http://www.httpwatch.com/httpgallery/chunked/chunkedimage.aspx HTTP/1.1 from www.httpwatch.com @ Sun Feb 25 09:41:19 2024
-
-Message: start to send GET80www.httpwatch.com
-Message: init client successfully
-1: not in cache
-Message: request sent to server1 www.httpwatch.com: GET http://www.httpwatch.com/httpgallery/chunked/chunkedimage.aspx HTTP/1.1
-Host: www.httpwatch.com
-Proxy-Connection: keep-alive
-Cache-Control: max-age=0
-Upgrade-Insecure-Requests: 1
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
-Accept-Encoding: gzip, deflate
-Accept-Language: en,zh-CN;q=0.9,zh;q=0.8
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-Message: 1response sent from server to clientHTTP/1.1 200 OK
-Message: after cache
-Message: test done1
-Message: test done2
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-4: CONNECT beacons.gcp.gvt2.com:443 HTTP/1.1 from beacons.gcp.gvt2.com @ Sun Feb 25 09:41:27 2024
-
-Message: start to send CONNECT443beacons.gcp.gvt2.com
-Message: init client successfully
-Message: response sent to client4 beacons.gcp.gvt2.com: HTTP/1.1 200 OK
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-5: CONNECT beacons.gvt2.com:443 HTTP/1.1 from beacons.gvt2.com @ Sun Feb 25 09:41:36 2024
-
-Message: start to send CONNECT443beacons.gvt2.com
-Message: init client successfully
-Message: response sent to client5 beacons.gvt2.com: HTTP/1.1 200 OK
-
-
-Message: test done4
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-6: CONNECT beacons.gvt2.com:443 HTTP/1.1 from beacons.gvt2.com @ Sun Feb 25 09:41:40 2024
-
-Message: start to send CONNECT443beacons.gvt2.com
-Message: init client successfully
-Message: response sent to client6 beacons.gvt2.com: HTTP/1.1 200 OK
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-7: CONNECT mqtt-web.zhihu.com:443 HTTP/1.1 from mqtt-web.zhihu.com @ Sun Feb 25 09:41:41 2024
-
-Message: start to send CONNECT443mqtt-web.zhihu.com
-Message: init client successfully
-Message: response sent to client7 mqtt-web.zhihu.com: HTTP/1.1 200 OK
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-8: CONNECT www.google.com:443 HTTP/1.1 from www.google.com @ Sun Feb 25 09:41:42 2024
+0: "CONNECT www.google.com:443 HTTP/1.1" from www.google.com @ Sun Feb 25 19:42:36 2024
 
 Message: start to send CONNECT443www.google.com
+0: Requesting "CONNECT www.google.com:443 HTTP/1.1" from www.google.com
 Message: init client successfully
-Message: response sent to client8 www.google.com: HTTP/1.1 200 OK
+Message: response sent to client0 www.google.com: HTTP/1.1 200 OK
 
 
 Message: Connection accepted
 Message: connection accepted
 Message: waiting for connection out
 Message: Waiting for connection in
-9: CONNECT mqtt-web.zhihu.com:443 HTTP/1.1 from mqtt-web.zhihu.com @ Sun Feb 25 09:41:49 2024
+1: "CONNECT optimizationguide-pa.googleapis.com:443 HTTP/1.1" from optimizationguide-pa.googleapis.com @ Sun Feb 25 19:42:36 2024
 
-Message: start to send CONNECT443mqtt-web.zhihu.com
+Message: start to send CONNECT443optimizationguide-pa.googleapis.com
+1: Requesting "CONNECT optimizationguide-pa.googleapis.com:443 HTTP/1.1" from optimizationguide-pa.googleapis.com
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+2: "CONNECT lh3.google.com:443 HTTP/1.1" from lh3.google.com @ Sun Feb 25 19:42:36 2024
+
+Message: start to send CONNECT443lh3.google.com
+2: Requesting "CONNECT lh3.google.com:443 HTTP/1.1" from lh3.google.com
 Message: init client successfully
-Message: response sent to client9 mqtt-web.zhihu.com: HTTP/1.1 200 OK
-
-
-Message: test done8
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-10: CONNECT mtalk.google.com:443 HTTP/1.1 from mtalk.google.com @ Sun Feb 25 09:41:57 2024
-
-Message: start to send CONNECT443mtalk.google.com
-Message: init client successfully
-Message: response sent to client10 mtalk.google.com: HTTP/1.1 200 OK
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-11: CONNECT www.google.com:443 HTTP/1.1 from www.google.com @ Sun Feb 25 09:42:42 2024
-
-Message: start to send CONNECT443www.google.com
-Message: init client successfully
-Message: response sent to client11 www.google.com: HTTP/1.1 200 OK
-
-
-Message: test done11
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-13: GET http://www.httpwatch.com/httpgallery/chunked/chunkedimage.aspx HTTP/1.1 from www.httpwatch.com @ Sun Feb 25 09:42:56 2024
-
-Message: start to send GET80www.httpwatch.com
-Message: init client successfully
-13: not in cache
-Message: request sent to server13 www.httpwatch.com: GET http://www.httpwatch.com/httpgallery/chunked/chunkedimage.aspx HTTP/1.1
-Host: www.httpwatch.com
-Proxy-Connection: keep-alive
-Cache-Control: max-age=0
-Upgrade-Insecure-Requests: 1
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
-Accept-Encoding: gzip, deflate
-Accept-Language: en,zh-CN;q=0.9,zh;q=0.8
-
-
-Message: 13response sent from server to clientHTTP/1.1 200 OK
-Message: after cache
-Message: test done13
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-14: CONNECT google.com:443 HTTP/1.1 from google.com @ Sun Feb 25 09:43:03 2024
-
-Message: Waiting for connection in
-Message: start to send CONNECT443google.com
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-16: CONNECT beacons.gcp.gvt2.com:443 HTTP/1.1 from beacons.gcp.gvt2.com @ Sun Feb 25 09:43:03 2024
-
-Message: start to send CONNECT443beacons.gcp.gvt2.com
-Message: Waiting for connection in
-Message: init client successfully
-Message: response sent to client14 google.com: HTTP/1.1 200 OK
+Message: response sent to client1 optimizationguide-pa.googleapis.com: HTTP/1.1 200 OK
 
 
 Message: init client successfully
-Message: response sent to client16 beacons.gcp.gvt2.com: HTTP/1.1 200 OK
+Message: response sent to client2 lh3.google.com: HTTP/1.1 200 OK
+
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+3: "CONNECT lh3.googleusercontent.com:443 HTTP/1.1" from lh3.googleusercontent.com @ Sun Feb 25 19:42:36 2024
+
+Message: start to send CONNECT443lh3.googleusercontent.com
+3: Requesting "CONNECT lh3.googleusercontent.com:443 HTTP/1.1" from lh3.googleusercontent.com
+Message: init client successfully
+Message: response sent to client3 lh3.googleusercontent.com: HTTP/1.1 200 OK
+
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+4: "CONNECT encrypted-tbn3.gstatic.com:443 HTTP/1.1" from encrypted-tbn3.gstatic.com @ Sun Feb 25 19:42:36 2024
+
+Message: start to send CONNECT443encrypted-tbn3.gstatic.com
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+4: Requesting "CONNECT encrypted-tbn3.gstatic.com:443 HTTP/1.1" from encrypted-tbn3.gstatic.com
+5: "CONNECT encrypted-tbn0.gstatic.com:443 HTTP/1.1" from encrypted-tbn0.gstatic.com @ Sun Feb 25 19:42:36 2024
+
+Message: start to send CONNECT443encrypted-tbn0.gstatic.com
+5: Requesting "CONNECT encrypted-tbn0.gstatic.com:443 HTTP/1.1" from encrypted-tbn0.gstatic.com
+Message: init client successfully
+Message: response sent to client5 encrypted-tbn0.gstatic.com: HTTP/1.1 200 OK
+
+
+Message: init client successfully
+Message: response sent to client4 encrypted-tbn3.gstatic.com: HTTP/1.1 200 OK
+
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+6: "CONNECT ogs.google.com:443 HTTP/1.1" from ogs.google.com @ Sun Feb 25 19:42:40 2024
+
+Message: start to send CONNECT443ogs.google.com
+6: Requesting "CONNECT ogs.google.com:443 HTTP/1.1" from ogs.google.com
+Message: init client successfully
+Message: response sent to client6 ogs.google.com: HTTP/1.1 200 OK
+
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+8: "CONNECT ssl.gstatic.com:443 HTTP/1.1" from ssl.gstatic.com @ Sun Feb 25 19:42:41 2024
+
+Message: start to send CONNECT443ssl.gstatic.com
+8: Requesting "CONNECT ssl.gstatic.com:443 HTTP/1.1" from ssl.gstatic.com
+Message: init client successfully
+Message: response sent to client8 ssl.gstatic.com: HTTP/1.1 200 OK
 
 
 Failed to read requestbad method
-Message: test done16
+Message: test done8
+8: Tunnel closed
 Message: Connection accepted
 Message: connection accepted
 Message: waiting for connection out
 Message: Waiting for connection in
-17: CONNECT beacons.gcp.gvt2.com:443 HTTP/1.1 from beacons.gcp.gvt2.com @ Sun Feb 25 09:43:03 2024
+9: "CONNECT ssl.gstatic.com:443 HTTP/1.1" from ssl.gstatic.com @ Sun Feb 25 19:42:41 2024
 
-Message: start to send CONNECT443beacons.gcp.gvt2.com
+Message: start to send CONNECT443ssl.gstatic.com
+9: Requesting "CONNECT ssl.gstatic.com:443 HTTP/1.1" from ssl.gstatic.com
 Message: init client successfully
-Message: response sent to client17 beacons.gcp.gvt2.com: HTTP/1.1 200 OK
+Message: response sent to client9 ssl.gstatic.com: HTTP/1.1 200 OK
 
 
-Message: test done14
 Message: Connection accepted
 Message: connection accepted
 Message: waiting for connection out
 Message: Waiting for connection in
-18: CONNECT google.com:443 HTTP/1.1 from google.com @ Sun Feb 25 09:43:13 2024
+10: "CONNECT play.google.com:443 HTTP/1.1" from play.google.com @ Sun Feb 25 19:43:11 2024
 
-Message: start to send CONNECT443google.com
+Message: start to send CONNECT443play.google.com
+10: Requesting "CONNECT play.google.com:443 HTTP/1.1" from play.google.com
 Message: init client successfully
-Message: response sent to client18 google.com: HTTP/1.1 200 OK
+Message: response sent to client10 play.google.com: HTTP/1.1 200 OK
+
+
+Message: test done9
+9: Tunnel closed
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+11: "CONNECT canvas.duke.edu:443 HTTP/1.1" from canvas.duke.edu @ Sun Feb 25 19:43:43 2024
+
+Message: start to send CONNECT443canvas.duke.edu
+11: Requesting "CONNECT canvas.duke.edu:443 HTTP/1.1" from canvas.duke.edu
+Message: init client successfully
+Message: response sent to client11 canvas.duke.edu: HTTP/1.1 200 OK
 
 
 Message: Connection accepted
 Message: connection accepted
 Message: waiting for connection out
 Message: Waiting for connection in
-19: CONNECT www.google.com:443 HTTP/1.1 from www.google.com @ Sun Feb 25 09:43:42 2024
+12: "CONNECT github.com:443 HTTP/1.1" from github.com @ Sun Feb 25 19:44:04 2024
+
+Message: start to send CONNECT443github.com
+12: Requesting "CONNECT github.com:443 HTTP/1.1" from github.com
+Message: init client successfully
+Message: response sent to client12 github.com: HTTP/1.1 200 OK
+
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+13: "CONNECT alive.github.com:443 HTTP/1.1" from alive.github.com @ Sun Feb 25 19:44:04 2024
+
+Message: start to send CONNECT443alive.github.com
+13: Requesting "CONNECT alive.github.com:443 HTTP/1.1" from alive.github.com
+Message: init client successfully
+Message: response sent to client13 alive.github.com: HTTP/1.1 200 OK
+
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+14: "CONNECT beacons.gvt2.com:443 HTTP/1.1" from beacons.gvt2.com @ Sun Feb 25 19:44:06 2024
+
+Message: start to send CONNECT443beacons.gvt2.com
+14: Requesting "CONNECT beacons.gvt2.com:443 HTTP/1.1" from beacons.gvt2.com
+Message: init client successfully
+Message: response sent to client14 beacons.gvt2.com: HTTP/1.1 200 OK
+
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+15: "CONNECT www.gstatic.com:443 HTTP/1.1" from www.gstatic.com @ Sun Feb 25 19:44:14 2024
+
+Message: start to send CONNECT443www.gstatic.com
+15: Requesting "CONNECT www.gstatic.com:443 HTTP/1.1" from www.gstatic.com
+Message: init client successfully
+Message: response sent to client15 www.gstatic.com: HTTP/1.1 200 OK
+
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+16: "CONNECT id.google.com:443 HTTP/1.1" from id.google.com @ Sun Feb 25 19:44:15 2024
+
+Message: start to send CONNECT443id.google.com
+16: Requesting "CONNECT id.google.com:443 HTTP/1.1" from id.google.com
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+17: "CONNECT lh3.google.com:443 HTTP/1.1" from lh3.google.com @ Sun Feb 25 19:44:15 2024
+
+Message: start to send CONNECT443lh3.google.com
+17: Requesting "CONNECT lh3.google.com:443 HTTP/1.1" from lh3.google.com
+Message: init client successfully
+Message: response sent to client16 id.google.com: HTTP/1.1 200 OK
+
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+18: "CONNECT play.google.com:443 HTTP/1.1" from play.google.com @ Sun Feb 25 19:44:15 2024
+
+Message: start to send CONNECT443play.google.com
+18: Requesting "CONNECT play.google.com:443 HTTP/1.1" from play.google.com
+Message: init client successfully
+Message: response sent to client18 play.google.com: HTTP/1.1 200 OK
+
+
+Message: init client successfully
+Message: response sent to client17 lh3.google.com: HTTP/1.1 200 OK
+
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+19: "CONNECT play.google.com:443 HTTP/1.1" from play.google.com @ Sun Feb 25 19:44:15 2024
+
+Message: start to send CONNECT443play.google.com
+19: Requesting "CONNECT play.google.com:443 HTTP/1.1" from play.google.com
+Message: init client successfully
+Message: response sent to client19 play.google.com: HTTP/1.1 200 OK
+
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+20: "CONNECT lh3.googleusercontent.com:443 HTTP/1.1" from lh3.googleusercontent.com @ Sun Feb 25 19:44:15 2024
+
+Message: start to send CONNECT443lh3.googleusercontent.com
+20: Requesting "CONNECT lh3.googleusercontent.com:443 HTTP/1.1" from lh3.googleusercontent.com
+Message: init client successfully
+Message: response sent to client20 lh3.googleusercontent.com: HTTP/1.1 200 OK
+
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+21: "CONNECT accounts.google.com:443 HTTP/1.1" from accounts.google.com @ Sun Feb 25 19:44:15 2024
+
+Message: start to send CONNECT443accounts.google.com
+21: Requesting "CONNECT accounts.google.com:443 HTTP/1.1" from accounts.google.com
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+22: "CONNECT adservice.google.com:443 HTTP/1.1" from adservice.google.com @ Sun Feb 25 19:44:15 2024
+
+Message: start to send CONNECT443adservice.google.com
+22: Requesting "CONNECT adservice.google.com:443 HTTP/1.1" from adservice.google.com
+Message: init client successfully
+Message: response sent to client21 accounts.google.com: HTTP/1.1 200 OK
+
+
+Message: init client successfully
+Message: response sent to client22 adservice.google.com: HTTP/1.1 200 OK
+
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+23: "CONNECT www.amctheatres.com:443 HTTP/1.1" from www.amctheatres.com @ Sun Feb 25 19:44:16 2024
+
+Message: start to send CONNECT443www.amctheatres.com
+23: Requesting "CONNECT www.amctheatres.com:443 HTTP/1.1" from www.amctheatres.com
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+24: "CONNECT cmp.osano.com:443 HTTP/1.1" from cmp.osano.com @ Sun Feb 25 19:44:16 2024
+
+Message: start to send CONNECT443cmp.osano.com
+26: "CONNECT www.recaptcha.net:443 HTTP/1.1" from www.recaptcha.net @ Sun Feb 25 19:44:16 2024
+
+Message: start to send CONNECT443www.recaptcha.net
+26: Requesting "CONNECT www.recaptcha.net:443 HTTP/1.1" from www.recaptcha.net
+24: Requesting "CONNECT cmp.osano.com:443 HTTP/1.1" from cmp.osano.com
+25: "CONNECT amc-theatres-res.cloudinary.com:443 HTTP/1.1" from amc-theatres-res.cloudinary.com @ Sun Feb 25 19:44:16 2024
+
+Message: start to send CONNECT443amc-theatres-res.cloudinary.com
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+25: Requesting "CONNECT amc-theatres-res.cloudinary.com:443 HTTP/1.1" from amc-theatres-res.cloudinary.com
+27: "CONNECT www.googleapis.com:443 HTTP/1.1" from www.googleapis.com @ Sun Feb 25 19:44:16 2024
+
+Message: start to send CONNECT443www.googleapis.com
+27: Requesting "CONNECT www.googleapis.com:443 HTTP/1.1" from www.googleapis.com
+Message: init client successfully
+Message: response sent to client27 www.googleapis.com: HTTP/1.1 200 OK
+
+
+Message: init client successfully
+Message: response sent to client24 cmp.osano.com: HTTP/1.1 200 OK
+
+
+Message: init client successfully
+Message: response sent to client26 www.recaptcha.net: HTTP/1.1 200 OK
+
+
+Message: init client successfully
+Message: response sent to client23 www.amctheatres.com: HTTP/1.1 200 OK
+
+
+Message: init client successfully
+Message: response sent to client25 amc-theatres-res.cloudinary.com: HTTP/1.1 200 OK
+
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+28: "CONNECT safebrowsing.google.com:443 HTTP/1.1" from safebrowsing.google.com @ Sun Feb 25 19:44:16 2024
+
+Message: start to send CONNECT443safebrowsing.google.com
+28: Requesting "CONNECT safebrowsing.google.com:443 HTTP/1.1" from safebrowsing.google.com
+Message: init client successfully
+Message: response sent to client28 safebrowsing.google.com: HTTP/1.1 200 OK
+
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+30: "CONNECT fonts.gstatic.com:443 HTTP/1.1" from fonts.gstatic.com @ Sun Feb 25 19:44:16 2024
+
+Message: start to send CONNECT443fonts.gstatic.com
+30: Requesting "CONNECT fonts.gstatic.com:443 HTTP/1.1" from fonts.gstatic.com
+Message: init client successfully
+Message: response sent to client30 fonts.gstatic.com: HTTP/1.1 200 OK
+
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+31: "CONNECT www.googletagmanager.com:443 HTTP/1.1" from www.googletagmanager.com @ Sun Feb 25 19:44:16 2024
+
+Message: start to send CONNECT443www.googletagmanager.com
+31: Requesting "CONNECT www.googletagmanager.com:443 HTTP/1.1" from www.googletagmanager.com
+Failed to read requestbad method
+Message: test done30
+30: Tunnel closed
+Message: init client successfully
+Message: response sent to client31 www.googletagmanager.com: HTTP/1.1 200 OK
+
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+32: "CONNECT fonts.gstatic.com:443 HTTP/1.1" from fonts.gstatic.com @ Sun Feb 25 19:44:16 2024
+
+Message: start to send CONNECT443fonts.gstatic.com
+32: Requesting "CONNECT fonts.gstatic.com:443 HTTP/1.1" from fonts.gstatic.com
+Message: init client successfully
+Message: response sent to client32 fonts.gstatic.com: HTTP/1.1 200 OK
+
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+33: "CONNECT app.launchdarkly.com:443 HTTP/1.1" from app.launchdarkly.com @ Sun Feb 25 19:44:16 2024
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+34: "CONNECT content.amctheatres.com:443 HTTP/1.1" from content.amctheatres.com @ Sun Feb 25 19:44:16 2024
+
+Message: Waiting for connection in
+Message: start to send CONNECT443content.amctheatres.com
+34: Requesting "CONNECT content.amctheatres.com:443 HTTP/1.1" from content.amctheatres.com
+Message: start to send CONNECT443app.launchdarkly.com
+33: Requesting "CONNECT app.launchdarkly.com:443 HTTP/1.1" from app.launchdarkly.com
+Message: test done25
+25: Tunnel closed
+Message: test done24
+24: Tunnel closed
+Message: test done32
+32: Tunnel closed
+Message: test done15
+15: Tunnel closed
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+36: "CONNECT www.google.com:443 HTTP/1.1" from www.google.com @ Sun Feb 25 19:44:16 2024
 
 Message: start to send CONNECT443www.google.com
+36: Requesting "CONNECT www.google.com:443 HTTP/1.1" from www.google.com
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+37: "CONNECT connect.facebook.net:443 HTTP/1.1" from connect.facebook.net @ Sun Feb 25 19:44:17 2024
+
+Message: start to send CONNECT443connect.facebook.net
+37: Requesting "CONNECT connect.facebook.net:443 HTTP/1.1" from connect.facebook.net
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+38: "CONNECT bat.bing.com:443 HTTP/1.1" from bat.bing.com @ Sun Feb 25 19:44:17 2024
+
+Message: start to send CONNECT443bat.bing.com
+38: Requesting "CONNECT bat.bing.com:443 HTTP/1.1" from bat.bing.com
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+39: "CONNECT 8666708.fls.doubleclick.net:443 HTTP/1.1" from 8666708.fls.doubleclick.net @ Sun Feb 25 19:44:17 2024
+
+Message: start to send CONNECT4438666708.fls.doubleclick.net
+39: Requesting "CONNECT 8666708.fls.doubleclick.net:443 HTTP/1.1" from 8666708.fls.doubleclick.net
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+40: "CONNECT analytics.tiktok.com:443 HTTP/1.1" from analytics.tiktok.com @ Sun Feb 25 19:44:17 2024
+
+Message: start to send CONNECT443analytics.tiktok.com
+40: Requesting "CONNECT analytics.tiktok.com:443 HTTP/1.1" from analytics.tiktok.com
 Message: init client successfully
-Message: response sent to client19 www.google.com: HTTP/1.1 200 OK
+Message: response sent to client36 www.google.com: HTTP/1.1 200 OK
 
 
+Message: init client successfully
+Message: response sent to client37 connect.facebook.net: HTTP/1.1 200 OK
+
+
+Message: init client successfully
+Message: response sent to client38 bat.bing.com: HTTP/1.1 200 OK
+
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+41: "CONNECT s.adroll.com:443 HTTP/1.1" from s.adroll.com @ Sun Feb 25 19:44:17 2024
+
+Message: start to send CONNECT443s.adroll.com
+41: Requesting "CONNECT s.adroll.com:443 HTTP/1.1" from s.adroll.com
+Failed to read requestbad method
+Message: init client successfully
+Message: response sent to client33 app.launchdarkly.com: HTTP/1.1 200 OK
+
+
+Message: init client successfully
+Message: response sent to client39 8666708.fls.doubleclick.net: HTTP/1.1 200 OK
+
+
+Message: init client successfully
+Message: response sent to client41 s.adroll.com: HTTP/1.1 200 OK
+
+
+Message: init client successfully
+Message: response sent to client40 analytics.tiktok.com: HTTP/1.1 200 OK
+
+
+Message: test done36
+36: Tunnel closed
+Message: init client successfully
+Message: response sent to client34 content.amctheatres.com: HTTP/1.1 200 OK
+
+
+Message: test done16
+16: Tunnel closed
+Message: test done26
+26: Tunnel closed
+Message: test done14
+14: Tunnel closed
+Message: test done11
+11: Tunnel closed
+Message: test done1
+1: Tunnel closed
 Message: test done19
+19: Tunnel closed
+Message: test done20
+Message: test done10
+Message: test done6
+20: Tunnel closed
+10: Tunnel closed
+6: Tunnel closed
+Message: test done2
+2: Tunnel closed
+Message: test done4
+4: Tunnel closed
+Message: test done22
+22: Tunnel closed
+Message: test done12
+12: Tunnel closed
+Message: test done3
+3: Tunnel closed
+Message: test done5
+Message: test done27
+5: Tunnel closed
+Message: test done21
+27: Tunnel closed
+21: Tunnel closed
+Message: test done0
+0: Tunnel closed
+Message: test done18
+18: Tunnel closed
+Message: test done17
+17: Tunnel closed
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+43: "CONNECT stats.g.doubleclick.net:443 HTTP/1.1" from stats.g.doubleclick.net @ Sun Feb 25 19:44:17 2024
+
+Message: start to send CONNECT443stats.g.doubleclick.net
+43: Requesting "CONNECT stats.g.doubleclick.net:443 HTTP/1.1" from stats.g.doubleclick.net
+44: "CONNECT s.adroll.com:443 HTTP/1.1" from s.adroll.com @ Sun Feb 25 19:44:17 2024
+
+Message: start to send CONNECT443s.adroll.com
+44: Requesting "CONNECT s.adroll.com:443 HTTP/1.1" from s.adroll.com
+Message: init client successfully
+Message: response sent to client44 s.adroll.com: HTTP/1.1 200 OK
+
+
+Message: init client successfully
+Message: response sent to client43 stats.g.doubleclick.net: HTTP/1.1 200 OK
+
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+45: "CONNECT d.adroll.com:443 HTTP/1.1" from d.adroll.com @ Sun Feb 25 19:44:17 2024
+
+Message: start to send CONNECT443d.adroll.com
+45: Requesting "CONNECT d.adroll.com:443 HTTP/1.1" from d.adroll.com
+Message: init client successfully
+Message: response sent to client45 d.adroll.com: HTTP/1.1 200 OK
+
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+47: "CONNECT adservice.google.com:443 HTTP/1.1" from adservice.google.com @ Sun Feb 25 19:44:17 2024
+
+Message: start to send CONNECT443adservice.google.com
+47: Requesting "CONNECT adservice.google.com:443 HTTP/1.1" from adservice.google.com
+Message: init client successfully
+Message: response sent to client47 adservice.google.com: HTTP/1.1 200 OK
+
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+48: "CONNECT www.facebook.com:443 HTTP/1.1" from www.facebook.com @ Sun Feb 25 19:44:17 2024
+
+Message: start to send CONNECT443www.facebook.com
+48: Requesting "CONNECT www.facebook.com:443 HTTP/1.1" from www.facebook.com
+Message: init client successfully
+Message: response sent to client48 www.facebook.com: HTTP/1.1 200 OK
+
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+49: "CONNECT graph.amctheatres.com:443 HTTP/1.1" from graph.amctheatres.com @ Sun Feb 25 19:44:17 2024
+
+Message: start to send CONNECT443graph.amctheatres.com
+49: Requesting "CONNECT graph.amctheatres.com:443 HTTP/1.1" from graph.amctheatres.com
+Failed to read requestbad method
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+50: "CONNECT www.google-analytics.com:443 HTTP/1.1" from www.google-analytics.com @ Sun Feb 25 19:44:17 2024
+
+Message: start to send CONNECT443www.google-analytics.com
+50: Requesting "CONNECT www.google-analytics.com:443 HTTP/1.1" from www.google-analytics.com
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+51: "CONNECT sc-static.net:443 HTTP/1.1" from sc-static.net @ Sun Feb 25 19:44:17 2024
+
+Message: start to send CONNECT443sc-static.net
+51: Requesting "CONNECT sc-static.net:443 HTTP/1.1" from sc-static.net
+Message: init client successfully
+Message: response sent to client50 www.google-analytics.com: HTTP/1.1 200 OK
+
+
+Message: init client successfully
+Message: response sent to client51 sc-static.net: HTTP/1.1 200 OK
+
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+52: "CONNECT resources.xg4ken.com:443 HTTP/1.1" from resources.xg4ken.com @ Sun Feb 25 19:44:17 2024
+
+Message: start to send CONNECT443resources.xg4ken.com
+52: Requesting "CONNECT resources.xg4ken.com:443 HTTP/1.1" from resources.xg4ken.com
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+53: "CONNECT www.recaptcha.net:443 HTTP/1.1" from www.recaptcha.net @ Sun Feb 25 19:44:17 2024
+
+Message: start to send CONNECT443www.recaptcha.net
+53: Requesting "CONNECT www.recaptcha.net:443 HTTP/1.1" from www.recaptcha.net
+Failed to read requestbad method
+Message: init client successfully
+Message: response sent to client49 graph.amctheatres.com: HTTP/1.1 200 OK
+
+
+Message: init client successfully
+Message: response sent to client53 www.recaptcha.net: HTTP/1.1 200 OK
+
+
+Message: init client successfully
+Message: response sent to client52 resources.xg4ken.com: HTTP/1.1 200 OK
+
+
+Message: test done47
+47: Tunnel closed
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+54: "CONNECT ib.adnxs.com:443 HTTP/1.1" from ib.adnxs.com @ Sun Feb 25 19:44:17 2024
+
+Message: start to send CONNECT443ib.adnxs.com
+54: Requesting "CONNECT ib.adnxs.com:443 HTTP/1.1" from ib.adnxs.com
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+56: "CONNECT tr.snapchat.com:443 HTTP/1.1" from tr.snapchat.com @ Sun Feb 25 19:44:17 2024
+
+Message: start to send CONNECT443tr.snapchat.com
+56: Requesting "CONNECT tr.snapchat.com:443 HTTP/1.1" from tr.snapchat.com
+57: "CONNECT googleads.g.doubleclick.net:443 HTTP/1.1" from googleads.g.doubleclick.net @ Sun Feb 25 19:44:17 2024
+
+Message: start to send CONNECT443googleads.g.doubleclick.net
+57: Requesting "CONNECT googleads.g.doubleclick.net:443 HTTP/1.1" from googleads.g.doubleclick.net
+Message: init client successfully
+Message: response sent to client56 tr.snapchat.com: HTTP/1.1 200 OK
+
+
+Message: init client successfully
+Message: response sent to client57 googleads.g.doubleclick.net: HTTP/1.1 200 OK
+
+
+Message: init client successfully
+Message: response sent to client54 ib.adnxs.com: HTTP/1.1 200 OK
+
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+58: "CONNECT googleads.g.doubleclick.net:443 HTTP/1.1" from googleads.g.doubleclick.net @ Sun Feb 25 19:44:17 2024
+
+Message: start to send CONNECT443googleads.g.doubleclick.net
+58: Requesting "CONNECT googleads.g.doubleclick.net:443 HTTP/1.1" from googleads.g.doubleclick.net
+Failed to read requestbad method
+Message: init client successfully
+Message: response sent to client58 googleads.g.doubleclick.net: HTTP/1.1 200 OK
+
+
+Message: test done58
+58: Tunnel closed
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+59: "CONNECT www.google.com:443 HTTP/1.1" from www.google.com @ Sun Feb 25 19:44:17 2024
+
+Message: start to send CONNECT443www.google.com
+59: Requesting "CONNECT www.google.com:443 HTTP/1.1" from www.google.com
+Message: init client successfully
+Message: response sent to client59 www.google.com: HTTP/1.1 200 OK
+
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+60: "CONNECT graph.amctheatres.com:443 HTTP/1.1" from graph.amctheatres.com @ Sun Feb 25 19:44:17 2024
+
+Message: start to send CONNECT443graph.amctheatres.com
+60: Requesting "CONNECT graph.amctheatres.com:443 HTTP/1.1" from graph.amctheatres.com
+Message: init client successfully
+Message: response sent to client60 graph.amctheatres.com: HTTP/1.1 200 OK
+
+
+Message: test done57
+57: Tunnel closed
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+61: "CONNECT www.google.com:443 HTTP/1.1" from www.google.com @ Sun Feb 25 19:44:17 2024
+
+Message: start to send CONNECT443www.google.com
+61: Requesting "CONNECT www.google.com:443 HTTP/1.1" from www.google.com
+Message: init client successfully
+Message: response sent to client61 www.google.com: HTTP/1.1 200 OK
+
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+62: "CONNECT analytics.google.com:443 HTTP/1.1" from analytics.google.com @ Sun Feb 25 19:44:22 2024
+
+Message: start to send CONNECT443analytics.google.com
+62: Requesting "CONNECT analytics.google.com:443 HTTP/1.1" from analytics.google.com
+Message: init client successfully
+Message: response sent to client62 analytics.google.com: HTTP/1.1 200 OK
+
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+63: "CONNECT clients4.google.com:443 HTTP/1.1" from clients4.google.com @ Sun Feb 25 19:44:25 2024
+
+Message: start to send CONNECT443clients4.google.com
+63: Requesting "CONNECT clients4.google.com:443 HTTP/1.1" from clients4.google.com
+Message: init client successfully
+Message: response sent to client63 clients4.google.com: HTTP/1.1 200 OK
+
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+64: "CONNECT www.google.com:443 HTTP/1.1" from www.google.com @ Sun Feb 25 19:44:27 2024
+
+Message: start to send CONNECT443www.google.com
+64: Requesting "CONNECT www.google.com:443 HTTP/1.1" from www.google.com
+Message: init client successfully
+Message: response sent to client64 www.google.com: HTTP/1.1 200 OK
+
+
+Message: test done54
+54: Tunnel closed
+Message: test done64
+64: Tunnel closed
