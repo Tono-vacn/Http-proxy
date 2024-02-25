@@ -8,56 +8,84 @@ Message: Connection accepted
 Message: connection accepted
 Message: waiting for connection out
 Message: Waiting for connection in
-0: CONNECT www.google.com:443 HTTP/1.1 from www.google.com @ Sun Feb 25 01:16:58 2024
+0: GET http://www.httpwatch.com/httpgallery/chunked/chunkedimage.aspx HTTP/1.1 from www.httpwatch.com @ Sun Feb 25 09:41:13 2024
 
-Message: start to send CONNECT443www.google.com
-Message: init client successfully
-Message: response sent to client0 www.google.com: HTTP/1.1 200 OK
-
-
+Message: start to send GET80www.httpwatch.com
 Message: Connection accepted
 Message: connection accepted
 Message: waiting for connection out
 Message: Waiting for connection in
-1: CONNECT beacons.gcp.gvt2.com:443 HTTP/1.1 from beacons.gcp.gvt2.com @ Sun Feb 25 01:16:58 2024
+Message: init client successfully
+0: not in cache
+Message: request sent to server0 www.httpwatch.com: GET http://www.httpwatch.com/httpgallery/chunked/chunkedimage.aspx HTTP/1.1
+Host: www.httpwatch.com
+Proxy-Connection: keep-alive
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Accept-Encoding: gzip, deflate
+Accept-Language: en,zh-CN;q=0.9,zh;q=0.8
+
+
+Message: 0response sent from server to clientHTTP/1.1 200 OK
+Message: after cache
+Message: test done0
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+2: CONNECT beacons.gcp.gvt2.com:443 HTTP/1.1 from beacons.gcp.gvt2.com @ Sun Feb 25 09:41:17 2024
 
 Message: start to send CONNECT443beacons.gcp.gvt2.com
 Message: init client successfully
-Message: response sent to client1 beacons.gcp.gvt2.com: HTTP/1.1 200 OK
+Message: response sent to client2 beacons.gcp.gvt2.com: HTTP/1.1 200 OK
+
+
+1: GET http://www.httpwatch.com/httpgallery/chunked/chunkedimage.aspx HTTP/1.1 from www.httpwatch.com @ Sun Feb 25 09:41:19 2024
+
+Message: start to send GET80www.httpwatch.com
+Message: init client successfully
+1: not in cache
+Message: request sent to server1 www.httpwatch.com: GET http://www.httpwatch.com/httpgallery/chunked/chunkedimage.aspx HTTP/1.1
+Host: www.httpwatch.com
+Proxy-Connection: keep-alive
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Accept-Encoding: gzip, deflate
+Accept-Language: en,zh-CN;q=0.9,zh;q=0.8
 
 
 Message: Connection accepted
 Message: connection accepted
 Message: waiting for connection out
 Message: Waiting for connection in
-2: CONNECT lh3.google.com:443 HTTP/1.1 from lh3.google.com @ Sun Feb 25 01:16:58 2024
+Message: 1response sent from server to clientHTTP/1.1 200 OK
+Message: after cache
+Message: test done1
+Message: test done2
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+4: CONNECT beacons.gcp.gvt2.com:443 HTTP/1.1 from beacons.gcp.gvt2.com @ Sun Feb 25 09:41:27 2024
 
-Message: start to send CONNECT443lh3.google.com
+Message: start to send CONNECT443beacons.gcp.gvt2.com
 Message: init client successfully
-Message: response sent to client2 lh3.google.com: HTTP/1.1 200 OK
+Message: response sent to client4 beacons.gcp.gvt2.com: HTTP/1.1 200 OK
 
 
 Message: Connection accepted
 Message: connection accepted
 Message: waiting for connection out
 Message: Waiting for connection in
-3: CONNECT lh3.googleusercontent.com:443 HTTP/1.1 from lh3.googleusercontent.com @ Sun Feb 25 01:16:58 2024
+5: CONNECT beacons.gvt2.com:443 HTTP/1.1 from beacons.gvt2.com @ Sun Feb 25 09:41:36 2024
 
-Message: start to send CONNECT443lh3.googleusercontent.com
+Message: start to send CONNECT443beacons.gvt2.com
 Message: init client successfully
-Message: response sent to client3 lh3.googleusercontent.com: HTTP/1.1 200 OK
-
-
-Message: test done3
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-4: CONNECT lh3.googleusercontent.com:443 HTTP/1.1 from lh3.googleusercontent.com @ Sun Feb 25 01:17:09 2024
-
-Message: start to send CONNECT443lh3.googleusercontent.com
-Message: init client successfully
-Message: response sent to client4 lh3.googleusercontent.com: HTTP/1.1 200 OK
+Message: response sent to client5 beacons.gvt2.com: HTTP/1.1 200 OK
 
 
 Message: test done4
@@ -65,85 +93,67 @@ Message: Connection accepted
 Message: connection accepted
 Message: waiting for connection out
 Message: Waiting for connection in
-5: CONNECT ogs.google.com:443 HTTP/1.1 from ogs.google.com @ Sun Feb 25 01:17:19 2024
+6: CONNECT beacons.gvt2.com:443 HTTP/1.1 from beacons.gvt2.com @ Sun Feb 25 09:41:40 2024
 
-Message: start to send CONNECT443ogs.google.com
+Message: start to send CONNECT443beacons.gvt2.com
 Message: init client successfully
-Message: response sent to client5 ogs.google.com: HTTP/1.1 200 OK
-
-
-Message: test done5
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-6: CONNECT ogs.google.com:443 HTTP/1.1 from ogs.google.com @ Sun Feb 25 01:17:29 2024
-
-Message: start to send CONNECT443ogs.google.com
-Message: init client successfully
-Message: response sent to client6 ogs.google.com: HTTP/1.1 200 OK
-
-
-Message: test done6
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-7: CONNECT ab.chatgpt.com:443 HTTP/1.1 from ab.chatgpt.com @ Sun Feb 25 01:19:44 2024
-
-Message: start to send CONNECT443ab.chatgpt.com
-Message: init client successfully
-Message: response sent to client7 ab.chatgpt.com: HTTP/1.1 200 OK
+Message: response sent to client6 beacons.gvt2.com: HTTP/1.1 200 OK
 
 
 Message: Connection accepted
 Message: connection accepted
 Message: waiting for connection out
 Message: Waiting for connection in
-8: CONNECT google.com:443 HTTP/1.1 from google.com @ Sun Feb 25 01:19:44 2024
+7: CONNECT mqtt-web.zhihu.com:443 HTTP/1.1 from mqtt-web.zhihu.com @ Sun Feb 25 09:41:41 2024
 
-Message: start to send CONNECT443google.com
+Message: start to send CONNECT443mqtt-web.zhihu.com
+Message: init client successfully
+Message: response sent to client7 mqtt-web.zhihu.com: HTTP/1.1 200 OK
+
+
 Message: Connection accepted
 Message: connection accepted
 Message: waiting for connection out
 Message: Waiting for connection in
-9: CONNECT beacons.gcp.gvt2.com:443 HTTP/1.1 from beacons.gcp.gvt2.com @ Sun Feb 25 01:19:44 2024
+8: CONNECT www.google.com:443 HTTP/1.1 from www.google.com @ Sun Feb 25 09:41:42 2024
 
-Message: start to send CONNECT443beacons.gcp.gvt2.com
+Message: start to send CONNECT443www.google.com
 Message: init client successfully
-Message: response sent to client8 google.com: HTTP/1.1 200 OK
+Message: response sent to client8 www.google.com: HTTP/1.1 200 OK
 
 
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+9: CONNECT mqtt-web.zhihu.com:443 HTTP/1.1 from mqtt-web.zhihu.com @ Sun Feb 25 09:41:49 2024
+
+Message: start to send CONNECT443mqtt-web.zhihu.com
 Message: init client successfully
-Message: response sent to client9 beacons.gcp.gvt2.com: HTTP/1.1 200 OK
+Message: response sent to client9 mqtt-web.zhihu.com: HTTP/1.1 200 OK
 
 
-Message: test done0
-Message: test done2
-Message: test done9
 Message: test done8
 Message: Connection accepted
 Message: connection accepted
 Message: waiting for connection out
 Message: Waiting for connection in
-10: CONNECT google.com:443 HTTP/1.1 from google.com @ Sun Feb 25 01:24:44 2024
+10: CONNECT mtalk.google.com:443 HTTP/1.1 from mtalk.google.com @ Sun Feb 25 09:41:57 2024
 
-Message: start to send CONNECT443google.com
+Message: start to send CONNECT443mtalk.google.com
 Message: init client successfully
-Message: response sent to client10 google.com: HTTP/1.1 200 OK
+Message: response sent to client10 mtalk.google.com: HTTP/1.1 200 OK
 
 
-Message: test done7
-Message: test done10
 Message: Connection accepted
 Message: connection accepted
 Message: waiting for connection out
 Message: Waiting for connection in
-11: CONNECT beacons.gcp.gvt2.com:443 HTTP/1.1 from beacons.gcp.gvt2.com @ Sun Feb 25 01:29:44 2024
+11: CONNECT www.google.com:443 HTTP/1.1 from www.google.com @ Sun Feb 25 09:42:42 2024
 
-Message: start to send CONNECT443beacons.gcp.gvt2.com
+Message: start to send CONNECT443www.google.com
 Message: init client successfully
-Message: response sent to client11 beacons.gcp.gvt2.com: HTTP/1.1 200 OK
+Message: response sent to client11 www.google.com: HTTP/1.1 200 OK
 
 
 Message: test done11
@@ -151,62 +161,36 @@ Message: Connection accepted
 Message: connection accepted
 Message: waiting for connection out
 Message: Waiting for connection in
-12: CONNECT beacons.gcp.gvt2.com:443 HTTP/1.1 from beacons.gcp.gvt2.com @ Sun Feb 25 01:29:54 2024
-
-Message: start to send CONNECT443beacons.gcp.gvt2.com
-Message: init client successfully
-Message: response sent to client12 beacons.gcp.gvt2.com: HTTP/1.1 200 OK
-
-
-Message: test done12
 Message: Connection accepted
 Message: connection accepted
 Message: waiting for connection out
 Message: Waiting for connection in
-13: CONNECT beacons.gvt2.com:443 HTTP/1.1 from beacons.gvt2.com @ Sun Feb 25 01:30:05 2024
+13: GET http://www.httpwatch.com/httpgallery/chunked/chunkedimage.aspx HTTP/1.1 from www.httpwatch.com @ Sun Feb 25 09:42:56 2024
 
-Message: start to send CONNECT443beacons.gvt2.com
+Message: start to send GET80www.httpwatch.com
 Message: init client successfully
-Message: response sent to client13 beacons.gvt2.com: HTTP/1.1 200 OK
+13: not in cache
+Message: request sent to server13 www.httpwatch.com: GET http://www.httpwatch.com/httpgallery/chunked/chunkedimage.aspx HTTP/1.1
+Host: www.httpwatch.com
+Proxy-Connection: keep-alive
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Accept-Encoding: gzip, deflate
+Accept-Language: en,zh-CN;q=0.9,zh;q=0.8
 
 
+Message: 13response sent from server to clientHTTP/1.1 200 OK
+Message: after cache
 Message: test done13
 Message: Connection accepted
 Message: connection accepted
 Message: waiting for connection out
-Message: Waiting for connection in
-14: CONNECT beacons.gvt2.com:443 HTTP/1.1 from beacons.gvt2.com @ Sun Feb 25 01:30:15 2024
-
-Message: start to send CONNECT443beacons.gvt2.com
-Message: init client successfully
-Message: response sent to client14 beacons.gvt2.com: HTTP/1.1 200 OK
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-15: CONNECT mtalk.google.com:5228 HTTP/1.1 from mtalk.google.com @ Sun Feb 25 01:31:30 2024
+14: CONNECT google.com:443 HTTP/1.1 from google.com @ Sun Feb 25 09:43:03 2024
 
 Message: Waiting for connection in
-Message: start to send CONNECT5228mtalk.google.com
-Message: init client successfully
-Message: response sent to client15 mtalk.google.com: HTTP/1.1 200 OK
-
-
-Message: test done15
-Message: test done14
-Message: test done1
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-16: CONNECT mtalk.google.com:443 HTTP/1.1 from mtalk.google.com @ Sun Feb 25 01:56:23 2024
-
-Message: start to send CONNECT443mtalk.google.com
-Message: init client successfully
-Message: response sent to client16 mtalk.google.com: HTTP/1.1 200 OK
-
-
+Message: start to send CONNECT443google.com
 Message: Connection accepted
 Message: connection accepted
 Message: waiting for connection out
@@ -214,38 +198,52 @@ Message: Waiting for connection in
 Message: Connection accepted
 Message: connection accepted
 Message: waiting for connection out
-Message: Waiting for connection in
-18: CONNECT easylist-downloads.adblockplus.org:443 HTTP/1.1 from easylist-downloads.adblockplus.org @ Sun Feb 25 02:00:22 2024
+16: CONNECT beacons.gcp.gvt2.com:443 HTTP/1.1 from beacons.gcp.gvt2.com @ Sun Feb 25 09:43:03 2024
 
-Message: start to send CONNECT443easylist-downloads.adblockplus.org
+Message: start to send CONNECT443beacons.gcp.gvt2.com
+Message: Waiting for connection in
 Message: init client successfully
-Message: response sent to client18 easylist-downloads.adblockplus.org: HTTP/1.1 200 OK
+Message: response sent to client14 google.com: HTTP/1.1 200 OK
+
+
+Message: init client successfully
+Message: response sent to client16 beacons.gcp.gvt2.com: HTTP/1.1 200 OK
 
 
 Failed to read requestbad method
-Message: test done18
+Message: test done16
 Message: Connection accepted
 Message: connection accepted
 Message: waiting for connection out
 Message: Waiting for connection in
-19: CONNECT easylist-downloads.adblockplus.org:443 HTTP/1.1 from easylist-downloads.adblockplus.org @ Sun Feb 25 02:00:22 2024
+17: CONNECT beacons.gcp.gvt2.com:443 HTTP/1.1 from beacons.gcp.gvt2.com @ Sun Feb 25 09:43:03 2024
 
-Message: start to send CONNECT443easylist-downloads.adblockplus.org
+Message: start to send CONNECT443beacons.gcp.gvt2.com
 Message: init client successfully
-Message: response sent to client19 easylist-downloads.adblockplus.org: HTTP/1.1 200 OK
+Message: response sent to client17 beacons.gcp.gvt2.com: HTTP/1.1 200 OK
+
+
+Message: test done14
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+18: CONNECT google.com:443 HTTP/1.1 from google.com @ Sun Feb 25 09:43:13 2024
+
+Message: start to send CONNECT443google.com
+Message: init client successfully
+Message: response sent to client18 google.com: HTTP/1.1 200 OK
+
+
+Message: Connection accepted
+Message: connection accepted
+Message: waiting for connection out
+Message: Waiting for connection in
+19: CONNECT www.google.com:443 HTTP/1.1 from www.google.com @ Sun Feb 25 09:43:42 2024
+
+Message: start to send CONNECT443www.google.com
+Message: init client successfully
+Message: response sent to client19 www.google.com: HTTP/1.1 200 OK
 
 
 Message: test done19
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-20: CONNECT mtalk.google.com:5228 HTTP/1.1 from mtalk.google.com @ Sun Feb 25 02:15:53 2024
-
-Message: start to send CONNECT5228mtalk.google.com
-Message: init client successfully
-Message: response sent to client20 mtalk.google.com: HTTP/1.1 200 OK
-
-
-Message: test done20
-Message: test done16
