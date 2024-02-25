@@ -79,7 +79,7 @@ public:
     struct sockaddr_storage socket_addr;
     socklen_t addr_size = sizeof(socket_addr);
 
-    outMessage("Waiting for connection in");
+    //outMessage("Waiting for connection in");
 
     int client_fd = accept(socket_fd, (struct sockaddr *)&socket_addr, &addr_size);
     if (client_fd == -1)
@@ -87,7 +87,7 @@ public:
       putError("accept error in acceptConnection");
     }
 
-    outMessage("Connection accepted");
+    //outMessage("Connection accepted");
 
     // char ipstr[INET6_ADDRSTRLEN];
     struct sockaddr_in *s = (struct sockaddr_in *)&socket_addr;
@@ -216,7 +216,7 @@ void Client::initClient()
   {
     putError("connect error in initClient");
   }
-  outMessage("init client successfully");
+  //outMessage("init client successfully");
 }
 
 #endif

@@ -1,810 +1,989 @@
-Message: Initializing server
-Message: Binding socket
-Message: Server is listening on port 0.0.0.012345
-Message: Proxy started
-Message: waiting for connection out
-Message: Waiting for connection in
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-0: "CONNECT www.google.com:443 HTTP/1.1" from www.google.com @ Sun Feb 25 19:42:36 2024
-
-Message: start to send CONNECT443www.google.com
-0: Requesting "CONNECT www.google.com:443 HTTP/1.1" from www.google.com
-Message: init client successfully
-Message: response sent to client0 www.google.com: HTTP/1.1 200 OK
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-1: "CONNECT optimizationguide-pa.googleapis.com:443 HTTP/1.1" from optimizationguide-pa.googleapis.com @ Sun Feb 25 19:42:36 2024
-
-Message: start to send CONNECT443optimizationguide-pa.googleapis.com
-1: Requesting "CONNECT optimizationguide-pa.googleapis.com:443 HTTP/1.1" from optimizationguide-pa.googleapis.com
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-2: "CONNECT lh3.google.com:443 HTTP/1.1" from lh3.google.com @ Sun Feb 25 19:42:36 2024
-
-Message: start to send CONNECT443lh3.google.com
-2: Requesting "CONNECT lh3.google.com:443 HTTP/1.1" from lh3.google.com
-Message: init client successfully
-Message: response sent to client1 optimizationguide-pa.googleapis.com: HTTP/1.1 200 OK
-
-
-Message: init client successfully
-Message: response sent to client2 lh3.google.com: HTTP/1.1 200 OK
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-3: "CONNECT lh3.googleusercontent.com:443 HTTP/1.1" from lh3.googleusercontent.com @ Sun Feb 25 19:42:36 2024
-
-Message: start to send CONNECT443lh3.googleusercontent.com
-3: Requesting "CONNECT lh3.googleusercontent.com:443 HTTP/1.1" from lh3.googleusercontent.com
-Message: init client successfully
-Message: response sent to client3 lh3.googleusercontent.com: HTTP/1.1 200 OK
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-4: "CONNECT encrypted-tbn3.gstatic.com:443 HTTP/1.1" from encrypted-tbn3.gstatic.com @ Sun Feb 25 19:42:36 2024
-
-Message: start to send CONNECT443encrypted-tbn3.gstatic.com
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-4: Requesting "CONNECT encrypted-tbn3.gstatic.com:443 HTTP/1.1" from encrypted-tbn3.gstatic.com
-5: "CONNECT encrypted-tbn0.gstatic.com:443 HTTP/1.1" from encrypted-tbn0.gstatic.com @ Sun Feb 25 19:42:36 2024
-
-Message: start to send CONNECT443encrypted-tbn0.gstatic.com
-5: Requesting "CONNECT encrypted-tbn0.gstatic.com:443 HTTP/1.1" from encrypted-tbn0.gstatic.com
-Message: init client successfully
-Message: response sent to client5 encrypted-tbn0.gstatic.com: HTTP/1.1 200 OK
-
-
-Message: init client successfully
-Message: response sent to client4 encrypted-tbn3.gstatic.com: HTTP/1.1 200 OK
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-6: "CONNECT ogs.google.com:443 HTTP/1.1" from ogs.google.com @ Sun Feb 25 19:42:40 2024
-
-Message: start to send CONNECT443ogs.google.com
-6: Requesting "CONNECT ogs.google.com:443 HTTP/1.1" from ogs.google.com
-Message: init client successfully
-Message: response sent to client6 ogs.google.com: HTTP/1.1 200 OK
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-8: "CONNECT ssl.gstatic.com:443 HTTP/1.1" from ssl.gstatic.com @ Sun Feb 25 19:42:41 2024
-
-Message: start to send CONNECT443ssl.gstatic.com
-8: Requesting "CONNECT ssl.gstatic.com:443 HTTP/1.1" from ssl.gstatic.com
-Message: init client successfully
-Message: response sent to client8 ssl.gstatic.com: HTTP/1.1 200 OK
-
-
-Failed to read requestbad method
-Message: test done8
-8: Tunnel closed
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-9: "CONNECT ssl.gstatic.com:443 HTTP/1.1" from ssl.gstatic.com @ Sun Feb 25 19:42:41 2024
-
-Message: start to send CONNECT443ssl.gstatic.com
-9: Requesting "CONNECT ssl.gstatic.com:443 HTTP/1.1" from ssl.gstatic.com
-Message: init client successfully
-Message: response sent to client9 ssl.gstatic.com: HTTP/1.1 200 OK
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-10: "CONNECT play.google.com:443 HTTP/1.1" from play.google.com @ Sun Feb 25 19:43:11 2024
-
-Message: start to send CONNECT443play.google.com
-10: Requesting "CONNECT play.google.com:443 HTTP/1.1" from play.google.com
-Message: init client successfully
-Message: response sent to client10 play.google.com: HTTP/1.1 200 OK
-
-
-Message: test done9
-9: Tunnel closed
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-11: "CONNECT canvas.duke.edu:443 HTTP/1.1" from canvas.duke.edu @ Sun Feb 25 19:43:43 2024
-
-Message: start to send CONNECT443canvas.duke.edu
-11: Requesting "CONNECT canvas.duke.edu:443 HTTP/1.1" from canvas.duke.edu
-Message: init client successfully
-Message: response sent to client11 canvas.duke.edu: HTTP/1.1 200 OK
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-12: "CONNECT github.com:443 HTTP/1.1" from github.com @ Sun Feb 25 19:44:04 2024
-
-Message: start to send CONNECT443github.com
-12: Requesting "CONNECT github.com:443 HTTP/1.1" from github.com
-Message: init client successfully
-Message: response sent to client12 github.com: HTTP/1.1 200 OK
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-13: "CONNECT alive.github.com:443 HTTP/1.1" from alive.github.com @ Sun Feb 25 19:44:04 2024
-
-Message: start to send CONNECT443alive.github.com
-13: Requesting "CONNECT alive.github.com:443 HTTP/1.1" from alive.github.com
-Message: init client successfully
-Message: response sent to client13 alive.github.com: HTTP/1.1 200 OK
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-14: "CONNECT beacons.gvt2.com:443 HTTP/1.1" from beacons.gvt2.com @ Sun Feb 25 19:44:06 2024
-
-Message: start to send CONNECT443beacons.gvt2.com
-14: Requesting "CONNECT beacons.gvt2.com:443 HTTP/1.1" from beacons.gvt2.com
-Message: init client successfully
-Message: response sent to client14 beacons.gvt2.com: HTTP/1.1 200 OK
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-15: "CONNECT www.gstatic.com:443 HTTP/1.1" from www.gstatic.com @ Sun Feb 25 19:44:14 2024
-
-Message: start to send CONNECT443www.gstatic.com
-15: Requesting "CONNECT www.gstatic.com:443 HTTP/1.1" from www.gstatic.com
-Message: init client successfully
-Message: response sent to client15 www.gstatic.com: HTTP/1.1 200 OK
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-16: "CONNECT id.google.com:443 HTTP/1.1" from id.google.com @ Sun Feb 25 19:44:15 2024
-
-Message: start to send CONNECT443id.google.com
-16: Requesting "CONNECT id.google.com:443 HTTP/1.1" from id.google.com
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-17: "CONNECT lh3.google.com:443 HTTP/1.1" from lh3.google.com @ Sun Feb 25 19:44:15 2024
-
-Message: start to send CONNECT443lh3.google.com
-17: Requesting "CONNECT lh3.google.com:443 HTTP/1.1" from lh3.google.com
-Message: init client successfully
-Message: response sent to client16 id.google.com: HTTP/1.1 200 OK
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-18: "CONNECT play.google.com:443 HTTP/1.1" from play.google.com @ Sun Feb 25 19:44:15 2024
-
-Message: start to send CONNECT443play.google.com
-18: Requesting "CONNECT play.google.com:443 HTTP/1.1" from play.google.com
-Message: init client successfully
-Message: response sent to client18 play.google.com: HTTP/1.1 200 OK
-
-
-Message: init client successfully
-Message: response sent to client17 lh3.google.com: HTTP/1.1 200 OK
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-19: "CONNECT play.google.com:443 HTTP/1.1" from play.google.com @ Sun Feb 25 19:44:15 2024
-
-Message: start to send CONNECT443play.google.com
-19: Requesting "CONNECT play.google.com:443 HTTP/1.1" from play.google.com
-Message: init client successfully
-Message: response sent to client19 play.google.com: HTTP/1.1 200 OK
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-20: "CONNECT lh3.googleusercontent.com:443 HTTP/1.1" from lh3.googleusercontent.com @ Sun Feb 25 19:44:15 2024
-
-Message: start to send CONNECT443lh3.googleusercontent.com
-20: Requesting "CONNECT lh3.googleusercontent.com:443 HTTP/1.1" from lh3.googleusercontent.com
-Message: init client successfully
-Message: response sent to client20 lh3.googleusercontent.com: HTTP/1.1 200 OK
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-21: "CONNECT accounts.google.com:443 HTTP/1.1" from accounts.google.com @ Sun Feb 25 19:44:15 2024
-
-Message: start to send CONNECT443accounts.google.com
-21: Requesting "CONNECT accounts.google.com:443 HTTP/1.1" from accounts.google.com
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-22: "CONNECT adservice.google.com:443 HTTP/1.1" from adservice.google.com @ Sun Feb 25 19:44:15 2024
-
-Message: start to send CONNECT443adservice.google.com
-22: Requesting "CONNECT adservice.google.com:443 HTTP/1.1" from adservice.google.com
-Message: init client successfully
-Message: response sent to client21 accounts.google.com: HTTP/1.1 200 OK
-
-
-Message: init client successfully
-Message: response sent to client22 adservice.google.com: HTTP/1.1 200 OK
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-23: "CONNECT www.amctheatres.com:443 HTTP/1.1" from www.amctheatres.com @ Sun Feb 25 19:44:16 2024
-
-Message: start to send CONNECT443www.amctheatres.com
-23: Requesting "CONNECT www.amctheatres.com:443 HTTP/1.1" from www.amctheatres.com
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-24: "CONNECT cmp.osano.com:443 HTTP/1.1" from cmp.osano.com @ Sun Feb 25 19:44:16 2024
-
-Message: start to send CONNECT443cmp.osano.com
-26: "CONNECT www.recaptcha.net:443 HTTP/1.1" from www.recaptcha.net @ Sun Feb 25 19:44:16 2024
-
-Message: start to send CONNECT443www.recaptcha.net
-26: Requesting "CONNECT www.recaptcha.net:443 HTTP/1.1" from www.recaptcha.net
-24: Requesting "CONNECT cmp.osano.com:443 HTTP/1.1" from cmp.osano.com
-25: "CONNECT amc-theatres-res.cloudinary.com:443 HTTP/1.1" from amc-theatres-res.cloudinary.com @ Sun Feb 25 19:44:16 2024
-
-Message: start to send CONNECT443amc-theatres-res.cloudinary.com
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-25: Requesting "CONNECT amc-theatres-res.cloudinary.com:443 HTTP/1.1" from amc-theatres-res.cloudinary.com
-27: "CONNECT www.googleapis.com:443 HTTP/1.1" from www.googleapis.com @ Sun Feb 25 19:44:16 2024
-
-Message: start to send CONNECT443www.googleapis.com
-27: Requesting "CONNECT www.googleapis.com:443 HTTP/1.1" from www.googleapis.com
-Message: init client successfully
-Message: response sent to client27 www.googleapis.com: HTTP/1.1 200 OK
-
-
-Message: init client successfully
-Message: response sent to client24 cmp.osano.com: HTTP/1.1 200 OK
-
-
-Message: init client successfully
-Message: response sent to client26 www.recaptcha.net: HTTP/1.1 200 OK
-
-
-Message: init client successfully
-Message: response sent to client23 www.amctheatres.com: HTTP/1.1 200 OK
-
-
-Message: init client successfully
-Message: response sent to client25 amc-theatres-res.cloudinary.com: HTTP/1.1 200 OK
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-28: "CONNECT safebrowsing.google.com:443 HTTP/1.1" from safebrowsing.google.com @ Sun Feb 25 19:44:16 2024
-
-Message: start to send CONNECT443safebrowsing.google.com
-28: Requesting "CONNECT safebrowsing.google.com:443 HTTP/1.1" from safebrowsing.google.com
-Message: init client successfully
-Message: response sent to client28 safebrowsing.google.com: HTTP/1.1 200 OK
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-30: "CONNECT fonts.gstatic.com:443 HTTP/1.1" from fonts.gstatic.com @ Sun Feb 25 19:44:16 2024
-
-Message: start to send CONNECT443fonts.gstatic.com
-30: Requesting "CONNECT fonts.gstatic.com:443 HTTP/1.1" from fonts.gstatic.com
-Message: init client successfully
-Message: response sent to client30 fonts.gstatic.com: HTTP/1.1 200 OK
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-31: "CONNECT www.googletagmanager.com:443 HTTP/1.1" from www.googletagmanager.com @ Sun Feb 25 19:44:16 2024
-
-Message: start to send CONNECT443www.googletagmanager.com
-31: Requesting "CONNECT www.googletagmanager.com:443 HTTP/1.1" from www.googletagmanager.com
-Failed to read requestbad method
-Message: test done30
-30: Tunnel closed
-Message: init client successfully
-Message: response sent to client31 www.googletagmanager.com: HTTP/1.1 200 OK
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-32: "CONNECT fonts.gstatic.com:443 HTTP/1.1" from fonts.gstatic.com @ Sun Feb 25 19:44:16 2024
-
-Message: start to send CONNECT443fonts.gstatic.com
-32: Requesting "CONNECT fonts.gstatic.com:443 HTTP/1.1" from fonts.gstatic.com
-Message: init client successfully
-Message: response sent to client32 fonts.gstatic.com: HTTP/1.1 200 OK
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-33: "CONNECT app.launchdarkly.com:443 HTTP/1.1" from app.launchdarkly.com @ Sun Feb 25 19:44:16 2024
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-34: "CONNECT content.amctheatres.com:443 HTTP/1.1" from content.amctheatres.com @ Sun Feb 25 19:44:16 2024
-
-Message: Waiting for connection in
-Message: start to send CONNECT443content.amctheatres.com
-34: Requesting "CONNECT content.amctheatres.com:443 HTTP/1.1" from content.amctheatres.com
-Message: start to send CONNECT443app.launchdarkly.com
-33: Requesting "CONNECT app.launchdarkly.com:443 HTTP/1.1" from app.launchdarkly.com
-Message: test done25
-25: Tunnel closed
-Message: test done24
-24: Tunnel closed
-Message: test done32
-32: Tunnel closed
-Message: test done15
-15: Tunnel closed
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-36: "CONNECT www.google.com:443 HTTP/1.1" from www.google.com @ Sun Feb 25 19:44:16 2024
-
-Message: start to send CONNECT443www.google.com
-36: Requesting "CONNECT www.google.com:443 HTTP/1.1" from www.google.com
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-37: "CONNECT connect.facebook.net:443 HTTP/1.1" from connect.facebook.net @ Sun Feb 25 19:44:17 2024
-
-Message: start to send CONNECT443connect.facebook.net
-37: Requesting "CONNECT connect.facebook.net:443 HTTP/1.1" from connect.facebook.net
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-38: "CONNECT bat.bing.com:443 HTTP/1.1" from bat.bing.com @ Sun Feb 25 19:44:17 2024
-
-Message: start to send CONNECT443bat.bing.com
-38: Requesting "CONNECT bat.bing.com:443 HTTP/1.1" from bat.bing.com
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-39: "CONNECT 8666708.fls.doubleclick.net:443 HTTP/1.1" from 8666708.fls.doubleclick.net @ Sun Feb 25 19:44:17 2024
-
-Message: start to send CONNECT4438666708.fls.doubleclick.net
-39: Requesting "CONNECT 8666708.fls.doubleclick.net:443 HTTP/1.1" from 8666708.fls.doubleclick.net
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-40: "CONNECT analytics.tiktok.com:443 HTTP/1.1" from analytics.tiktok.com @ Sun Feb 25 19:44:17 2024
-
-Message: start to send CONNECT443analytics.tiktok.com
-40: Requesting "CONNECT analytics.tiktok.com:443 HTTP/1.1" from analytics.tiktok.com
-Message: init client successfully
-Message: response sent to client36 www.google.com: HTTP/1.1 200 OK
-
-
-Message: init client successfully
-Message: response sent to client37 connect.facebook.net: HTTP/1.1 200 OK
-
-
-Message: init client successfully
-Message: response sent to client38 bat.bing.com: HTTP/1.1 200 OK
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-41: "CONNECT s.adroll.com:443 HTTP/1.1" from s.adroll.com @ Sun Feb 25 19:44:17 2024
-
-Message: start to send CONNECT443s.adroll.com
-41: Requesting "CONNECT s.adroll.com:443 HTTP/1.1" from s.adroll.com
-Failed to read requestbad method
-Message: init client successfully
-Message: response sent to client33 app.launchdarkly.com: HTTP/1.1 200 OK
-
-
-Message: init client successfully
-Message: response sent to client39 8666708.fls.doubleclick.net: HTTP/1.1 200 OK
-
-
-Message: init client successfully
-Message: response sent to client41 s.adroll.com: HTTP/1.1 200 OK
-
-
-Message: init client successfully
-Message: response sent to client40 analytics.tiktok.com: HTTP/1.1 200 OK
-
-
-Message: test done36
-36: Tunnel closed
-Message: init client successfully
-Message: response sent to client34 content.amctheatres.com: HTTP/1.1 200 OK
-
-
-Message: test done16
-16: Tunnel closed
-Message: test done26
-26: Tunnel closed
-Message: test done14
-14: Tunnel closed
-Message: test done11
-11: Tunnel closed
-Message: test done1
+0: "CONNECT canvas.duke.edu:443 HTTP/1.1" from canvas.duke.edu @ Sun Feb 25 20:50:04 2024
+
+0: Requesting "CONNECT canvas.duke.edu:443 HTTP/1.1" from canvas.duke.edu
+0: Responding "HTTP/1.1 200 OK
+
+
+1: "CONNECT bam.nr-data.net:443 HTTP/1.1" from bam.nr-data.net @ Sun Feb 25 20:50:05 2024
+
+1: Requesting "CONNECT bam.nr-data.net:443 HTTP/1.1" from bam.nr-data.net
+2: "CONNECT bam.nr-data.net:443 HTTP/1.1" from bam.nr-data.net @ Sun Feb 25 20:50:05 2024
+
+2: Requesting "CONNECT bam.nr-data.net:443 HTTP/1.1" from bam.nr-data.net
+3: "CONNECT tr.snapchat.com:443 HTTP/1.1" from tr.snapchat.com @ Sun Feb 25 20:50:05 2024
+
+3: Requesting "CONNECT tr.snapchat.com:443 HTTP/1.1" from tr.snapchat.com
+2: Responding "HTTP/1.1 200 OK
+
+
+1: Responding "HTTP/1.1 200 OK
+
+
+3: Responding "HTTP/1.1 200 OK
+
+
+4: "CONNECT www.amctheatres.com:443 HTTP/1.1" from www.amctheatres.com @ Sun Feb 25 20:50:08 2024
+
+4: Requesting "CONNECT www.amctheatres.com:443 HTTP/1.1" from www.amctheatres.com
+5: "CONNECT cmp.osano.com:443 HTTP/1.1" from cmp.osano.com @ Sun Feb 25 20:50:08 2024
+
+5: Requesting "CONNECT cmp.osano.com:443 HTTP/1.1" from cmp.osano.com
+6: "CONNECT amc-theatres-res.cloudinary.com:443 HTTP/1.1" from amc-theatres-res.cloudinary.com @ Sun Feb 25 20:50:08 2024
+
+6: Requesting "CONNECT amc-theatres-res.cloudinary.com:443 HTTP/1.1" from amc-theatres-res.cloudinary.com
+7: "CONNECT www.googleapis.com:443 HTTP/1.1" from www.googleapis.com @ Sun Feb 25 20:50:08 2024
+
+8: "CONNECT www.recaptcha.net:443 HTTP/1.1" from www.recaptcha.net @ Sun Feb 25 20:50:08 2024
+
+7: Requesting "CONNECT www.googleapis.com:443 HTTP/1.1" from www.googleapis.com
+8: Requesting "CONNECT www.recaptcha.net:443 HTTP/1.1" from www.recaptcha.net
+7: Responding "HTTP/1.1 200 OK
+
+
+5: Responding "HTTP/1.1 200 OK
+
+
+8: Responding "HTTP/1.1 200 OK
+
+
+6: Responding "HTTP/1.1 200 OK
+
+
+4: Responding "HTTP/1.1 200 OK
+
+
+9: "CONNECT beacons.gcp.gvt2.com:443 HTTP/1.1" from beacons.gcp.gvt2.com @ Sun Feb 25 20:50:08 2024
+
+9: Requesting "CONNECT beacons.gcp.gvt2.com:443 HTTP/1.1" from beacons.gcp.gvt2.com
+10: "CONNECT safebrowsing.google.com:443 HTTP/1.1" from safebrowsing.google.com @ Sun Feb 25 20:50:08 2024
+
+10: Requesting "CONNECT safebrowsing.google.com:443 HTTP/1.1" from safebrowsing.google.com
+10: Responding "HTTP/1.1 200 OK
+
+
+9: Responding "HTTP/1.1 200 OK
+
+
 1: Tunnel closed
-Message: test done19
-19: Tunnel closed
-Message: test done20
-Message: test done10
-Message: test done6
+18: "CONNECT www.googletagmanager.com:443 HTTP/1.1" from www.googletagmanager.com @ Sun Feb 25 20:50:09 2024
+
+18: Requesting "CONNECT www.googletagmanager.com:443 HTTP/1.1" from www.googletagmanager.com
+18: Responding "HTTP/1.1 200 OK
+
+
+18: ERROR failed to read request:bad method
+18: ERROR failed to read request:bad method
+20: "CONNECT content.amctheatres.com:443 HTTP/1.1" from content.amctheatres.com @ Sun Feb 25 20:50:09 2024
+
+20: Requesting "CONNECT content.amctheatres.com:443 HTTP/1.1" from content.amctheatres.com
+20: Responding "HTTP/1.1 200 OK
+
+
+20: ERROR failed to read request:bad method
 20: Tunnel closed
-10: Tunnel closed
+21: "CONNECT content.amctheatres.com:443 HTTP/1.1" from content.amctheatres.com @ Sun Feb 25 20:50:10 2024
+
+21: Requesting "CONNECT content.amctheatres.com:443 HTTP/1.1" from content.amctheatres.com
+21: Responding "HTTP/1.1 200 OK
+
+
+22: "CONNECT www.recaptcha.net:443 HTTP/1.1" from www.recaptcha.net @ Sun Feb 25 20:50:10 2024
+
+22: Requesting "CONNECT www.recaptcha.net:443 HTTP/1.1" from www.recaptcha.net
+22: Responding "HTTP/1.1 200 OK
+
+
+23: "CONNECT www.bbc.com:443 HTTP/1.1" from www.bbc.com @ Sun Feb 25 20:50:11 2024
+
+23: Requesting "CONNECT www.bbc.com:443 HTTP/1.1" from www.bbc.com
+26: "CONNECT mybbc-analytics.files.bbci.co.uk:443 HTTP/1.1" from mybbc-analytics.files.bbci.co.uk @ Sun Feb 25 20:50:11 2024
+
+26: Requesting "CONNECT mybbc-analytics.files.bbci.co.uk:443 HTTP/1.1" from mybbc-analytics.files.bbci.co.uk
+23: Responding "HTTP/1.1 200 OK
+
+
+26: Responding "HTTP/1.1 200 OK
+
+
+26: ERROR failed to read request:bad method
+26: ERROR 502 Bad Gateway
+26: Responding "HTTP/1.1 502 Bad Gateway
+Content-Type: text/html
+Content-Length: 0
+
+
+26: Tunnel closed
+26: ERROR failed to read request:bad method
+27: "CONNECT mybbc-analytics.files.bbci.co.uk:443 HTTP/1.1" from mybbc-analytics.files.bbci.co.uk @ Sun Feb 25 20:50:11 2024
+
+27: Requesting "CONNECT mybbc-analytics.files.bbci.co.uk:443 HTTP/1.1" from mybbc-analytics.files.bbci.co.uk
+28: "CONNECT gn-web-assets.api.bbc.com:443 HTTP/1.1" from gn-web-assets.api.bbc.com @ Sun Feb 25 20:50:11 2024
+
+28: Requesting "CONNECT gn-web-assets.api.bbc.com:443 HTTP/1.1" from gn-web-assets.api.bbc.com
+27: Responding "HTTP/1.1 200 OK
+
+
+28: Responding "HTTP/1.1 200 OK
+
+
+29: "CONNECT emp.bbci.co.uk:443 HTTP/1.1" from emp.bbci.co.uk @ Sun Feb 25 20:50:11 2024
+
+29: Requesting "CONNECT emp.bbci.co.uk:443 HTTP/1.1" from emp.bbci.co.uk
+30: "CONNECT ichef.bbci.co.uk:443 HTTP/1.1" from ichef.bbci.co.uk @ Sun Feb 25 20:50:11 2024
+
+30: Requesting "CONNECT ichef.bbci.co.uk:443 HTTP/1.1" from ichef.bbci.co.uk
+29: Responding "HTTP/1.1 200 OK
+
+
+30: Responding "HTTP/1.1 200 OK
+
+
 6: Tunnel closed
-Message: test done2
 2: Tunnel closed
-Message: test done4
-4: Tunnel closed
-Message: test done22
-22: Tunnel closed
-Message: test done12
-12: Tunnel closed
-Message: test done3
-3: Tunnel closed
-Message: test done5
-Message: test done27
 5: Tunnel closed
-Message: test done21
+28: Tunnel closed
 27: Tunnel closed
+23: Tunnel closed
+8: Tunnel closed
+7: Tunnel closed
+3: Tunnel closed
 21: Tunnel closed
-Message: test done0
+9: Tunnel closed
+4: Tunnel closed
+22: Tunnel closed
+29: Tunnel closed
 0: Tunnel closed
-Message: test done18
-18: Tunnel closed
-Message: test done17
-17: Tunnel closed
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-43: "CONNECT stats.g.doubleclick.net:443 HTTP/1.1" from stats.g.doubleclick.net @ Sun Feb 25 19:44:17 2024
+30: Tunnel closed
+31: "CONNECT securepubads.g.doubleclick.net:443 HTTP/1.1" from securepubads.g.doubleclick.net @ Sun Feb 25 20:50:11 2024
 
-Message: start to send CONNECT443stats.g.doubleclick.net
-43: Requesting "CONNECT stats.g.doubleclick.net:443 HTTP/1.1" from stats.g.doubleclick.net
-44: "CONNECT s.adroll.com:443 HTTP/1.1" from s.adroll.com @ Sun Feb 25 19:44:17 2024
+31: Requesting "CONNECT securepubads.g.doubleclick.net:443 HTTP/1.1" from securepubads.g.doubleclick.net
+32: "CONNECT pagead2.googlesyndication.com:443 HTTP/1.1" from pagead2.googlesyndication.com @ Sun Feb 25 20:50:11 2024
 
-Message: start to send CONNECT443s.adroll.com
-44: Requesting "CONNECT s.adroll.com:443 HTTP/1.1" from s.adroll.com
-Message: init client successfully
-Message: response sent to client44 s.adroll.com: HTTP/1.1 200 OK
+32: Requesting "CONNECT pagead2.googlesyndication.com:443 HTTP/1.1" from pagead2.googlesyndication.com
+33: "CONNECT prebid.the-ozone-project.com:443 HTTP/1.1" from prebid.the-ozone-project.com @ Sun Feb 25 20:50:11 2024
 
+33: Requesting "CONNECT prebid.the-ozone-project.com:443 HTTP/1.1" from prebid.the-ozone-project.com
+34: "CONNECT cdn.permutive.com:443 HTTP/1.1" from cdn.permutive.com @ Sun Feb 25 20:50:11 2024
 
-Message: init client successfully
-Message: response sent to client43 stats.g.doubleclick.net: HTTP/1.1 200 OK
+34: Requesting "CONNECT cdn.permutive.com:443 HTTP/1.1" from cdn.permutive.com
+35: "CONNECT cdn.adsafeprotected.com:443 HTTP/1.1" from cdn.adsafeprotected.com @ Sun Feb 25 20:50:11 2024
+
+36: "CONNECT static.adsafeprotected.com:443 HTTP/1.1" from static.adsafeprotected.com @ Sun Feb 25 20:50:11 2024
+
+35: Requesting "CONNECT cdn.adsafeprotected.com:443 HTTP/1.1" from cdn.adsafeprotected.com
+38: "CONNECT bbc.gscontxt.net:443 HTTP/1.1" from bbc.gscontxt.net @ Sun Feb 25 20:50:11 2024
+
+38: Requesting "CONNECT bbc.gscontxt.net:443 HTTP/1.1" from bbc.gscontxt.net
+36: Requesting "CONNECT static.adsafeprotected.com:443 HTTP/1.1" from static.adsafeprotected.com
+42: "CONNECT cdn.privacy-mgmt.com:443 HTTP/1.1" from cdn.privacy-mgmt.com @ Sun Feb 25 20:50:11 2024
+
+31: Responding "HTTP/1.1 200 OK
 
 
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-45: "CONNECT d.adroll.com:443 HTTP/1.1" from d.adroll.com @ Sun Feb 25 19:44:17 2024
+42: Requesting "CONNECT cdn.privacy-mgmt.com:443 HTTP/1.1" from cdn.privacy-mgmt.com
+39: "CONNECT elb.the-ozone-project.com:443 HTTP/1.1" from elb.the-ozone-project.com @ Sun Feb 25 20:50:11 2024
 
-Message: start to send CONNECT443d.adroll.com
-45: Requesting "CONNECT d.adroll.com:443 HTTP/1.1" from d.adroll.com
-Message: init client successfully
-Message: response sent to client45 d.adroll.com: HTTP/1.1 200 OK
+39: Requesting "CONNECT elb.the-ozone-project.com:443 HTTP/1.1" from elb.the-ozone-project.com
+40: "CONNECT scripts.webcontentassessor.com:443 HTTP/1.1" from scripts.webcontentassessor.com @ Sun Feb 25 20:50:11 2024
+
+40: Requesting "CONNECT scripts.webcontentassessor.com:443 HTTP/1.1" from scripts.webcontentassessor.com
+32: Responding "HTTP/1.1 200 OK
 
 
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-47: "CONNECT adservice.google.com:443 HTTP/1.1" from adservice.google.com @ Sun Feb 25 19:44:17 2024
-
-Message: start to send CONNECT443adservice.google.com
-47: Requesting "CONNECT adservice.google.com:443 HTTP/1.1" from adservice.google.com
-Message: init client successfully
-Message: response sent to client47 adservice.google.com: HTTP/1.1 200 OK
+42: Responding "HTTP/1.1 200 OK
 
 
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-48: "CONNECT www.facebook.com:443 HTTP/1.1" from www.facebook.com @ Sun Feb 25 19:44:17 2024
-
-Message: start to send CONNECT443www.facebook.com
-48: Requesting "CONNECT www.facebook.com:443 HTTP/1.1" from www.facebook.com
-Message: init client successfully
-Message: response sent to client48 www.facebook.com: HTTP/1.1 200 OK
+34: Responding "HTTP/1.1 200 OK
 
 
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-49: "CONNECT graph.amctheatres.com:443 HTTP/1.1" from graph.amctheatres.com @ Sun Feb 25 19:44:17 2024
-
-Message: start to send CONNECT443graph.amctheatres.com
-49: Requesting "CONNECT graph.amctheatres.com:443 HTTP/1.1" from graph.amctheatres.com
-Failed to read requestbad method
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-50: "CONNECT www.google-analytics.com:443 HTTP/1.1" from www.google-analytics.com @ Sun Feb 25 19:44:17 2024
-
-Message: start to send CONNECT443www.google-analytics.com
-50: Requesting "CONNECT www.google-analytics.com:443 HTTP/1.1" from www.google-analytics.com
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-51: "CONNECT sc-static.net:443 HTTP/1.1" from sc-static.net @ Sun Feb 25 19:44:17 2024
-
-Message: start to send CONNECT443sc-static.net
-51: Requesting "CONNECT sc-static.net:443 HTTP/1.1" from sc-static.net
-Message: init client successfully
-Message: response sent to client50 www.google-analytics.com: HTTP/1.1 200 OK
+35: Responding "HTTP/1.1 200 OK
 
 
-Message: init client successfully
-Message: response sent to client51 sc-static.net: HTTP/1.1 200 OK
+39: Responding "HTTP/1.1 200 OK
 
 
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-52: "CONNECT resources.xg4ken.com:443 HTTP/1.1" from resources.xg4ken.com @ Sun Feb 25 19:44:17 2024
-
-Message: start to send CONNECT443resources.xg4ken.com
-52: Requesting "CONNECT resources.xg4ken.com:443 HTTP/1.1" from resources.xg4ken.com
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-53: "CONNECT www.recaptcha.net:443 HTTP/1.1" from www.recaptcha.net @ Sun Feb 25 19:44:17 2024
-
-Message: start to send CONNECT443www.recaptcha.net
-53: Requesting "CONNECT www.recaptcha.net:443 HTTP/1.1" from www.recaptcha.net
-Failed to read requestbad method
-Message: init client successfully
-Message: response sent to client49 graph.amctheatres.com: HTTP/1.1 200 OK
+36: Responding "HTTP/1.1 200 OK
 
 
-Message: init client successfully
-Message: response sent to client53 www.recaptcha.net: HTTP/1.1 200 OK
+40: Responding "HTTP/1.1 200 OK
 
 
-Message: init client successfully
-Message: response sent to client52 resources.xg4ken.com: HTTP/1.1 200 OK
+43: "CONNECT xproxy.api.bbc.com:443 HTTP/1.1" from xproxy.api.bbc.com @ Sun Feb 25 20:50:12 2024
+
+43: Requesting "CONNECT xproxy.api.bbc.com:443 HTTP/1.1" from xproxy.api.bbc.com
+38: Responding "HTTP/1.1 200 OK
 
 
-Message: test done47
-47: Tunnel closed
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-54: "CONNECT ib.adnxs.com:443 HTTP/1.1" from ib.adnxs.com @ Sun Feb 25 19:44:17 2024
-
-Message: start to send CONNECT443ib.adnxs.com
-54: Requesting "CONNECT ib.adnxs.com:443 HTTP/1.1" from ib.adnxs.com
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-56: "CONNECT tr.snapchat.com:443 HTTP/1.1" from tr.snapchat.com @ Sun Feb 25 19:44:17 2024
-
-Message: start to send CONNECT443tr.snapchat.com
-56: Requesting "CONNECT tr.snapchat.com:443 HTTP/1.1" from tr.snapchat.com
-57: "CONNECT googleads.g.doubleclick.net:443 HTTP/1.1" from googleads.g.doubleclick.net @ Sun Feb 25 19:44:17 2024
-
-Message: start to send CONNECT443googleads.g.doubleclick.net
-57: Requesting "CONNECT googleads.g.doubleclick.net:443 HTTP/1.1" from googleads.g.doubleclick.net
-Message: init client successfully
-Message: response sent to client56 tr.snapchat.com: HTTP/1.1 200 OK
+33: Responding "HTTP/1.1 200 OK
 
 
-Message: init client successfully
-Message: response sent to client57 googleads.g.doubleclick.net: HTTP/1.1 200 OK
+43: Responding "HTTP/1.1 200 OK
 
 
-Message: init client successfully
-Message: response sent to client54 ib.adnxs.com: HTTP/1.1 200 OK
+44: "CONNECT cdn.privacy-mgmt.com:443 HTTP/1.1" from cdn.privacy-mgmt.com @ Sun Feb 25 20:50:12 2024
+
+44: Requesting "CONNECT cdn.privacy-mgmt.com:443 HTTP/1.1" from cdn.privacy-mgmt.com
+45: "CONNECT a1.api.bbc.co.uk:443 HTTP/1.1" from a1.api.bbc.co.uk @ Sun Feb 25 20:50:12 2024
+
+45: Requesting "CONNECT a1.api.bbc.co.uk:443 HTTP/1.1" from a1.api.bbc.co.uk
+44: Responding "HTTP/1.1 200 OK
 
 
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-58: "CONNECT googleads.g.doubleclick.net:443 HTTP/1.1" from googleads.g.doubleclick.net @ Sun Feb 25 19:44:17 2024
-
-Message: start to send CONNECT443googleads.g.doubleclick.net
-58: Requesting "CONNECT googleads.g.doubleclick.net:443 HTTP/1.1" from googleads.g.doubleclick.net
-Failed to read requestbad method
-Message: init client successfully
-Message: response sent to client58 googleads.g.doubleclick.net: HTTP/1.1 200 OK
+45: Responding "HTTP/1.1 200 OK
 
 
-Message: test done58
-58: Tunnel closed
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-59: "CONNECT www.google.com:443 HTTP/1.1" from www.google.com @ Sun Feb 25 19:44:17 2024
+46: "CONNECT xproxy.api.bbc.com:443 HTTP/1.1" from xproxy.api.bbc.com @ Sun Feb 25 20:50:12 2024
 
-Message: start to send CONNECT443www.google.com
+46: Requesting "CONNECT xproxy.api.bbc.com:443 HTTP/1.1" from xproxy.api.bbc.com
+46: Responding "HTTP/1.1 200 OK
+
+
+47: "CONNECT browser.covatic.io:443 HTTP/1.1" from browser.covatic.io @ Sun Feb 25 20:50:12 2024
+
+47: Requesting "CONNECT browser.covatic.io:443 HTTP/1.1" from browser.covatic.io
+48: "CONNECT gn-web-assets.api.bbc.com:443 HTTP/1.1" from gn-web-assets.api.bbc.com @ Sun Feb 25 20:50:12 2024
+
+48: Requesting "CONNECT gn-web-assets.api.bbc.com:443 HTTP/1.1" from gn-web-assets.api.bbc.com
+49: "CONNECT gn-web-assets.api.bbc.com:443 HTTP/1.1" from gn-web-assets.api.bbc.com @ Sun Feb 25 20:50:12 2024
+
+49: Requesting "CONNECT gn-web-assets.api.bbc.com:443 HTTP/1.1" from gn-web-assets.api.bbc.com
+48: Responding "HTTP/1.1 200 OK
+
+
+49: Responding "HTTP/1.1 200 OK
+
+
+47: Responding "HTTP/1.1 200 OK
+
+
+38: Tunnel closed
+35: Tunnel closed
+50: "CONNECT api.permutive.com:443 HTTP/1.1" from api.permutive.com @ Sun Feb 25 20:50:12 2024
+
+50: Requesting "CONNECT api.permutive.com:443 HTTP/1.1" from api.permutive.com
+39: Tunnel closed
+51: "CONNECT pixel.adsafeprotected.com:443 HTTP/1.1" from pixel.adsafeprotected.com @ Sun Feb 25 20:50:12 2024
+
+51: Requesting "CONNECT pixel.adsafeprotected.com:443 HTTP/1.1" from pixel.adsafeprotected.com
+48: Tunnel closed
+49: Tunnel closed
+53: "CONNECT 8b8076f653ea2b9048d5c9575c091e2b.safeframe.googlesyndication.com:443 HTTP/1.1" from 8b8076f653ea2b9048d5c9575c091e2b.safeframe.googlesyndication.com @ Sun Feb 25 20:50:12 2024
+
+53: Requesting "CONNECT 8b8076f653ea2b9048d5c9575c091e2b.safeframe.googlesyndication.com:443 HTTP/1.1" from 8b8076f653ea2b9048d5c9575c091e2b.safeframe.googlesyndication.com
+50: Responding "HTTP/1.1 200 OK
+
+
+54: "CONNECT secure-us.imrworldwide.com:443 HTTP/1.1" from secure-us.imrworldwide.com @ Sun Feb 25 20:50:12 2024
+
+54: Requesting "CONNECT secure-us.imrworldwide.com:443 HTTP/1.1" from secure-us.imrworldwide.com
+51: Responding "HTTP/1.1 200 OK
+
+
+53: Responding "HTTP/1.1 200 OK
+
+
+56: "CONNECT sb.scorecardresearch.com:443 HTTP/1.1" from sb.scorecardresearch.com @ Sun Feb 25 20:50:12 2024
+
+56: Requesting "CONNECT sb.scorecardresearch.com:443 HTTP/1.1" from sb.scorecardresearch.com
+54: Responding "HTTP/1.1 200 OK
+
+
+56: Responding "HTTP/1.1 200 OK
+
+
+53: ERROR failed to read request:bad method
+53: Tunnel closed
+57: "CONNECT mobile-cvc-nv-bbc-web.covatic.io:443 HTTP/1.1" from mobile-cvc-nv-bbc-web.covatic.io @ Sun Feb 25 20:50:13 2024
+
+57: Requesting "CONNECT mobile-cvc-nv-bbc-web.covatic.io:443 HTTP/1.1" from mobile-cvc-nv-bbc-web.covatic.io
+57: Responding "HTTP/1.1 200 OK
+
+
+32: Tunnel closed
+58: "CONNECT elb.the-ozone-project.com:443 HTTP/1.1" from elb.the-ozone-project.com @ Sun Feb 25 20:50:13 2024
+
+58: Requesting "CONNECT elb.the-ozone-project.com:443 HTTP/1.1" from elb.the-ozone-project.com
+58: Responding "HTTP/1.1 200 OK
+
+
+33: Tunnel closed
+59: "CONNECT www.google.com:443 HTTP/1.1" from www.google.com @ Sun Feb 25 20:50:14 2024
+
 59: Requesting "CONNECT www.google.com:443 HTTP/1.1" from www.google.com
-Message: init client successfully
-Message: response sent to client59 www.google.com: HTTP/1.1 200 OK
+59: Responding "HTTP/1.1 200 OK
 
 
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-60: "CONNECT graph.amctheatres.com:443 HTTP/1.1" from graph.amctheatres.com @ Sun Feb 25 19:44:17 2024
-
-Message: start to send CONNECT443graph.amctheatres.com
-60: Requesting "CONNECT graph.amctheatres.com:443 HTTP/1.1" from graph.amctheatres.com
-Message: init client successfully
-Message: response sent to client60 graph.amctheatres.com: HTTP/1.1 200 OK
-
-
-Message: test done57
+36: Tunnel closed
+45: Tunnel closed
+34: Tunnel closed
+44: Tunnel closed
+50: Tunnel closed
+46: Tunnel closed
+47: Tunnel closed
 57: Tunnel closed
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-61: "CONNECT www.google.com:443 HTTP/1.1" from www.google.com @ Sun Feb 25 19:44:17 2024
-
-Message: start to send CONNECT443www.google.com
-61: Requesting "CONNECT www.google.com:443 HTTP/1.1" from www.google.com
-Message: init client successfully
-Message: response sent to client61 www.google.com: HTTP/1.1 200 OK
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-62: "CONNECT analytics.google.com:443 HTTP/1.1" from analytics.google.com @ Sun Feb 25 19:44:22 2024
-
-Message: start to send CONNECT443analytics.google.com
-62: Requesting "CONNECT analytics.google.com:443 HTTP/1.1" from analytics.google.com
-Message: init client successfully
-Message: response sent to client62 analytics.google.com: HTTP/1.1 200 OK
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-63: "CONNECT clients4.google.com:443 HTTP/1.1" from clients4.google.com @ Sun Feb 25 19:44:25 2024
-
-Message: start to send CONNECT443clients4.google.com
-63: Requesting "CONNECT clients4.google.com:443 HTTP/1.1" from clients4.google.com
-Message: init client successfully
-Message: response sent to client63 clients4.google.com: HTTP/1.1 200 OK
-
-
-Message: Connection accepted
-Message: connection accepted
-Message: waiting for connection out
-Message: Waiting for connection in
-64: "CONNECT www.google.com:443 HTTP/1.1" from www.google.com @ Sun Feb 25 19:44:27 2024
-
-Message: start to send CONNECT443www.google.com
-64: Requesting "CONNECT www.google.com:443 HTTP/1.1" from www.google.com
-Message: init client successfully
-Message: response sent to client64 www.google.com: HTTP/1.1 200 OK
-
-
-Message: test done54
 54: Tunnel closed
-Message: test done64
+31: Tunnel closed
+42: ERROR failed to read request:end of stream
+42: Tunnel closed
+42: ERROR failed to read request:end of stream
+43: Tunnel closed
+51: Tunnel closed
+59: Tunnel closed
+40: Tunnel closed
+56: ERROR failed to read request:end of stream
+56: Tunnel closed
+60: "CONNECT optimizationguide-pa.googleapis.com:443 HTTP/1.1" from optimizationguide-pa.googleapis.com @ Sun Feb 25 20:50:14 2024
+
+60: Requesting "CONNECT optimizationguide-pa.googleapis.com:443 HTTP/1.1" from optimizationguide-pa.googleapis.com
+61: "CONNECT lh3.google.com:443 HTTP/1.1" from lh3.google.com @ Sun Feb 25 20:50:14 2024
+
+61: Requesting "CONNECT lh3.google.com:443 HTTP/1.1" from lh3.google.com
+60: Responding "HTTP/1.1 200 OK
+
+
+61: Responding "HTTP/1.1 200 OK
+
+
+62: "CONNECT lh3.googleusercontent.com:443 HTTP/1.1" from lh3.googleusercontent.com @ Sun Feb 25 20:50:14 2024
+
+62: Requesting "CONNECT lh3.googleusercontent.com:443 HTTP/1.1" from lh3.googleusercontent.com
+63: "CONNECT encrypted-tbn3.gstatic.com:443 HTTP/1.1" from encrypted-tbn3.gstatic.com @ Sun Feb 25 20:50:14 2024
+
+63: Requesting "CONNECT encrypted-tbn3.gstatic.com:443 HTTP/1.1" from encrypted-tbn3.gstatic.com
+64: "CONNECT encrypted-tbn0.gstatic.com:443 HTTP/1.1" from encrypted-tbn0.gstatic.com @ Sun Feb 25 20:50:14 2024
+
+64: Requesting "CONNECT encrypted-tbn0.gstatic.com:443 HTTP/1.1" from encrypted-tbn0.gstatic.com
+62: Responding "HTTP/1.1 200 OK
+
+
+65: "CONNECT securepubads.g.doubleclick.net:443 HTTP/1.1" from securepubads.g.doubleclick.net @ Sun Feb 25 20:50:14 2024
+
+65: Requesting "CONNECT securepubads.g.doubleclick.net:443 HTTP/1.1" from securepubads.g.doubleclick.net
+64: Responding "HTTP/1.1 200 OK
+
+
+65: Responding "HTTP/1.1 200 OK
+
+
+63: Responding "HTTP/1.1 200 OK
+
+
+66: "CONNECT www.google.com:443 HTTP/1.1" from www.google.com @ Sun Feb 25 20:50:14 2024
+
+66: Requesting "CONNECT www.google.com:443 HTTP/1.1" from www.google.com
+67: "CONNECT api.permutive.com:443 HTTP/1.1" from api.permutive.com @ Sun Feb 25 20:50:14 2024
+
+67: Requesting "CONNECT api.permutive.com:443 HTTP/1.1" from api.permutive.com
+66: Responding "HTTP/1.1 200 OK
+
+
+67: Responding "HTTP/1.1 200 OK
+
+
+68: "CONNECT 8b8076f653ea2b9048d5c9575c091e2b.safeframe.googlesyndication.com:443 HTTP/1.1" from 8b8076f653ea2b9048d5c9575c091e2b.safeframe.googlesyndication.com @ Sun Feb 25 20:50:15 2024
+
+68: Requesting "CONNECT 8b8076f653ea2b9048d5c9575c091e2b.safeframe.googlesyndication.com:443 HTTP/1.1" from 8b8076f653ea2b9048d5c9575c091e2b.safeframe.googlesyndication.com
+68: Responding "HTTP/1.1 200 OK
+
+
+69: "CONNECT scripts.webcontentassessor.com:443 HTTP/1.1" from scripts.webcontentassessor.com @ Sun Feb 25 20:50:15 2024
+
+69: Requesting "CONNECT scripts.webcontentassessor.com:443 HTTP/1.1" from scripts.webcontentassessor.com
+70: "CONNECT pagead2.googlesyndication.com:443 HTTP/1.1" from pagead2.googlesyndication.com @ Sun Feb 25 20:50:15 2024
+
+70: Requesting "CONNECT pagead2.googlesyndication.com:443 HTTP/1.1" from pagead2.googlesyndication.com
+70: Responding "HTTP/1.1 200 OK
+
+
+69: Responding "HTTP/1.1 200 OK
+
+
+62: Tunnel closed
+70: Tunnel closed
+69: Tunnel closed
+63: Tunnel closed
 64: Tunnel closed
+65: Tunnel closed
+67: Tunnel closed
+66: Tunnel closed
+58: Tunnel closed
+68: Tunnel closed
+60: Tunnel closed
+61: Tunnel closed
+71: "CONNECT cdn.doubleverify.com:443 HTTP/1.1" from cdn.doubleverify.com @ Sun Feb 25 20:50:15 2024
+
+71: Requesting "CONNECT cdn.doubleverify.com:443 HTTP/1.1" from cdn.doubleverify.com
+72: "CONNECT securepubads.g.doubleclick.net:443 HTTP/1.1" from securepubads.g.doubleclick.net @ Sun Feb 25 20:50:15 2024
+
+72: Requesting "CONNECT securepubads.g.doubleclick.net:443 HTTP/1.1" from securepubads.g.doubleclick.net
+73: "CONNECT pixel.adsafeprotected.com:443 HTTP/1.1" from pixel.adsafeprotected.com @ Sun Feb 25 20:50:15 2024
+
+73: Requesting "CONNECT pixel.adsafeprotected.com:443 HTTP/1.1" from pixel.adsafeprotected.com
+74: "CONNECT fonts.googleapis.com:443 HTTP/1.1" from fonts.googleapis.com @ Sun Feb 25 20:50:15 2024
+
+74: Requesting "CONNECT fonts.googleapis.com:443 HTTP/1.1" from fonts.googleapis.com
+75: "CONNECT fonts.googleapis.com:443 HTTP/1.1" from fonts.googleapis.com @ Sun Feb 25 20:50:15 2024
+
+75: Requesting "CONNECT fonts.googleapis.com:443 HTTP/1.1" from fonts.googleapis.com
+72: Responding "HTTP/1.1 200 OK
+
+
+71: Responding "HTTP/1.1 200 OK
+
+
+74: Responding "HTTP/1.1 200 OK
+
+
+75: Responding "HTTP/1.1 200 OK
+
+
+73: Responding "HTTP/1.1 200 OK
+
+
+76: "CONNECT cdn.bttrack.com:443 HTTP/1.1" from cdn.bttrack.com @ Sun Feb 25 20:50:15 2024
+
+76: Requesting "CONNECT cdn.bttrack.com:443 HTTP/1.1" from cdn.bttrack.com
+76: Responding "HTTP/1.1 200 OK
+
+
+75: Tunnel closed
+77: "CONNECT fonts.gstatic.com:443 HTTP/1.1" from fonts.gstatic.com @ Sun Feb 25 20:50:15 2024
+
+77: Requesting "CONNECT fonts.gstatic.com:443 HTTP/1.1" from fonts.gstatic.com
+77: Responding "HTTP/1.1 200 OK
+
+
+78: "CONNECT ghent-gce-sc.bidswitch.net:443 HTTP/1.1" from ghent-gce-sc.bidswitch.net @ Sun Feb 25 20:50:15 2024
+
+78: Requesting "CONNECT ghent-gce-sc.bidswitch.net:443 HTTP/1.1" from ghent-gce-sc.bidswitch.net
+78: Responding "HTTP/1.1 200 OK
+
+
+79: "CONNECT dt.adsafeprotected.com:443 HTTP/1.1" from dt.adsafeprotected.com @ Sun Feb 25 20:50:16 2024
+
+79: Requesting "CONNECT dt.adsafeprotected.com:443 HTTP/1.1" from dt.adsafeprotected.com
+80: "CONNECT bttrack.com:443 HTTP/1.1" from bttrack.com @ Sun Feb 25 20:50:16 2024
+
+80: Requesting "CONNECT bttrack.com:443 HTTP/1.1" from bttrack.com
+80: Responding "HTTP/1.1 200 OK
+
+
+79: Responding "HTTP/1.1 200 OK
+
+
+81: "CONNECT us-east-sync.bidswitch.net:443 HTTP/1.1" from us-east-sync.bidswitch.net @ Sun Feb 25 20:50:16 2024
+
+81: Requesting "CONNECT us-east-sync.bidswitch.net:443 HTTP/1.1" from us-east-sync.bidswitch.net
+81: Responding "HTTP/1.1 200 OK
+
+
+82: "CONNECT x.bidswitch.net:443 HTTP/1.1" from x.bidswitch.net @ Sun Feb 25 20:50:16 2024
+
+82: Requesting "CONNECT x.bidswitch.net:443 HTTP/1.1" from x.bidswitch.net
+82: Responding "HTTP/1.1 200 OK
+
+
+83: "CONNECT simage2.pubmatic.com:443 HTTP/1.1" from simage2.pubmatic.com @ Sun Feb 25 20:50:16 2024
+
+83: Requesting "CONNECT simage2.pubmatic.com:443 HTTP/1.1" from simage2.pubmatic.com
+83: Responding "HTTP/1.1 200 OK
+
+
+84: "CONNECT eb2.3lift.com:443 HTTP/1.1" from eb2.3lift.com @ Sun Feb 25 20:50:16 2024
+
+84: Requesting "CONNECT eb2.3lift.com:443 HTTP/1.1" from eb2.3lift.com
+84: Responding "HTTP/1.1 200 OK
+
+
+85: "CONNECT api.permutive.com:443 HTTP/1.1" from api.permutive.com @ Sun Feb 25 20:50:16 2024
+
+85: Requesting "CONNECT api.permutive.com:443 HTTP/1.1" from api.permutive.com
+85: Responding "HTTP/1.1 200 OK
+
+
+86: "CONNECT optimizationguide-pa.googleapis.com:443 HTTP/1.1" from optimizationguide-pa.googleapis.com @ Sun Feb 25 20:50:17 2024
+
+86: Requesting "CONNECT optimizationguide-pa.googleapis.com:443 HTTP/1.1" from optimizationguide-pa.googleapis.com
+87: "CONNECT ad.doubleclick.net:443 HTTP/1.1" from ad.doubleclick.net @ Sun Feb 25 20:50:17 2024
+
+87: Requesting "CONNECT ad.doubleclick.net:443 HTTP/1.1" from ad.doubleclick.net
+86: Responding "HTTP/1.1 200 OK
+
+
+87: Responding "HTTP/1.1 200 OK
+
+
+88: "CONNECT count.schwab.com:443 HTTP/1.1" from count.schwab.com @ Sun Feb 25 20:50:17 2024
+
+88: Requesting "CONNECT count.schwab.com:443 HTTP/1.1" from count.schwab.com
+77: Tunnel closed
+88: Responding "HTTP/1.1 200 OK
+
+
+89: "CONNECT encrypted-tbn0.gstatic.com:443 HTTP/1.1" from encrypted-tbn0.gstatic.com @ Sun Feb 25 20:50:17 2024
+
+89: Requesting "CONNECT encrypted-tbn0.gstatic.com:443 HTTP/1.1" from encrypted-tbn0.gstatic.com
+89: Responding "HTTP/1.1 200 OK
+
+
+88: Tunnel closed
+90: "CONNECT bcp.crwdcntrl.net:443 HTTP/1.1" from bcp.crwdcntrl.net @ Sun Feb 25 20:50:17 2024
+
+90: Requesting "CONNECT bcp.crwdcntrl.net:443 HTTP/1.1" from bcp.crwdcntrl.net
+90: Responding "HTTP/1.1 200 OK
+
+
+78: Tunnel closed
+91: "CONNECT idsync.rlcdn.com:443 HTTP/1.1" from idsync.rlcdn.com @ Sun Feb 25 20:50:17 2024
+
+91: Requesting "CONNECT idsync.rlcdn.com:443 HTTP/1.1" from idsync.rlcdn.com
+91: Responding "HTTP/1.1 200 OK
+
+
+81: Tunnel closed
+92: "CONNECT match.adsrvr.org:443 HTTP/1.1" from match.adsrvr.org @ Sun Feb 25 20:50:17 2024
+
+92: Requesting "CONNECT match.adsrvr.org:443 HTTP/1.1" from match.adsrvr.org
+82: Tunnel closed
+93: "CONNECT elb.the-ozone-project.com:443 HTTP/1.1" from elb.the-ozone-project.com @ Sun Feb 25 20:50:17 2024
+
+93: Requesting "CONNECT elb.the-ozone-project.com:443 HTTP/1.1" from elb.the-ozone-project.com
+92: Responding "HTTP/1.1 200 OK
+
+
+93: Responding "HTTP/1.1 200 OK
+
+
+73: Tunnel closed
+76: Tunnel closed
+85: Tunnel closed
+72: Tunnel closed
+84: Tunnel closed
+83: Tunnel closed
+74: Tunnel closed
+86: Tunnel closed
+80: Tunnel closed
+87: Tunnel closed
+89: Tunnel closed
+90: Tunnel closed
+79: Tunnel closed
+92: Tunnel closed
+93: Tunnel closed
+94: "CONNECT static.cloudflareinsights.com:443 HTTP/1.1" from static.cloudflareinsights.com @ Sun Feb 25 20:50:18 2024
+
+94: Requesting "CONNECT static.cloudflareinsights.com:443 HTTP/1.1" from static.cloudflareinsights.com
+95: "CONNECT elb.the-ozone-project.com:443 HTTP/1.1" from elb.the-ozone-project.com @ Sun Feb 25 20:50:18 2024
+
+95: Requesting "CONNECT elb.the-ozone-project.com:443 HTTP/1.1" from elb.the-ozone-project.com
+95: Responding "HTTP/1.1 200 OK
+
+
+94: Responding "HTTP/1.1 200 OK
+
+
+96: "CONNECT bttrack.com:443 HTTP/1.1" from bttrack.com @ Sun Feb 25 20:50:18 2024
+
+96: Requesting "CONNECT bttrack.com:443 HTTP/1.1" from bttrack.com
+96: Responding "HTTP/1.1 200 OK
+
+
+97: "CONNECT dpm.demdex.net:443 HTTP/1.1" from dpm.demdex.net @ Sun Feb 25 20:50:18 2024
+
+97: Requesting "CONNECT dpm.demdex.net:443 HTTP/1.1" from dpm.demdex.net
+98: "CONNECT ogs.google.com:443 HTTP/1.1" from ogs.google.com @ Sun Feb 25 20:50:18 2024
+
+98: Requesting "CONNECT ogs.google.com:443 HTTP/1.1" from ogs.google.com
+99: "CONNECT ssc-cms.33across.com:443 HTTP/1.1" from ssc-cms.33across.com @ Sun Feb 25 20:50:18 2024
+
+99: Requesting "CONNECT ssc-cms.33across.com:443 HTTP/1.1" from ssc-cms.33across.com
+98: Responding "HTTP/1.1 200 OK
+
+
+99: Responding "HTTP/1.1 200 OK
+
+
+97: Responding "HTTP/1.1 200 OK
+
+
+101: "CONNECT ssl.gstatic.com:443 HTTP/1.1" from ssl.gstatic.com @ Sun Feb 25 20:50:18 2024
+
+101: Requesting "CONNECT ssl.gstatic.com:443 HTTP/1.1" from ssl.gstatic.com
+101: Responding "HTTP/1.1 200 OK
+
+
+101: ERROR failed to read request:bad method
+102: "CONNECT sync.richaudience.com:443 HTTP/1.1" from sync.richaudience.com @ Sun Feb 25 20:50:18 2024
+
+102: Requesting "CONNECT sync.richaudience.com:443 HTTP/1.1" from sync.richaudience.com
+18: Tunnel closed
+103: "CONNECT clients4.google.com:443 HTTP/1.1" from clients4.google.com @ Sun Feb 25 20:50:20 2024
+
+103: Requesting "CONNECT clients4.google.com:443 HTTP/1.1" from clients4.google.com
+103: Responding "HTTP/1.1 200 OK
+
+
+104: "CONNECT www.amctheatres.com:443 HTTP/1.1" from www.amctheatres.com @ Sun Feb 25 20:50:20 2024
+
+104: Requesting "CONNECT www.amctheatres.com:443 HTTP/1.1" from www.amctheatres.com
+104: Responding "HTTP/1.1 200 OK
+
+
+102: Responding "HTTP/1.1 200 OK
+
+
+105: "CONNECT api.permutive.com:443 HTTP/1.1" from api.permutive.com @ Sun Feb 25 20:50:21 2024
+
+105: Requesting "CONNECT api.permutive.com:443 HTTP/1.1" from api.permutive.com
+105: Responding "HTTP/1.1 200 OK
+
+
+106: "GET http://cacerts.rapidssl.com/RapidSSLTLSRSACAG1.crt HTTP/1.1" from cacerts.rapidssl.com @ Sun Feb 25 20:50:22 2024
+
+106: NOTE start to seng GET
+106: not in cache
+106: Requesting "GET http://cacerts.rapidssl.com/RapidSSLTLSRSACAG1.crt HTTP/1.1" from cacerts.rapidssl.com
+106: Received "HTTP/1.1 304 Not Modified" from cacerts.rapidssl.com
+106: Responding "HTTP/1.1 304 Not Modified"
+106: NOTE cache failed
+106: Tunnel closed
+101: Tunnel closed
+107: "CONNECT ads.pubmatic.com:443 HTTP/1.1" from ads.pubmatic.com @ Sun Feb 25 20:50:22 2024
+
+107: Requesting "CONNECT ads.pubmatic.com:443 HTTP/1.1" from ads.pubmatic.com
+109: "CONNECT fonts.gstatic.com:443 HTTP/1.1" from fonts.gstatic.com @ Sun Feb 25 20:50:22 2024
+
+109: Requesting "CONNECT fonts.gstatic.com:443 HTTP/1.1" from fonts.gstatic.com
+110: "CONNECT fonts.gstatic.com:443 HTTP/1.1" from fonts.gstatic.com @ Sun Feb 25 20:50:22 2024
+
+110: Requesting "CONNECT fonts.gstatic.com:443 HTTP/1.1" from fonts.gstatic.com
+108: "CONNECT st.pubmatic.com:443 HTTP/1.1" from st.pubmatic.com @ Sun Feb 25 20:50:22 2024
+
+108: Requesting "CONNECT st.pubmatic.com:443 HTTP/1.1" from st.pubmatic.com
+110: Responding "HTTP/1.1 200 OK
+
+
+109: Responding "HTTP/1.1 200 OK
+
+
+108: Responding "HTTP/1.1 200 OK
+
+
+107: Responding "HTTP/1.1 200 OK
+
+
+110: Tunnel closed
+111: "CONNECT tps.doubleverify.com:443 HTTP/1.1" from tps.doubleverify.com @ Sun Feb 25 20:50:22 2024
+
+71: Tunnel closed
+111: Requesting "CONNECT tps.doubleverify.com:443 HTTP/1.1" from tps.doubleverify.com
+111: Responding "HTTP/1.1 200 OK
+
+
+112: "CONNECT match.prod.bidr.io:443 HTTP/1.1" from match.prod.bidr.io @ Sun Feb 25 20:50:22 2024
+
+112: Requesting "CONNECT match.prod.bidr.io:443 HTTP/1.1" from match.prod.bidr.io
+112: Responding "HTTP/1.1 200 OK
+
+
+104: Tunnel closed
+98: Tunnel closed
+99: Tunnel closed
+96: Tunnel closed
+103: Tunnel closed
+105: Tunnel closed
+97: Tunnel closed
+95: Tunnel closed
+94: Tunnel closed
+102: Tunnel closed
+107: Tunnel closed
+91: Tunnel closed
+108: Tunnel closed
+109: Tunnel closed
+113: "CONNECT tps.doubleverify.com:443 HTTP/1.1" from tps.doubleverify.com @ Sun Feb 25 20:50:22 2024
+
+113: Requesting "CONNECT tps.doubleverify.com:443 HTTP/1.1" from tps.doubleverify.com
+113: Responding "HTTP/1.1 200 OK
+
+
+114: "CONNECT securepubads.g.doubleclick.net:443 HTTP/1.1" from securepubads.g.doubleclick.net @ Sun Feb 25 20:50:22 2024
+
+114: Requesting "CONNECT securepubads.g.doubleclick.net:443 HTTP/1.1" from securepubads.g.doubleclick.net
+114: Responding "HTTP/1.1 200 OK
+
+
+115: "CONNECT elb.the-ozone-project.com:443 HTTP/1.1" from elb.the-ozone-project.com @ Sun Feb 25 20:50:22 2024
+
+115: Requesting "CONNECT elb.the-ozone-project.com:443 HTTP/1.1" from elb.the-ozone-project.com
+116: "CONNECT image6.pubmatic.com:443 HTTP/1.1" from image6.pubmatic.com @ Sun Feb 25 20:50:22 2024
+
+116: Requesting "CONNECT image6.pubmatic.com:443 HTTP/1.1" from image6.pubmatic.com
+117: "CONNECT pixel.adsafeprotected.com:443 HTTP/1.1" from pixel.adsafeprotected.com @ Sun Feb 25 20:50:22 2024
+
+117: Requesting "CONNECT pixel.adsafeprotected.com:443 HTTP/1.1" from pixel.adsafeprotected.com
+118: "CONNECT dt.adsafeprotected.com:443 HTTP/1.1" from dt.adsafeprotected.com @ Sun Feb 25 20:50:22 2024
+
+118: Requesting "CONNECT dt.adsafeprotected.com:443 HTTP/1.1" from dt.adsafeprotected.com
+115: Responding "HTTP/1.1 200 OK
+
+
+116: Responding "HTTP/1.1 200 OK
+
+
+117: Responding "HTTP/1.1 200 OK
+
+
+118: Responding "HTTP/1.1 200 OK
+
+
+119: "CONNECT ssp-sync.criteo.com:443 HTTP/1.1" from ssp-sync.criteo.com @ Sun Feb 25 20:50:23 2024
+
+119: Requesting "CONNECT ssp-sync.criteo.com:443 HTTP/1.1" from ssp-sync.criteo.com
+119: Responding "HTTP/1.1 200 OK
+
+
+120: "CONNECT bttrack.com:443 HTTP/1.1" from bttrack.com @ Sun Feb 25 20:50:23 2024
+
+120: Requesting "CONNECT bttrack.com:443 HTTP/1.1" from bttrack.com
+120: Responding "HTTP/1.1 200 OK
+
+
+121: "CONNECT www.httpwatch.com:443 HTTP/1.1" from www.httpwatch.com @ Sun Feb 25 20:50:23 2024
+
+121: Requesting "CONNECT www.httpwatch.com:443 HTTP/1.1" from www.httpwatch.com
+122: "CONNECT crb.kargo.com:443 HTTP/1.1" from crb.kargo.com @ Sun Feb 25 20:50:23 2024
+
+122: Requesting "CONNECT crb.kargo.com:443 HTTP/1.1" from crb.kargo.com
+122: Responding "HTTP/1.1 200 OK
+
+
+121: Responding "HTTP/1.1 200 OK
+
+
+123: "CONNECT b1h-euc1.zemanta.com:443 HTTP/1.1" from b1h-euc1.zemanta.com @ Sun Feb 25 20:50:23 2024
+
+123: Requesting "CONNECT b1h-euc1.zemanta.com:443 HTTP/1.1" from b1h-euc1.zemanta.com
+123: Responding "HTTP/1.1 200 OK
+
+
+124: "CONNECT eb2.3lift.com:443 HTTP/1.1" from eb2.3lift.com @ Sun Feb 25 20:50:24 2024
+
+124: Requesting "CONNECT eb2.3lift.com:443 HTTP/1.1" from eb2.3lift.com
+124: Responding "HTTP/1.1 200 OK
+
+
+111: Tunnel closed
+125: "CONNECT tpsc-ue1.doubleverify.com:443 HTTP/1.1" from tpsc-ue1.doubleverify.com @ Sun Feb 25 20:50:25 2024
+
+125: Requesting "CONNECT tpsc-ue1.doubleverify.com:443 HTTP/1.1" from tpsc-ue1.doubleverify.com
+126: "CONNECT tpsc-ue1.doubleverify.com:443 HTTP/1.1" from tpsc-ue1.doubleverify.com @ Sun Feb 25 20:50:25 2024
+
+126: Requesting "CONNECT tpsc-ue1.doubleverify.com:443 HTTP/1.1" from tpsc-ue1.doubleverify.com
+125: Responding "HTTP/1.1 200 OK
+
+
+126: Responding "HTTP/1.1 200 OK
+
+
+127: "CONNECT www.google.com:443 HTTP/1.1" from www.google.com @ Sun Feb 25 20:50:26 2024
+
+127: Requesting "CONNECT www.google.com:443 HTTP/1.1" from www.google.com
+127: Responding "HTTP/1.1 200 OK
+
+
+123: Tunnel closed
+125: Tunnel closed
+126: Tunnel closed
+112: Tunnel closed
+128: "CONNECT optimizationguide-pa.googleapis.com:443 HTTP/1.1" from optimizationguide-pa.googleapis.com @ Sun Feb 25 20:50:29 2024
+
+128: Requesting "CONNECT optimizationguide-pa.googleapis.com:443 HTTP/1.1" from optimizationguide-pa.googleapis.com
+128: Responding "HTTP/1.1 200 OK
+
+
+129: "CONNECT lh3.google.com:443 HTTP/1.1" from lh3.google.com @ Sun Feb 25 20:50:29 2024
+
+129: Requesting "CONNECT lh3.google.com:443 HTTP/1.1" from lh3.google.com
+129: Responding "HTTP/1.1 200 OK
+
+
+130: "CONNECT lh3.googleusercontent.com:443 HTTP/1.1" from lh3.googleusercontent.com @ Sun Feb 25 20:50:29 2024
+
+130: Requesting "CONNECT lh3.googleusercontent.com:443 HTTP/1.1" from lh3.googleusercontent.com
+130: Responding "HTTP/1.1 200 OK
+
+
+113: Tunnel closed
+131: "GET http://www.httpwatch.com/httpgallery/chunked/chunkedimage.aspx HTTP/1.1" from www.httpwatch.com @ Sun Feb 25 20:50:32 2024
+
+131: NOTE start to seng GET
+131: not in cache
+131: Requesting "GET http://www.httpwatch.com/httpgallery/chunked/chunkedimage.aspx HTTP/1.1" from www.httpwatch.com
+132: ERROR failed to read request:end of stream
+133: "CONNECT tpsc-ue1.doubleverify.com:443 HTTP/1.1" from tpsc-ue1.doubleverify.com @ Sun Feb 25 20:50:32 2024
+
+133: Requesting "CONNECT tpsc-ue1.doubleverify.com:443 HTTP/1.1" from tpsc-ue1.doubleverify.com
+133: Responding "HTTP/1.1 200 OK
+
+
+119: Tunnel closed
+134: "CONNECT clients4.google.com:443 HTTP/1.1" from clients4.google.com @ Sun Feb 25 20:50:34 2024
+
+134: Requesting "CONNECT clients4.google.com:443 HTTP/1.1" from clients4.google.com
+134: Responding "HTTP/1.1 200 OK
+
+
+133: Tunnel closed
+131: Received "HTTP/1.1 200 OK" from www.httpwatch.com
+131: Responding "HTTP/1.1 200 OK"
+131: Tunnel closed
+135: "CONNECT www.httpwatch.com:443 HTTP/1.1" from www.httpwatch.com @ Sun Feb 25 20:50:36 2024
+
+135: Requesting "CONNECT www.httpwatch.com:443 HTTP/1.1" from www.httpwatch.com
+135: Responding "HTTP/1.1 200 OK
+
+
+136: "CONNECT tpsc-ue1.doubleverify.com:443 HTTP/1.1" from tpsc-ue1.doubleverify.com @ Sun Feb 25 20:50:37 2024
+
+136: Requesting "CONNECT tpsc-ue1.doubleverify.com:443 HTTP/1.1" from tpsc-ue1.doubleverify.com
+136: Responding "HTTP/1.1 200 OK
+
+
+136: Tunnel closed
+137: "CONNECT api.permutive.com:443 HTTP/1.1" from api.permutive.com @ Sun Feb 25 20:50:41 2024
+
+137: Requesting "CONNECT api.permutive.com:443 HTTP/1.1" from api.permutive.com
+137: Responding "HTTP/1.1 200 OK
+
+
+138: "CONNECT www.amctheatres.com:443 HTTP/1.1" from www.amctheatres.com @ Sun Feb 25 20:50:44 2024
+
+138: Requesting "CONNECT www.amctheatres.com:443 HTTP/1.1" from www.amctheatres.com
+139: "CONNECT content.amctheatres.com:443 HTTP/1.1" from content.amctheatres.com @ Sun Feb 25 20:50:44 2024
+
+139: Requesting "CONNECT content.amctheatres.com:443 HTTP/1.1" from content.amctheatres.com
+138: Responding "HTTP/1.1 200 OK
+
+
+139: Responding "HTTP/1.1 200 OK
+
+
+140: "CONNECT graph.amctheatres.com:443 HTTP/1.1" from graph.amctheatres.com @ Sun Feb 25 20:50:44 2024
+
+140: Requesting "CONNECT graph.amctheatres.com:443 HTTP/1.1" from graph.amctheatres.com
+140: Responding "HTTP/1.1 200 OK
+
+
+141: "CONNECT content-autofill.googleapis.com:443 HTTP/1.1" from content-autofill.googleapis.com @ Sun Feb 25 20:50:44 2024
+
+141: Requesting "CONNECT content-autofill.googleapis.com:443 HTTP/1.1" from content-autofill.googleapis.com
+141: Responding "HTTP/1.1 200 OK
+
+
+142: "CONNECT graph.amctheatres.com:443 HTTP/1.1" from graph.amctheatres.com @ Sun Feb 25 20:50:45 2024
+
+142: Requesting "CONNECT graph.amctheatres.com:443 HTTP/1.1" from graph.amctheatres.com
+142: Responding "HTTP/1.1 200 OK
+
+
+143: "CONNECT play.google.com:443 HTTP/1.1" from play.google.com @ Sun Feb 25 20:50:49 2024
+
+143: Requesting "CONNECT play.google.com:443 HTTP/1.1" from play.google.com
+143: Responding "HTTP/1.1 200 OK
+
+
+144: "CONNECT play.google.com:443 HTTP/1.1" from play.google.com @ Sun Feb 25 20:50:49 2024
+
+144: Requesting "CONNECT play.google.com:443 HTTP/1.1" from play.google.com
+144: Responding "HTTP/1.1 200 OK
+
+
+145: "CONNECT github.com:443 HTTP/1.1" from github.com @ Sun Feb 25 20:50:52 2024
+
+145: Requesting "CONNECT github.com:443 HTTP/1.1" from github.com
+146: "CONNECT github.githubassets.com:443 HTTP/1.1" from github.githubassets.com @ Sun Feb 25 20:50:52 2024
+
+146: Requesting "CONNECT github.githubassets.com:443 HTTP/1.1" from github.githubassets.com
+145: Responding "HTTP/1.1 200 OK
+
+
+146: Responding "HTTP/1.1 200 OK
+
+
+147: "CONNECT api.github.com:443 HTTP/1.1" from api.github.com @ Sun Feb 25 20:50:52 2024
+
+147: Requesting "CONNECT api.github.com:443 HTTP/1.1" from api.github.com
+148: "CONNECT github.githubassets.com:443 HTTP/1.1" from github.githubassets.com @ Sun Feb 25 20:50:52 2024
+
+148: Requesting "CONNECT github.githubassets.com:443 HTTP/1.1" from github.githubassets.com
+149: "CONNECT avatars.githubusercontent.com:443 HTTP/1.1" from avatars.githubusercontent.com @ Sun Feb 25 20:50:52 2024
+
+149: Requesting "CONNECT avatars.githubusercontent.com:443 HTTP/1.1" from avatars.githubusercontent.com
+147: Responding "HTTP/1.1 200 OK
+
+
+148: Responding "HTTP/1.1 200 OK
+
+
+149: Responding "HTTP/1.1 200 OK
+
+
+117: Tunnel closed
+150: "CONNECT alive.github.com:443 HTTP/1.1" from alive.github.com @ Sun Feb 25 20:50:53 2024
+
+150: Requesting "CONNECT alive.github.com:443 HTTP/1.1" from alive.github.com
+150: Responding "HTTP/1.1 200 OK
+
+
+151: "CONNECT collector.github.com:443 HTTP/1.1" from collector.github.com @ Sun Feb 25 20:50:53 2024
+
+151: Requesting "CONNECT collector.github.com:443 HTTP/1.1" from collector.github.com
+151: Responding "HTTP/1.1 200 OK
+
+
+120: Tunnel closed
+152: "CONNECT www.gstatic.com:443 HTTP/1.1" from www.gstatic.com @ Sun Feb 25 20:50:53 2024
+
+152: Requesting "CONNECT www.gstatic.com:443 HTTP/1.1" from www.gstatic.com
+152: Responding "HTTP/1.1 200 OK
+
+
+153: "CONNECT lh3.google.com:443 HTTP/1.1" from lh3.google.com @ Sun Feb 25 20:50:54 2024
+
+153: Requesting "CONNECT lh3.google.com:443 HTTP/1.1" from lh3.google.com
+153: Responding "HTTP/1.1 200 OK
+
+
+154: "CONNECT lh3.googleusercontent.com:443 HTTP/1.1" from lh3.googleusercontent.com @ Sun Feb 25 20:50:54 2024
+
+154: Requesting "CONNECT lh3.googleusercontent.com:443 HTTP/1.1" from lh3.googleusercontent.com
+154: Responding "HTTP/1.1 200 OK
+
+
+146: Tunnel closed
+155: "CONNECT accounts.google.com:443 HTTP/1.1" from accounts.google.com @ Sun Feb 25 20:50:54 2024
+
+155: Requesting "CONNECT accounts.google.com:443 HTTP/1.1" from accounts.google.com
+156: "CONNECT adservice.google.com:443 HTTP/1.1" from adservice.google.com @ Sun Feb 25 20:50:54 2024
+
+156: Requesting "CONNECT adservice.google.com:443 HTTP/1.1" from adservice.google.com
+155: Responding "HTTP/1.1 200 OK
+
+
+156: Responding "HTTP/1.1 200 OK
+
+
+148: Tunnel closed
+157: "CONNECT www.googleadservices.com:443 HTTP/1.1" from www.googleadservices.com @ Sun Feb 25 20:50:57 2024
+
+157: Requesting "CONNECT www.googleadservices.com:443 HTTP/1.1" from www.googleadservices.com
+157: Responding "HTTP/1.1 200 OK
+
+
+152: Tunnel closed
+158: "CONNECT ogs.google.com:443 HTTP/1.1" from ogs.google.com @ Sun Feb 25 20:50:58 2024
+
+158: Requesting "CONNECT ogs.google.com:443 HTTP/1.1" from ogs.google.com
+158: Responding "HTTP/1.1 200 OK
+
+
+118: Tunnel closed
