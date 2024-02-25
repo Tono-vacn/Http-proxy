@@ -10,7 +10,8 @@
 
 //#include "cache.hpp"
 
-std::ofstream to_log("./logs/log.txt", std::ios::app);
+//this one should be /var/log/erss/proxy.log, but can be modified later
+std::ofstream to_log("./logs/log.txt");//, std::ios::app);
 
 pthread_mutex_t mlock = PTHREAD_MUTEX_INITIALIZER;
 

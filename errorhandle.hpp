@@ -41,4 +41,12 @@ void outMessage(std::string msg)
   std::cout << "Message: " << msg << std::endl;
 }
 
+void outRawMessage(std::string msg)
+{
+  pthread_mutex_lock(&mlock);
+  to_log << msg << std::endl;
+  pthread_mutex_unlock(&mlock);
+  std::cout << msg << std::endl;
+}
+
 #endif

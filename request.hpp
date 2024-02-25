@@ -16,6 +16,7 @@ class Request
   std::string host_name;
   std::string port;
   std::string date;
+  std::string request_line;
   bool is_cache = false;
   int max_stale = 0;
   int id = 0;
@@ -25,15 +26,23 @@ public:
   Request(std::string raw_request, int id) : request(raw_request), id(id)
   {
     // parseRequest();
+    readRequestLine();
     readMethod();
     readURI();
     readHost();
+    readDate();
+    
     checkCache();
   }
 
   bool getCache()
   {
     return is_cache;
+  }
+
+  std::string getRequestLine()
+  {
+    return request_line;
   }
 
   std::string getRequest()
@@ -76,7 +85,18 @@ public:
   // void readId();
   void checkCache();
   void readDate();
+  void readRequestLine();
 };
+
+void Request::readRequestLine()
+{
+  size_t pos = request.find("\r\n");
+  if (pos == std::string::npos)
+  {
+    putError("Invalid request, fail to read request line");
+  }
+  request_line = request.substr(0, pos);
+}
 
 void Request::readMethod()
 {

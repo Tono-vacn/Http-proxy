@@ -119,6 +119,7 @@ void * Proxy::error502(int client_fd, int req_id){
 // }
 
 void * Proxy::sendCONNECT(Request req, int client_fd, int req_id){
+  try{
   outMessage("start to send CONNECT"+req.getPort()+req.getHost());
   Client client(req.getPort().c_str(), req.getHost().c_str());
 
@@ -195,7 +196,11 @@ void * Proxy::sendCONNECT(Request req, int client_fd, int req_id){
       }
     }
   }
-
+  }catch(std::exception e){
+    outError("exception in sendCONNECT");
+    error404(client_fd, req_id);
+    return nullptr;
+  }
 
 }
 
@@ -264,16 +269,17 @@ void * Proxy::sendPOST(Request req, int client_fd, int req_id){
     outError("fail to send response from server to client");
     return nullptr;
   }
+  return nullptr;
 }
 
 void * Proxy::sendGET(Request req, int client_fd, int req_id){
-  
+  try{
   outMessage("start to send GET"+req.getPort()+req.getHost());
   Client client(req.getPort().c_str(), req.getHost().c_str());
 
   if (cache_c.inCache(req))
   {
-    Response *res = cache_c.getResponseFromCache(req, client.socket_fd);
+    Response *res = cache_c.getResponseFromCache(req, client.socket_fd, req_id);
     if (res == NULL)
     {
       putError("fail to get response from cache");
@@ -289,6 +295,8 @@ void * Proxy::sendGET(Request req, int client_fd, int req_id){
     //close(client_fd);
     return nullptr;
   }
+
+  outRawMessage(std::to_string(req_id)+": not in cache");
 
   int status = send(client.socket_fd, req.getRequest().c_str(), req.getRequest().length(), 0);
 
@@ -369,6 +377,16 @@ void * Proxy::sendGET(Request req, int client_fd, int req_id){
   }
   outMessage("after cache");
   //close(client_fd);
+  return nullptr;
+
+  }catch(std::exception e){
+    outError("exception in sendGET");
+    error404(client_fd, req_id);
+    // if(e.what()!=NULL){
+    //   outError(e.what());
+    // }
+    return nullptr;
+  }
 }
 
 void* Proxy::recvRequest(void *args)
@@ -443,6 +461,12 @@ void* Proxy::recvRequest(void *args)
 
   Request reqPtr(req_get, req_id);
 
+  std::time_t ctime = std::time(nullptr);
+  std::tm* ctime_utc = std::gmtime(&ctime);
+  std::string ctime_str = std::asctime(ctime_utc);
+
+  outRawMessage(std::to_string(req_id)+": "+reqPtr.getRequestLine()+" from "+reqPtr.getHost()+" @ "+ctime_str);
+
   if(reqPtr.getMethod()=="GET"){
     sendGET(reqPtr, client_fd, req_id);
   }
@@ -458,7 +482,7 @@ void* Proxy::recvRequest(void *args)
   }
 
   close(client_fd);
-  outMessage("test done");
+  outMessage("test done"+std::to_string(req_id));
   pthread_exit(NULL);
   return NULL;
   

@@ -42,7 +42,7 @@ public:
   bool checkResponse(Response res);
   bool inCache(Request req);
   bool checkResponseInCache(Request req, Response res, int res_id);
-  Response *getResponseFromCache(Request req, int fd);
+  Response *getResponseFromCache(Request req, int fd, int req_id);
   //bool  sendResponseFromCache(Request * req, int fd);
   std::string generateValidateRequest(Request req, Response * res);
     
@@ -125,7 +125,7 @@ if(res.haveMaxAge()){
   expire_tm = formatTime(res.getExpires());
   gmtime_r(&expire_tm, &expire_tm_utc);
 }else{
-  to_log <<req_id<< " : No max age or expires in response, valid" << std::endl;
+  //to_log <<req_id<< " : No max age or expires in response, valid" << std::endl;
   return true;
 }
 
@@ -135,11 +135,12 @@ if(!res.getRevalidate()&&res.haveMaxStale()){
 }
 
 if(now_time > expire_tm){
-  to_log <<req_id<< " : Expired at" << std::asctime((std::tm *)&expire_tm_utc)<<std::endl;
+  //to_log <<req_id<< " : Expired at" << std::asctime((std::tm *)&expire_tm_utc)<<std::endl;
+  outRawMessage(std::to_string(req_id)+": in cache, but expired at "+std::asctime((std::tm *)&expire_tm_utc));
   return false;
 }
 
-to_log <<req_id<< " :in cache, valid" << std::asctime((std::tm *)&expire_tm_utc)<<std::endl;
+//to_log <<req_id<< " :in cache, valid" << std::asctime((std::tm *)&expire_tm_utc)<<std::endl;
 return true;
 
 }
@@ -156,10 +157,11 @@ std::string Cache::generateValidateRequest(Request req, Response * res){
   return validate_req;
 }
 
-Response * Cache::getResponseFromCache(Request req, int fd){
+Response * Cache::getResponseFromCache(Request req, int fd, int req_id){
   std::string k = req.getURI();
   Response * res = &cachePool[k];
   if(checkResponseInCache(req, *res, req.getID())){
+    outRawMessage(std::to_string(req_id)+": in cache, valid");
     return res;
   }
 
