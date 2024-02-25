@@ -63,6 +63,7 @@ class Proxy
 };
 
 void * Proxy::error404(int client_fd, int req_id){
+  printError(req_id,"404 Not Found");
   std::string error_msg = "HTTP/1.1 404 Not Found\r\nContent-Type: text/html\r\nContent-Length: 0\r\n\r\n";
   int status = send(client_fd, error_msg.c_str(),error_msg.length(),0);
   if(status<0){
@@ -73,6 +74,7 @@ void * Proxy::error404(int client_fd, int req_id){
 }
 
 void * Proxy::error400(int client_fd, int req_id){
+  printError(req_id,"400 Bad Request");
   std::string error_msg = "HTTP/1.1 400 Bad Request\r\nContent-Type: text/html\r\nContent-Length: 0\r\n\r\n";
   int status = send(client_fd, error_msg.c_str(), error_msg.length(), 0);
   if (status < 0)
@@ -84,30 +86,32 @@ void * Proxy::error400(int client_fd, int req_id){
 }
 
 void * Proxy::error502(int client_fd, int req_id){
+  printError(req_id,"502 Bad Gateway");
   std::string error_msg = "HTTP/1.1 502 Bad Gateway\r\nContent-Type: text/html\r\nContent-Length: 0\r\n\r\n";
   int status = send(client_fd, error_msg.c_str(), error_msg.length(), 0);
-  if (status < 0)
-  {
-    perror("send() failed");
-    if (errno == EPIPE) {
-        // Socket closed by remote end
-        // Handle the situation appropriately
-        putError("socket closed by the remote");
-    } else if (errno == ENOTCONN) {
-        putError("connection not established");
-    } else if (errno == EAGAIN || errno == EWOULDBLOCK) {
-        putError("socket operation would block");
-    } else if (errno == EINTR) {
-        putError("operation interrupted by a signal");
-    } else if (errno == ENOMEM) {
-        putError("insufficient memory");
-    } else if (errno == EFAULT) {
-        putError("invalid send buffer");
-    } else {
-        putError("fail to send 502 error to client");
-    }
-    return nullptr;
-  }
+  outRawMessage(std::to_string(req_id)+": Responding \""+error_msg);
+  // if (status < 0)
+  // {
+  //   perror("send() failed");
+  //   if (errno == EPIPE) {
+  //       // Socket closed by remote end
+  //       // Handle the situation appropriately
+  //       putError("socket closed by the remote");
+  //   } else if (errno == ENOTCONN) {
+  //       putError("connection not established");
+  //   } else if (errno == EAGAIN || errno == EWOULDBLOCK) {
+  //       putError("socket operation would block");
+  //   } else if (errno == EINTR) {
+  //       putError("operation interrupted by a signal");
+  //   } else if (errno == ENOMEM) {
+  //       putError("insufficient memory");
+  //   } else if (errno == EFAULT) {
+  //       putError("invalid send buffer");
+  //   } else {
+  //       putError("fail to send 502 error to client");
+  //   }
+  //   return nullptr;
+  // }
   return nullptr;   
 }
 
@@ -129,7 +133,8 @@ void * Proxy::sendCONNECT(Request req, int client_fd, int req_id){
   std::string res_msg = "HTTP/1.1 200 OK\r\n\r\n";
   int status = send(client_fd, res_msg.c_str(), res_msg.length(), 0);
 
-  outMessage("response sent to client"+std::to_string(req_id)+" "+req.getHost()+": "+res_msg);
+  //outMessage("response sent to client"+std::to_string(req_id)+" "+req.getHost()+": "+res_msg);
+  outRawMessage(std::to_string(req_id)+": Responding \""+res_msg);
 
   fd_set fd2;
   int fdMaxV = std::max(client.socket_fd, client_fd);
@@ -143,7 +148,7 @@ void * Proxy::sendCONNECT(Request req, int client_fd, int req_id){
 
     if(status<0){
       error502(client_fd, req_id);
-      outError("fail to select");
+      //outError("fail to select");
       close(client.socket_fd);
       return nullptr;
     }
@@ -199,7 +204,8 @@ void * Proxy::sendCONNECT(Request req, int client_fd, int req_id){
     }
   }
   }catch(std::exception e){
-    outError("exception in sendCONNECT");
+    //outError("exception in sendCONNECT");
+    printError(req_id,"exception in sendCONNECT");
     error404(client_fd, req_id);
     return nullptr;
   }
@@ -207,7 +213,8 @@ void * Proxy::sendCONNECT(Request req, int client_fd, int req_id){
 }
 
 void * Proxy::sendPOST(Request req, int client_fd, int req_id){
-  outMessage("start to send post");
+  printNote(req_id,"start to send post");
+  //outMessage("start to send post");
 
   Client client(req.getPort().c_str(), req.getHost().c_str());
   int status = send(client.socket_fd, req.getRequest().c_str(), req.getRequest().length(), 0);
@@ -220,7 +227,8 @@ void * Proxy::sendPOST(Request req, int client_fd, int req_id){
   if (bytes_received < 0)
   {
     error502(client_fd, req_id);
-    outError("fail to recieve response from outer server");
+    printError(req_id,"fail to recieve response from outer server");
+    //outError("fail to recieve response from outer server");
     close(client.socket_fd);
     return nullptr;
   }
@@ -272,7 +280,8 @@ void * Proxy::sendPOST(Request req, int client_fd, int req_id){
   int final_status = send(client_fd, res_str.c_str(), res_str.length(), 0);
   if (final_status < 0)
   {
-    outError("fail to send response from server to client");
+    //outError("fail to send response from server to client");
+    printError(req_id,"failed to send response to client");
     return nullptr;
   }
   return nullptr;
@@ -280,7 +289,8 @@ void * Proxy::sendPOST(Request req, int client_fd, int req_id){
 
 void * Proxy::sendGET(Request req, int client_fd, int req_id){
   try{
-  outMessage("start to send GET"+req.getPort()+req.getHost());
+  //outMessage("start to send GET"+req.getPort()+req.getHost());
+  printNote(req_id,"start to seng GET");
  // outRawMessage(std::to_string(req_id)+": Requesting \""+req.getRequestLine()+"\" from "+req.getHost());
 
   Client client(req.getPort().c_str(), req.getHost().c_str());
@@ -290,18 +300,21 @@ void * Proxy::sendGET(Request req, int client_fd, int req_id){
     Response *res = cache_c.getResponseFromCache(req, client.socket_fd, req_id);
     if (res == NULL)
     {
-      putError("fail to get response from cache");
+      //putError("fail to get response from cache");
+      printError(req_id,"fail to get response from cache");
     }
 
 
     int status = send(client_fd, res->getResponse().c_str(), res->getResponse().length(), 0);
     if (status < 0)
     {
-      putError("fail to send response from cache to client");
+      //putError("fail to send response from cache to client");
+      printError(req_id,"fail to send response from cache to client");
     }
 
-    outMessage(std::to_string(req_id)+"response sent from cache to client"+std::string(res->getStatus()));
+    //outMessage(std::to_string(req_id)+"response sent from cache to client"+std::string(res->getStatus()));
     //close(client_fd);
+    outRawMessage(std::to_string(req_id)+": esponse sent from cache to client");
     return nullptr;
   }
 
@@ -334,7 +347,7 @@ void * Proxy::sendGET(Request req, int client_fd, int req_id){
   }catch(std::exception &e){
     std::cerr<< "Exception: "<< e.what()<<std::endl;
     error502(client_fd, req_id);
-    outError("fail to recieve response from outer server");
+    printError(req_id,"fail to recieve response from outer server");
     close(client.socket_fd);
     return nullptr;
   }
@@ -345,74 +358,6 @@ void * Proxy::sendGET(Request req, int client_fd, int req_id){
   Response final_res(res_get);
   outRawMessage(std::to_string(req_id)+": Received \""+final_res.getResponseLine().c_str()+"\" from "+req.getHost());
 
-
-  // boost::beast::flat_buffer buffer_send;
-  // std::size_t bytes_trans = boost::beast::http::serialize(buffer_send);
-  // auto data = boost::asio::buffer_cast<const uint8_t*>(res.data());
-  // res_get.insert(res_get.end(), 
-
-  // char res_buffer[1000];
-  // int bytes_received = recv(client.socket_fd, res_buffer, 1000, 0);
-  // if (bytes_received < 0)
-  // {
-  //   error502(client_fd, req_id);
-  //   outError("fail to recieve response from outer server");
-  //   close(client.socket_fd);
-  //   return nullptr;
-  // }
-
-  // std::string res_str(res_buffer, res_buffer + bytes_received);
-  // Response res_head(res_str);
-  // char res_buffer2[BUFSIZ];
-  // if(res_head.getContentLength()==0){
-  //   while(true){
-  //     bytes_received = recv(client.socket_fd, res_buffer2, BUFSIZ, 0);
-  //     if(bytes_received<0){
-  //       error502(client_fd, req_id);
-  //       close(client.socket_fd);
-  //       return nullptr;
-  //     }
-  //     if(bytes_received==0){
-  //       break;
-  //     }
-  //     res_str.append(res_buffer2, bytes_received);
-  //     if(res_str.find("\r\n0\r\n")!=std::string::npos){
-  //       break;
-  //     }
-  //   }
-  // }else{
-  //   int lth = res_head.getContentLength()+res_head.getHeaderLength();
-  //   while(bytes_received<lth){
-  //     int bytes = recv(client.socket_fd, res_buffer2, BUFSIZ, 0);
-  //     if(bytes<0){
-  //       error502(client_fd, req_id);
-  //       close(client.socket_fd);
-  //       return nullptr;
-  //     }
-  //     if(bytes==0){
-  //       break;
-  //     }
-  //     bytes_received += bytes;
-  //     res_str.append(res_buffer2, bytes);
-  //     if(res_str.find("\r\n0\r\n")!=std::string::npos){
-  //       break;
-  //     }
-
-  //   }
-  // }
-
-  // Response final_res(res_str);
-  // Response final_res(res_get);
-  //outMessage("response recieved from server"+std::to_string(req_id)+" "+req.getHost()+": "+final_res.getResponse());
-
-  // int final_status = send(client_fd, res_get.c_str(), res_get.size(), 0);
-  // if (final_status < 0)
-  // {
-  //   outError("fail to send response from server to client");
-  // }
-
-  //std::cout<<res<<std::endl;
-
   try{
     asio::io_context ioc;
     tcp::socket socket(ioc);
@@ -420,8 +365,10 @@ void * Proxy::sendGET(Request req, int client_fd, int req_id){
     socket.assign(tcp::v4(), new_client_fd);
     http::write(socket, res);
   }catch(const std::exception &e) {
-    std::cerr << "Exception: " << e.what() << std::endl;
+    //std::cerr << "Exception: " << e.what() << std::endl;
+    printError(req_id,"failed to send response to client");
     error502(client_fd, req_id);
+    return nullptr;
   }
 
 
@@ -436,22 +383,25 @@ void * Proxy::sendGET(Request req, int client_fd, int req_id){
     pthread_mutex_lock(&cache_lock);
     if(
     cache_c.cacheRec(final_res, req)){
-      to_log << "cache successfully" << std::endl;
-      std::cout <<"cache successfully"<<std::endl;
+      //to_log << "cache successfully" << std::endl;
+      printNote(req_id,"cache successfully");
+      //std::cout <<"cache successfully"<<std::endl;
     }
     else{
-      to_log << "cache failed" << std::endl;
-      std::cout <<"cache failed"<<std::endl;
+      // to_log << "cache failed" << std::endl;
+      // std::cout <<"cache failed"<<std::endl;
+      printNote(req_id,"cache failed");
     }
     pthread_mutex_unlock(&cache_lock);
   }
-  outMessage("after cache");
+  //outMessage("after cache");
   //close(client_fd);
   return nullptr;
 
   }catch(std::exception e){
-    putError("exception in sendGET");
-    std::cerr<< "Exception: "<< e.what()<<std::endl;
+    //putError("exception in sendGET");
+    printError(req_id,"exception in sendGET");
+    //std::cerr<< "Exception: "<< e.what()<<std::endl;
     //error404(client_fd, req_id);
     // if(e.what()!=NULL){
     //   outError(e.what());
@@ -475,7 +425,8 @@ void* Proxy::recvRequest(void *args)
   int new_client_fd = dup(client_fd);
   socket.assign(tcp::v4(), new_client_fd, ec);
   if(ec){
-    std::cerr<<"Failed to assign socket"<<std::endl;
+    printError(req_id,"failed to assign socket");
+    //std::cerr<<"Failed to assign socket"<<std::endl;
     return nullptr;
   }
   try{
@@ -483,8 +434,9 @@ void* Proxy::recvRequest(void *args)
     http::request<http::string_body> req;
     http::read(socket, buffer, req, ec);
     if(ec){
-      std::cerr<<"Failed to read request: "<<ec.message()<<std::endl;
-      to_log<<"Failed to read request"<<ec.message()<<std::endl;
+      printError(req_id,"failed to read request:"+ec.message());
+      //std::cerr<<"Failed to read request: "<<ec.message()<<std::endl;
+      //to_log<<"Failed to read request"<<ec.message()<<std::endl;
       return nullptr;
     }
 
@@ -492,43 +444,10 @@ void* Proxy::recvRequest(void *args)
     ss<<req;
     req_get = ss.str();
   }catch(std::exception &e){
-    std::cerr<< "Exception: "<< e.what()<<std::endl;
+    printError(req_id,"Exception: "+std::string(e.what()));
+    //std::cerr<< "Exception: "<< e.what()<<std::endl;
     return nullptr;
   }
-  // bool success = false;
-  // Request* reqPtr;
-
-  //recieve request from client
-
-
-  // is recv loop needed here?
-
-  // while(!success){
-  //   std::vector<char> request_msg(1024*1024);
-  //   //request_msg.resize(1000*1000);
-  //   int bytes_recieved = recv(client_fd, request_msg.data(), request_msg.size(), 0);
-  //   try{
-  //   if(bytes_recieved < 0){
-  //     outError("fail to recieve request from client");
-  //     //std::this_thread::sleep_for(std::chrono::seconds(1));
-  //     //close(client_fd);
-  //     return NULL;
-  //   }
-  //   if(bytes_recieved == 0){
-  //     outError("client closed connection");
-  //     //close(client_fd);
-  //     return NULL;
-  //   }
-
-  //   std::string req_str(request_msg.begin(), request_msg.begin() + bytes_recieved);
-  //   success = true;
-    
-  //     reqPtr = new Request(req_str, req_id);
-  //   }
-  //   catch(std::exception e){
-  //     success = false;
-  //   }
-  // }
 
   Request reqPtr(req_get, req_id);
 
@@ -553,7 +472,7 @@ void* Proxy::recvRequest(void *args)
   }
 
   close(client_fd);
-  outMessage("test done"+std::to_string(req_id));
+  //outMessage("test done"+std::to_string(req_id));
   outRawMessage(std::to_string(req_id)+": Tunnel closed");
   pthread_exit(NULL);
   return NULL;
@@ -629,9 +548,9 @@ void Proxy::mainProcess()
   std::string client_ip;
   outMessage("Proxy started");
   while(true){
-    outMessage("waiting for connection out");
+    //outMessage("waiting for connection out");
     client_fd = serverP.acceptConnection(client_ip);
-    outMessage("connection accepted");
+    //outMessage("connection accepted");
     if(client_fd < 0){
       outError("fail to accept connection");
       continue;
