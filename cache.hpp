@@ -47,30 +47,34 @@ public:
     tm.tm_isdst = 0;
     return timegm(&tm);
   };
-  bool cacheRec(Response res, Request req);
-  bool checkResponse(Response res);
-  bool inCache(Request req);
-  bool checkResponseInCache(Request req, Response res, int res_id);
+  bool cacheRec(Response res, Request req, int req_id);
+  bool checkResponse(Response res, int req_id);
+  bool inCache(Request req, int req_id);
+  bool checkResponseInCache(Request req, Response res, int req_id);
   Response *getResponseFromCache(Request req, int fd, int req_id);
   //bool  sendResponseFromCache(Request * req, int fd);
-  std::string generateValidateRequest(Request req, Response * res);
+  std::string generateValidateRequest(Request req, Response * res, int req_id);
     
   
 };
 
-bool Cache::checkResponse(Response res){
+bool Cache::checkResponse(Response res, int req_id){
   if(res.getNoStore() == true){
-    outMessage("No store in response");
+    //outMessage("No store in response");
+    // printNote(req_id, "No store in response");
+    outRawMessage(std::to_string(req_id)+": not cacheable because no-store");
     return false;
   }
 
   if(res.getPublic() == false && res.getPrivate() == true){
-    outMessage("response is private");
+    // outMessage("response is private");
+    outRawMessage(std::to_string(req_id)+": not cacheable because private");
     return false;
   }
 
   if(res.getEtag().empty() && res.getLastModified().empty()){
-    outMessage("No etag or last modified in response");
+    // outMessage("No etag or last modified in response");
+    outRawMessage(std::to_string(req_id)+": not cacheable because no etag or last-modified");
     return false;
   }
 
@@ -80,7 +84,7 @@ bool Cache::checkResponse(Response res){
 
 }
 
-bool Cache::inCache(Request req){
+bool Cache::inCache(Request req, int req_id){
   std::string k = req.getURI();
   if(cachePool.find(k) == cachePool.end()){
     return false;
@@ -88,24 +92,42 @@ bool Cache::inCache(Request req){
   return true;
 }
 
-bool Cache::cacheRec(Response res, Request req){
-  std::cout <<"cache start"<<std::endl;
-  if(checkResponse(res) == false){
+bool Cache::cacheRec(Response res, Request req, int req_id){
+  //std::cout <<"cache start"<<std::endl;
+  printNote(req_id, "cache start");
+  if(checkResponse(res, req_id) == false){
     return false;
   }
-std::cout <<"after check response"<<std::endl;
+//std::cout <<"after check response"<<std::endl;
+  printNote(req_id, "after check response");
   if(cachePool.size() == max_size){
     std::string k_r = cacheQueue.front();
     cachePool.erase(k_r);
     cacheQueue.pop();
   }
-std::cout <<"before get URI"<<std::endl;
+// std::cout <<"before get URI"<<std::endl;
+  printNote(req_id, "before get URI");
   std::string k_a = req.getURI();
   cacheQueue.push(k_a);
   cachePool[k_a] = res;
-std::cout <<"before cahce return"<<std::endl;
-  return true;
 
+  if(!res.getExpires().empty()){
+    // std::cout <<"no expires"<<std::endl;
+    outRawMessage(std::to_string(req_id)+": cached, expires at "+res.getExpires());
+    printNote(req_id, "before cahce return");
+    return true;
+  }
+
+  if(res.getRevalidate()){
+    // std::cout <<"no revalidate"<<std::endl;
+    outRawMessage(std::to_string(req_id)+": cached, but requires re-validation");
+    printNote(req_id, "before cahce return");
+    return true;
+  }
+
+// std::cout <<"before cahce return"<<std::endl;
+
+return true;
     
 }
 
@@ -159,7 +181,7 @@ return true;
 
 }
 
-std::string Cache::generateValidateRequest(Request req, Response * res){
+std::string Cache::generateValidateRequest(Request req, Response * res, int req_id){
   std::string validate_req = "GET " + req.getURI() + " HTTP/1.1\r\n";
   validate_req += "Host: " + req.getHost() + "\r\n";
   if(!(res->getEtag().empty())){
@@ -175,17 +197,21 @@ std::string Cache::generateValidateRequest(Request req, Response * res){
 Response * Cache::getResponseFromCache(Request req, int fd, int req_id){
   std::string k = req.getURI();
   Response * res = &cachePool[k];
-  if(checkResponseInCache(req, *res, req.getID())){
+  //if(checkResponseInCache(req, *res, req.getID())){
+  if(checkResponseInCache(req, *res, req_id)){
     outRawMessage(std::to_string(req_id)+": in cache, valid");
     return res;
   }
 
-  std::string validate_req = generateValidateRequest(req, res);
-  outMessage("Sending validate request in Cache::getResponseFromCache");
-  outMessage(validate_req.c_str());
+  std::string validate_req = generateValidateRequest(req, res, req_id);
+  //outMessage("Sending validate request in Cache::getResponseFromCache");
+  //outMessage(validate_req.c_str());
+  printNote(req_id, "Sending validate request in Cache::getResponseFromCache");
   int status = send(fd, validate_req.c_str(), validate_req.length(), 0);
   if(status<0){
-    putError("Failed to send validate request");
+    //putError("Failed to send validate request");
+    printError(req_id, "Failed to send validate request");
+    return nullptr;
   }
 
 
@@ -196,7 +222,7 @@ Response * Cache::getResponseFromCache(Request req, int fd, int req_id){
   //   response_recv.append(char_buffer.begin(), char_buffer.begin()+status);
   // }
 
-  //refactor this with boost
+  // refactor this with boost
 
   std::string req_get;
 
@@ -208,6 +234,7 @@ Response * Cache::getResponseFromCache(Request req, int fd, int req_id){
   if(ec){
     // std::cerr<<"Failed to assign socket"<<std::endl;
     //printError(req_id, "Failed to assign socket in Cache::getResponseFromCache");
+    printError(req_id, ec.message());
     return nullptr;
   }
   try{
@@ -215,8 +242,9 @@ Response * Cache::getResponseFromCache(Request req, int fd, int req_id){
     http::request<http::dynamic_body> req;
     http::read(socket, buffer, req, ec);
     if(ec){
-      std::cerr<<"Failed to read request: "<<ec.message()<<std::endl;
-      to_log<<"Failed to read request"<<ec.message()<<std::endl;
+      // std::cerr<<"Failed to read request: "<<ec.message()<<std::endl;
+      // to_log<<"Failed to read request"<<ec.message()<<std::endl;
+      printError(req_id, ec.message());
       return nullptr;
     }
 
@@ -224,15 +252,18 @@ Response * Cache::getResponseFromCache(Request req, int fd, int req_id){
     ss<<req;
     req_get = ss.str();
   }catch(std::exception &e){
-    std::cerr<< "Exception: "<< e.what()<<std::endl;
+    // std::cerr<< "Exception: "<< e.what()<<std::endl;
+    printError(req_id, e.what());
     return nullptr;
   }
 
 
   ////
   Response * new_res = new Response(req_get);
-  outMessage("Received response from Server in Cache::getResponseFromCache");
-  outMessage(new_res->getEtag().c_str());
+  printNote(req_id, "Received response from Server in Cache::getResponseFromCache");
+  printNote(req_id, "Etag: "+new_res->getEtag());
+  //outMessage("Received response from Server in Cache::getResponseFromCache");
+  //outMessage(new_res->getEtag().c_str());
 
   if(new_res->getCode() == "304"){
     to_log << req.getID() << " : Not modified" << std::endl;
@@ -240,11 +271,13 @@ Response * Cache::getResponseFromCache(Request req, int fd, int req_id){
   }
   if(new_res->getCode() == "200"){
     to_log << req.getID() << " : Modified" << std::endl;
-    cacheRec(*new_res, req);
+    cacheRec(*new_res, req, req_id);
     return new_res;
   }
 
-  putError("Invalid response code in Cache::getResponseFromCache");
+  //putError("Invalid response code in Cache::getResponseFromCache");
+  printError(req_id, "Invalid response code in Cache::getResponseFromCache");
+
   //this one should not be reached
   exit(EXIT_FAILURE);
 

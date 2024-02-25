@@ -61,15 +61,25 @@ class Proxy
   static void* error400(int client_fd, int req_id);
   static void* error404(int client_fd, int req_id);
 };
-
+std::string getFirstLine(std::string& str){
+  size_t pos = str.find("\r\n");
+  if(pos==std::string::npos){
+    return str;
+  }
+  else{
+    return str.substr(0, pos);
+  }
+}
 void * Proxy::error404(int client_fd, int req_id){
   printError(req_id,"404 Not Found");
   std::string error_msg = "HTTP/1.1 404 Not Found\r\nContent-Type: text/html\r\nContent-Length: 0\r\n\r\n";
   int status = send(client_fd, error_msg.c_str(),error_msg.length(),0);
   if(status<0){
-    putError("fail to send 404 error to client");
+    printError(req_id,"fail to send 404 error to client");
     return nullptr;
   }
+
+  outRawMessage(std::to_string(req_id)+": Responding \""+"HTTP/1.1 404 Not Found\"");
   return nullptr;
 }
 
@@ -77,11 +87,14 @@ void * Proxy::error400(int client_fd, int req_id){
   printError(req_id,"400 Bad Request");
   std::string error_msg = "HTTP/1.1 400 Bad Request\r\nContent-Type: text/html\r\nContent-Length: 0\r\n\r\n";
   int status = send(client_fd, error_msg.c_str(), error_msg.length(), 0);
+
   if (status < 0)
   {
-    putError("fail to send 400 error to client");
+    printError(req_id, "fail to send 400 error to client");
     return nullptr;
   }
+
+  outRawMessage(std::to_string(req_id)+": Responding \""+"HTTP/1.1 400 Bad Request\"");
   return nullptr;
 }
 
@@ -89,38 +102,14 @@ void * Proxy::error502(int client_fd, int req_id){
   printError(req_id,"502 Bad Gateway");
   std::string error_msg = "HTTP/1.1 502 Bad Gateway\r\nContent-Type: text/html\r\nContent-Length: 0\r\n\r\n";
   int status = send(client_fd, error_msg.c_str(), error_msg.length(), 0);
-  outRawMessage(std::to_string(req_id)+": Responding \""+error_msg);
-  // if (status < 0)
-  // {
-  //   perror("send() failed");
-  //   if (errno == EPIPE) {
-  //       // Socket closed by remote end
-  //       // Handle the situation appropriately
-  //       putError("socket closed by the remote");
-  //   } else if (errno == ENOTCONN) {
-  //       putError("connection not established");
-  //   } else if (errno == EAGAIN || errno == EWOULDBLOCK) {
-  //       putError("socket operation would block");
-  //   } else if (errno == EINTR) {
-  //       putError("operation interrupted by a signal");
-  //   } else if (errno == ENOMEM) {
-  //       putError("insufficient memory");
-  //   } else if (errno == EFAULT) {
-  //       putError("invalid send buffer");
-  //   } else {
-  //       putError("fail to send 502 error to client");
-  //   }
-  //   return nullptr;
-  // }
+
+  if(status<0){
+    printError(req_id,"fail to send 502 error to client");
+    return nullptr;
+  }
+  outRawMessage(std::to_string(req_id)+": Responding \""+"HTTP/1.1 502 Bad Gateway\"");
   return nullptr;   
 }
-
-// void errorHandlingFunction(int client_fd) {
-//     // 在这里执行错误处理逻辑，比如等待一段时间后重试、关闭连接等
-//     std::this_thread::sleep_for(std::chrono::seconds(1));
-//     std::cout << "Error handling function executed" << std::endl;
-//     // 你可以在这里添加其他错误处理逻辑
-// }
 
 void * Proxy::sendCONNECT(Request req, int client_fd, int req_id){
   try{
@@ -134,7 +123,7 @@ void * Proxy::sendCONNECT(Request req, int client_fd, int req_id){
   int status = send(client_fd, res_msg.c_str(), res_msg.length(), 0);
 
   //outMessage("response sent to client"+std::to_string(req_id)+" "+req.getHost()+": "+res_msg);
-  outRawMessage(std::to_string(req_id)+": Responding \""+res_msg);
+  outRawMessage(std::to_string(req_id)+": Responding \""+getFirstLine(res_msg)+"\"");
 
   fd_set fd2;
   int fdMaxV = std::max(client.socket_fd, client_fd);
@@ -295,13 +284,14 @@ void * Proxy::sendGET(Request req, int client_fd, int req_id){
 
   Client client(req.getPort().c_str(), req.getHost().c_str());
 
-  if (cache_c.inCache(req))
+  if (cache_c.inCache(req,req_id))
   {
     Response *res = cache_c.getResponseFromCache(req, client.socket_fd, req_id);
     if (res == NULL)
     {
       //putError("fail to get response from cache");
       printError(req_id,"fail to get response from cache");
+      return nullptr;
     }
 
 
@@ -310,6 +300,7 @@ void * Proxy::sendGET(Request req, int client_fd, int req_id){
     {
       //putError("fail to send response from cache to client");
       printError(req_id,"fail to send response from cache to client");
+      return nullptr;
     }
 
     //outMessage(std::to_string(req_id)+"response sent from cache to client"+std::string(res->getStatus()));
@@ -382,7 +373,7 @@ void * Proxy::sendGET(Request req, int client_fd, int req_id){
   if(final_res.getChunked()==false){
     pthread_mutex_lock(&cache_lock);
     if(
-    cache_c.cacheRec(final_res, req)){
+    cache_c.cacheRec(final_res, req, req_id)){
       //to_log << "cache successfully" << std::endl;
       printNote(req_id,"cache successfully");
       //std::cout <<"cache successfully"<<std::endl;
