@@ -210,63 +210,43 @@ void * Proxy::sendPOST(Request req, int client_fd, int req_id){
   //outMessage("request sent to server"+std::to_string(req_id)+" "+req.getHost()+": "+req.getRequest());
   outRawMessage(std::to_string(req_id)+": Requesting \""+req.getRequestLine()+"\" from "+req.getHost());
 
+  std::string res_get;
+  beast::flat_buffer buffer;
+  http::response<http::dynamic_body> res;
 
-  char res_buffer[1000];
-  int bytes_received = recv(client.socket_fd, res_buffer, 1000, 0);
-  if (bytes_received < 0)
-  {
+
+  try{
+    asio::io_context ioc;
+    tcp::socket socket(ioc);
+    int new_client_fd = dup(client.socket_fd);
+    socket.assign(tcp::v4(), new_client_fd);
+
+
+    http::read(socket, buffer, res);
+
+    // std::ostringstream ss;
+    // ss<<res;
+    // res_get = ss.str();
+  }catch(std::exception &e){
+    std::cerr<< "Exception: "<< e.what()<<std::endl;
     error502(client_fd, req_id);
     printError(req_id,"fail to recieve response from outer server");
-    //outError("fail to recieve response from outer server");
     close(client.socket_fd);
     return nullptr;
   }
 
-  std::string res_str(res_buffer, res_buffer + bytes_received);
-  Response res_head(res_str);
-  char res_buffer2[BUFSIZ];
-  if(res_head.getContentLength()==0){
-    while(true){
-      bytes_received = recv(client.socket_fd, res_buffer2, BUFSIZ, 0);
-      if(bytes_received<0){
-        error502(client_fd, req_id);
-        close(client.socket_fd);
-        return nullptr;
-      }
-      if(bytes_received==0){
-        break;
-      }
-      res_str.append(res_buffer2, bytes_received);
-      if(res_str.find("\r\n0\r\n")!=std::string::npos){
-        break;
-      }
-    }
-  }else{
-    int lth = res_head.getContentLength()+res_head.getHeaderLength();
-    while(bytes_received<lth){
-      int bytes = recv(client.socket_fd, res_buffer2, BUFSIZ, 0);
-      if(bytes<0){
-        error502(client_fd, req_id);
-        close(client.socket_fd);
-        return nullptr;
-      }
-      if(bytes==0){
-        break;
-      }
-      bytes_received += bytes;
-      res_str.append(res_buffer2, bytes);
-      if(res_str.find("\r\n0\r\n")!=std::string::npos){
-        break;
-      }
-    }
-  }
+  std::ostringstream ss;
+  ss<<res;
+  res_get = ss.str();
 
-  Response final_res(res_str);
+  //Response final_res(res_str);
+  Response final_res(res_get);
   //outMessage("response recieved from server"+std::to_string(req_id)+" "+req.getHost()+": "+final_res.getResponse());
   outRawMessage(std::to_string(req_id)+": Responding \""+final_res.getResponseLine()+"\"");
 
 
-  int final_status = send(client_fd, res_str.c_str(), res_str.length(), 0);
+  //int final_status = send(client_fd, res_str.c_str(), res_str.length(), 0);
+  int final_status = send(client_fd, res_get.c_str(), res_get.length(), 0);
   if (final_status < 0)
   {
     //outError("fail to send response from server to client");
