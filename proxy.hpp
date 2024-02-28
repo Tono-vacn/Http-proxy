@@ -28,10 +28,87 @@
 namespace asio = boost::asio;
 namespace beast = boost::beast;
 namespace http = beast::http;
+constexpr size_t bufferSize = 4096; 
 
 using tcp = asio::ip::tcp;
 
 Cache cache_c(100);
+
+class Session : public std::enable_shared_from_this<Session> {
+    beast::tcp_stream server_stream_;
+    asio::posix::stream_descriptor client_stream_;
+    std::array<char, bufferSize> buffer_;
+
+public:
+    Session(asio::io_context& ioc, tcp::socket server_socket, int client_fd)
+    : server_stream_(std::move(server_socket)),
+      client_stream_(ioc, client_fd) {}
+
+    void start() {
+        readFromClient();
+        readFromServer();
+    }
+
+private:
+    void readFromClient() {
+        auto self(shared_from_this());
+        client_stream_.async_read_some(asio::buffer(buffer_),
+            [this, self](boost::system::error_code ec, std::size_t length) {
+                if (!ec) {
+                    writeToServer(length);
+                }else if(ec == asio::error::eof){
+                    return;
+                }
+                else {
+                    std::cerr << "Read from client failed: " << ec.message() << std::endl;
+                }
+            });
+    }
+
+    void writeToServer(std::size_t length) {
+        auto self(shared_from_this());
+        asio::async_write(server_stream_, asio::buffer(buffer_, length),
+            [this, self](boost::system::error_code ec, std::size_t length) {
+                if (!ec) {
+                    readFromClient();
+                }else if(ec == asio::error::eof){
+                    return;
+                }else {
+                    std::cerr << "Write to server failed: " << ec.message() << std::endl;
+                }
+            });
+    }
+
+    void readFromServer() {
+        auto self(shared_from_this());
+        server_stream_.async_read_some(asio::buffer(buffer_),
+            [this, self](boost::system::error_code ec, std::size_t length) {
+                if (!ec) {
+                    writeToClient(length);
+                }else if(ec == asio::error::eof){
+                    return;
+                } else {
+                std::cerr << "Read from server failed: " << ec.message() << std::endl;
+            }
+            });
+    }
+
+    void writeToClient(std::size_t length) {
+        auto self(shared_from_this());
+        asio::async_write(client_stream_, asio::buffer(buffer_, length),
+            [this, self](boost::system::error_code ec, std::size_t /*length*/) {
+                if (!ec) {
+                    readFromServer();
+                }else if(ec == asio::error::eof){
+                    return;
+                } else {
+                    std::cerr << "Write to client failed: " << ec.message() << std::endl;
+                }
+            });
+    }
+
+};
+
 
 class Proxy
 {
@@ -111,95 +188,112 @@ void * Proxy::error502(int client_fd, int req_id){
   return nullptr;   
 }
 
-void * Proxy::sendCONNECT(Request req, int client_fd, int req_id){
-  try{
-  //outMessage("start to send CONNECT"+req.getPort()+req.getHost());
-  outRawMessage(std::to_string(req_id)+": Requesting \""+req.getRequestLine()+"\" from "+req.getHost());
+void * Proxy::sendCONNECT( Request req, int client_fd, int req_id) {
+    asio::io_context ioc;
+    tcp::resolver resolver(ioc);
+    auto endpoints = resolver.resolve(req.getHost(), req.getPort());
+    tcp::socket server_socket(ioc);
+    asio::connect(server_socket, endpoints);
 
-  Client client(req.getPort().c_str(), req.getHost().c_str());
+    std::string res_msg = "HTTP/1.1 200 OK\r\n\r\n";
+    int status = send(client_fd, res_msg.c_str(), res_msg.length(), 0);
 
-  //not sure whether to send 200 OK or other response
-  std::string res_msg = "HTTP/1.1 200 OK\r\n\r\n";
-  int status = send(client_fd, res_msg.c_str(), res_msg.length(), 0);
+    auto session = std::make_shared<Session>(ioc, std::move(server_socket), client_fd);
+    session->start();
 
-  //outMessage("response sent to client"+std::to_string(req_id)+" "+req.getHost()+": "+res_msg);
-  outRawMessage(std::to_string(req_id)+": Responding \""+getFirstLine(res_msg)+"\"");
-
-  fd_set fd2;
-  int fdMaxV = std::max(client.socket_fd, client_fd);
-
-  while(true){
-    FD_ZERO(&fd2);
-    FD_SET(client.socket_fd, &fd2);
-    FD_SET(client_fd, &fd2);
-
-    int status = select(fdMaxV+1, &fd2, NULL, NULL, NULL);
-
-    if(status<0){
-      error502(client_fd, req_id);
-      //outError("fail to select");
-      close(client.socket_fd);
-      return nullptr;
-    }
-
-    if(FD_ISSET(client_fd, &fd2)){
-      //might need to change buffer size
-      //and also need to initialize buffer
-      char buffer[BUFSIZ];
-      int bytes_received = recv(client_fd, buffer, BUFSIZ, 0);
-      if(bytes_received<0){
-        error502(client_fd, req_id);
-        close(client.socket_fd);
-        return nullptr;
-      }
-      if(bytes_received==0){
-        return nullptr;
-      }
-
-
-      int status = send(client.socket_fd, buffer, bytes_received, 0);
-      if(status<0){
-        error502(client_fd, req_id);
-        close(client.socket_fd);
-        return nullptr;
-      }
-      if(bytes_received==0){
-        return nullptr;
-      }
-
-    }
-
-    if(FD_ISSET(client.socket_fd, &fd2)){
-      char buffer[BUFSIZ];
-      int bytes_received = recv(client.socket_fd, buffer, BUFSIZ, 0);
-      if(bytes_received<0){
-        error502(client_fd, req_id);
-        close(client.socket_fd);
-        return nullptr;
-      }
-      if(bytes_received==0){
-        return nullptr;
-      }
-
-      int status = send(client_fd, buffer, bytes_received, 0);
-      if(status<0){
-        error502(client_fd, req_id);
-        close(client.socket_fd);
-        return nullptr;
-      }
-      if(bytes_received==0){
-        return nullptr;
-      }
-    }
-  }
-  }catch(std::exception e){
-    //outError("exception in sendCONNECT");
-    printError(req_id,"exception in sendCONNECT");
-    error404(client_fd, req_id);
+    ioc.run();
     return nullptr;
-  }
-
 }
+
+// void * Proxy::sendCONNECT(Request req, int client_fd, int req_id){
+//   try{
+//   //outMessage("start to send CONNECT"+req.getPort()+req.getHost());
+//   outRawMessage(std::to_string(req_id)+": Requesting \""+req.getRequestLine()+"\" from "+req.getHost());
+
+//   Client client(req.getPort().c_str(), req.getHost().c_str());
+
+//   //not sure whether to send 200 OK or other response
+//   std::string res_msg = "HTTP/1.1 200 OK\r\n\r\n";
+//   int status = send(client_fd, res_msg.c_str(), res_msg.length(), 0);
+
+//   //outMessage("response sent to client"+std::to_string(req_id)+" "+req.getHost()+": "+res_msg);
+//   outRawMessage(std::to_string(req_id)+": Responding \""+getFirstLine(res_msg)+"\"");
+
+//   fd_set fd2;
+//   int fdMaxV = std::max(client.socket_fd, client_fd);
+
+//   while(true){
+//     FD_ZERO(&fd2);
+//     FD_SET(client.socket_fd, &fd2);
+//     FD_SET(client_fd, &fd2);
+
+//     int status = select(fdMaxV+1, &fd2, NULL, NULL, NULL);
+
+//     if(status<0){
+//       error502(client_fd, req_id);
+//       //outError("fail to select");
+//       close(client.socket_fd);
+//       return nullptr;
+//     }
+
+//     if(FD_ISSET(client_fd, &fd2)){
+//       //might need to change buffer size
+//       //and also need to initialize buffer
+//       char buffer[BUFSIZ];
+//       int bytes_received = recv(client_fd, buffer, BUFSIZ, 0);
+//       if(bytes_received<0){
+//         error502(client_fd, req_id);
+//         close(client.socket_fd);
+//         return nullptr;
+//       }
+//       if(bytes_received==0){
+//         return nullptr;
+//       }
+
+
+//       int status = send(client.socket_fd, buffer, bytes_received, 0);
+//       if(status<0){
+//         error502(client_fd, req_id);
+//         close(client.socket_fd);
+//         return nullptr;
+//       }
+//       if(bytes_received==0){
+//         return nullptr;
+//       }
+
+//     }
+
+//     if(FD_ISSET(client.socket_fd, &fd2)){
+//       char buffer[BUFSIZ];
+//       int bytes_received = recv(client.socket_fd, buffer, BUFSIZ, 0);
+//       if(bytes_received<0){
+//         error502(client_fd, req_id);
+//         close(client.socket_fd);
+//         return nullptr;
+//       }
+//       if(bytes_received==0){
+//         return nullptr;
+//       }
+
+//       int status = send(client_fd, buffer, bytes_received, 0);
+//       if(status<0){
+//         error502(client_fd, req_id);
+//         close(client.socket_fd);
+//         return nullptr;
+//       }
+//       if(bytes_received==0){
+//         return nullptr;
+//       }
+//     }
+//   }
+//   }catch(std::exception e){
+//     //outError("exception in sendCONNECT");
+//     printError(req_id,"exception in sendCONNECT");
+//     error404(client_fd, req_id);
+//     return nullptr;
+//   }
+
+// }
 
 void * Proxy::sendPOST(Request req, int client_fd, int req_id){
   printNote(req_id,"start to send post");
