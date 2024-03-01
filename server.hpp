@@ -139,24 +139,7 @@ public:
   // pthread_mutex_t & mlock;
 
   Client(const char *port, const char *host_name) : socket_fd(0), status(0), host_info_list(NULL), port(port), host_name(host_name) { 
-    // int attempts = 0;
-    // bool connected = false;
-    // while (!connected && attempts < 10)
-    // {
-    //   try
-    //   {
         initClient();
-    //     connected = true;
-    //   }
-    //   catch (std::exception e)
-    //   {
-    //     outError("Error initializing client ");
-    //     ++attempts;
-    //   }
-    // }
-    // if(!connected){
-    //   throw("failed to initializing client");
-    // }
   
   };
   Client() : socket_fd(0), status(0), host_info_list(NULL), port("8080"), host_name("localhost") { initClient(); }
@@ -172,26 +155,6 @@ public:
   };
   // int client_fd;
 };
-
-// Response Client::sendRequest(Request& request){
-//   int status = send(socket_fd, request.getRequest().c_str(), request.getRequest().length(), 0);
-//   if(status<0){
-//     putError("Failed to send request from client");
-//     //return Response();
-//   }
-//   char buffer[4096];
-//   int bytes_received = recv(socket_fd, buffer, sizeof(buffer), 0);
-//   if(bytes_received<0){
-//     putError("Failed to receive response from server");
-//     //return Response();
-//   }
-//   Response response(std::string(buffer, bytes_received));
-//   return response;
-// }
-
-// void Server::initServer()
-
-// int Server::acceptConnection(std::string &client_ip)
 
 void Client::initClient()
 {

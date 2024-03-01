@@ -21,10 +21,6 @@
 
 #include "basic_log.hpp"
 
-// std::ofstream to_log("./logs/log.txt", std::ios::app);
-
-// pthread_mutex_t mlock = PTHREAD_MUTEX_INITIALIZER;
-
 namespace asio = boost::asio;
 namespace beast = boost::beast;
 namespace http = beast::http;
@@ -205,96 +201,6 @@ void * Proxy::sendCONNECT( Request req, int client_fd, int req_id) {
     return nullptr;
 }
 
-// void * Proxy::sendCONNECT(Request req, int client_fd, int req_id){
-//   try{
-//   //outMessage("start to send CONNECT"+req.getPort()+req.getHost());
-//   outRawMessage(std::to_string(req_id)+": Requesting \""+req.getRequestLine()+"\" from "+req.getHost());
-
-//   Client client(req.getPort().c_str(), req.getHost().c_str());
-
-//   //not sure whether to send 200 OK or other response
-//   std::string res_msg = "HTTP/1.1 200 OK\r\n\r\n";
-//   int status = send(client_fd, res_msg.c_str(), res_msg.length(), 0);
-
-//   //outMessage("response sent to client"+std::to_string(req_id)+" "+req.getHost()+": "+res_msg);
-//   outRawMessage(std::to_string(req_id)+": Responding \""+getFirstLine(res_msg)+"\"");
-
-//   fd_set fd2;
-//   int fdMaxV = std::max(client.socket_fd, client_fd);
-
-//   while(true){
-//     FD_ZERO(&fd2);
-//     FD_SET(client.socket_fd, &fd2);
-//     FD_SET(client_fd, &fd2);
-
-//     int status = select(fdMaxV+1, &fd2, NULL, NULL, NULL);
-
-//     if(status<0){
-//       error502(client_fd, req_id);
-//       //outError("fail to select");
-//       close(client.socket_fd);
-//       return nullptr;
-//     }
-
-//     if(FD_ISSET(client_fd, &fd2)){
-//       //might need to change buffer size
-//       //and also need to initialize buffer
-//       char buffer[BUFSIZ];
-//       int bytes_received = recv(client_fd, buffer, BUFSIZ, 0);
-//       if(bytes_received<0){
-//         error502(client_fd, req_id);
-//         close(client.socket_fd);
-//         return nullptr;
-//       }
-//       if(bytes_received==0){
-//         return nullptr;
-//       }
-
-
-//       int status = send(client.socket_fd, buffer, bytes_received, 0);
-//       if(status<0){
-//         error502(client_fd, req_id);
-//         close(client.socket_fd);
-//         return nullptr;
-//       }
-//       if(bytes_received==0){
-//         return nullptr;
-//       }
-
-//     }
-
-//     if(FD_ISSET(client.socket_fd, &fd2)){
-//       char buffer[BUFSIZ];
-//       int bytes_received = recv(client.socket_fd, buffer, BUFSIZ, 0);
-//       if(bytes_received<0){
-//         error502(client_fd, req_id);
-//         close(client.socket_fd);
-//         return nullptr;
-//       }
-//       if(bytes_received==0){
-//         return nullptr;
-//       }
-
-//       int status = send(client_fd, buffer, bytes_received, 0);
-//       if(status<0){
-//         error502(client_fd, req_id);
-//         close(client.socket_fd);
-//         return nullptr;
-//       }
-//       if(bytes_received==0){
-//         return nullptr;
-//       }
-//     }
-//   }
-//   }catch(std::exception e){
-//     //outError("exception in sendCONNECT");
-//     printError(req_id,"exception in sendCONNECT");
-//     error404(client_fd, req_id);
-//     return nullptr;
-//   }
-
-// }
-
 void * Proxy::sendPOST(Request req, int client_fd, int req_id){
   printNote(req_id,"start to send post");
   //outMessage("start to send post");
@@ -334,6 +240,7 @@ void * Proxy::sendPOST(Request req, int client_fd, int req_id){
   res_get = ss.str();
 
   //Response final_res(res_str);
+  try{
   Response final_res(res_get);
   //outMessage("response recieved from server"+std::to_string(req_id)+" "+req.getHost()+": "+final_res.getResponse());
   outRawMessage(std::to_string(req_id)+": Responding \""+final_res.getResponseLine()+"\"");
@@ -348,6 +255,11 @@ void * Proxy::sendPOST(Request req, int client_fd, int req_id){
     return nullptr;
   }
   return nullptr;
+  }catch(std::exception &e){
+    //putError("exception in sendPOST");
+    printError(req_id,"exception in sendPOST");
+    return nullptr;
+  }
 }
 
 void * Proxy::sendGET(Request req, int client_fd, int req_id){
@@ -379,7 +291,7 @@ void * Proxy::sendGET(Request req, int client_fd, int req_id){
 
     //outMessage(std::to_string(req_id)+"response sent from cache to client"+std::string(res->getStatus()));
     //close(client_fd);
-    outRawMessage(std::to_string(req_id)+": esponse sent from cache to client");
+    outRawMessage(std::to_string(req_id)+": response sent from cache to client");
     return nullptr;
   }
 
@@ -417,6 +329,7 @@ void * Proxy::sendGET(Request req, int client_fd, int req_id){
     return nullptr;
   }
 
+try{
   std::ostringstream ss;
   ss<<res;
   res_get = ss.str();
@@ -436,11 +349,6 @@ void * Proxy::sendGET(Request req, int client_fd, int req_id){
     return nullptr;
   }
 
-
-  // std::ostringstream ss;
-  // ss<<res;
-  // res_get = ss.str();
-  // Response final_res(res_get);
 
   //outMessage(std::to_string(req_id)+"response sent from server to client"+std::string(final_res.getStatus()));
   outRawMessage(std::to_string(req_id)+": Responding \""+final_res.getResponseLine()+"\"");
@@ -466,11 +374,11 @@ void * Proxy::sendGET(Request req, int client_fd, int req_id){
   }catch(std::exception e){
     //putError("exception in sendGET");
     printError(req_id,"exception in sendGET");
-    //std::cerr<< "Exception: "<< e.what()<<std::endl;
-    //error404(client_fd, req_id);
-    // if(e.what()!=NULL){
-    //   outError(e.what());
-    // }
+    return nullptr;
+  }
+  }catch(std::exception e){
+    //putError("exception in sendGET");
+    printError(req_id,"exception in sendGET:" + std::string(e.what()));
     return nullptr;
   }
 }
@@ -514,6 +422,8 @@ void* Proxy::recvRequest(void *args)
     return nullptr;
   }
 
+  try{
+
   Request reqPtr(req_get, req_id);
 
   std::time_t ctime = std::time(nullptr);
@@ -535,6 +445,10 @@ void* Proxy::recvRequest(void *args)
   if(reqPtr.getMethod()!="GET" && reqPtr.getMethod()!="POST" && reqPtr.getMethod()!="CONNECT"){
     error400(client_fd, req_id);
   }
+  }catch(std::exception &e){
+    printError(req_id,"Exception: "+std::string(e.what()));
+    return nullptr;
+  }
 
   close(client_fd);
   //outMessage("test done"+std::to_string(req_id));
@@ -555,7 +469,8 @@ void Proxy::Deamonlize()
   }
   if (m_pid > 0)
   {
-    std::cout << "Daemon process created with pid: " << m_pid << std::endl;
+    //std::cout << "Daemon process created with pid: " << m_pid << std::endl;
+    std::cout<<"First fork success: "<<m_pid<<std::endl;
     exit(EXIT_SUCCESS);
   }
   pid_t n_sid = setsid();
@@ -607,12 +522,14 @@ void Proxy::Deamonlize()
 
 void Proxy::mainProcess()
 {
+  try{
   serverP.initServer();
   int req_id = -1;
   int client_fd;
   std::string client_ip;
   outMessage("Proxy started");
   while(true){
+    try{
     //outMessage("waiting for connection out");
     client_fd = serverP.acceptConnection(client_ip);
     //outMessage("connection accepted");
@@ -633,7 +550,14 @@ void Proxy::mainProcess()
 
     pthread_t thread;
     pthread_create(&thread, NULL, recvRequest, &to_thread_data);
+    }catch(std::exception &e){
+      outRawMessage("Error: exception in mainProcess: "+std::string(e.what()));
+    }
 
+  }
+  }catch(std::exception &e){
+    outRawMessage("Error: exception in mainProcess: "+std::string(e.what()));
+    mainProcess();
   }
   
 }

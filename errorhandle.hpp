@@ -6,9 +6,8 @@
 #include "basic_log.hpp"
 #include <iostream>
 
-//std::ofstream to_log("./logs/log.txt", std::ios::app);
 
-void putError(const char* error){//, std::ofstream& to_log, pthread_mutex_t &mlock){
+void putError(const char* error){
   pthread_mutex_lock(&mlock);
   to_log << error << std::endl;
   pthread_mutex_unlock(&mlock);

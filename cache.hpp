@@ -210,7 +210,8 @@ Response * Cache::getResponseFromCache(Request req, int fd, int req_id){
   int status = send(fd, validate_req.c_str(), validate_req.length(), 0);
   if(status<0){
     //putError("Failed to send validate request");
-    printError(req_id, "Failed to send validate request");
+    outRawMessage(std::to_string(req_id)+": Failed to send validate request");
+    //printError(req_id, "Failed to send validate request");
     return nullptr;
   }
 
@@ -233,17 +234,18 @@ Response * Cache::getResponseFromCache(Request req, int fd, int req_id){
   socket.assign(tcp::v4(), new_client_fd, ec);
   if(ec){
     // std::cerr<<"Failed to assign socket"<<std::endl;
-    //printError(req_id, "Failed to assign socket in Cache::getResponseFromCache");
+    printError(req_id, "Failed to assign socket in Cache::getResponseFromCache");
     printError(req_id, ec.message());
     return nullptr;
   }
   try{
     beast::flat_buffer buffer;
-    http::request<http::dynamic_body> req;
+    http::response<http::dynamic_body> req;
     http::read(socket, buffer, req, ec);
     if(ec){
       // std::cerr<<"Failed to read request: "<<ec.message()<<std::endl;
       // to_log<<"Failed to read request"<<ec.message()<<std::endl;
+      printError(req_id, "Failed to read response in Cache::getResponseFromCache");
       printError(req_id, ec.message());
       return nullptr;
     }
@@ -257,9 +259,14 @@ Response * Cache::getResponseFromCache(Request req, int fd, int req_id){
     return nullptr;
   }
 
-
+  Response * new_res;
   ////
-  Response * new_res = new Response(req_get);
+  try{
+    new_res = new Response(req_get);
+  }catch(std::exception &e){
+    printError(req_id, e.what());
+    return nullptr;
+  }
   printNote(req_id, "Received response from Server in Cache::getResponseFromCache");
   printNote(req_id, "Etag: "+new_res->getEtag());
   //outMessage("Received response from Server in Cache::getResponseFromCache");
