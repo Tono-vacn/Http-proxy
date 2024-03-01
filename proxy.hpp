@@ -30,6 +30,8 @@ using tcp = asio::ip::tcp;
 
 Cache cache_c(100);
 
+// int req_id = -1;
+
 class Session : public std::enable_shared_from_this<Session> {
     beast::tcp_stream server_stream_;
     asio::posix::stream_descriptor client_stream_;
@@ -40,65 +42,71 @@ public:
     : server_stream_(std::move(server_socket)),
       client_stream_(ioc, client_fd) {}
 
-    void start() {
-        readFromClient();
-        readFromServer();
+    void start(int req_id) {
+        readFromClient(req_id);
+        readFromServer(req_id);
     }
 
 private:
-    void readFromClient() {
+    void readFromClient(int req_id) {
         auto self(shared_from_this());
         client_stream_.async_read_some(asio::buffer(buffer_),
-            [this, self](boost::system::error_code ec, std::size_t length) {
+            [this, self, req_id](boost::system::error_code ec, std::size_t length) {
                 if (!ec) {
-                    writeToServer(length);
+                  // print
+                    writeToServer(length, req_id);
                 }else if(ec == asio::error::eof){
                     return;
                 }
                 else {
-                    std::cerr << "Read from client failed: " << ec.message() << std::endl;
+                  printError(req_id,"Read from client failed: "+ec.message());
+                    //std::cerr << "Read from client failed: " << ec.message() << std::endl;
                 }
             });
+
     }
 
-    void writeToServer(std::size_t length) {
+    void writeToServer(std::size_t length, int req_id) {
         auto self(shared_from_this());
         asio::async_write(server_stream_, asio::buffer(buffer_, length),
-            [this, self](boost::system::error_code ec, std::size_t length) {
+            [this, self, req_id](boost::system::error_code ec, std::size_t length) {
                 if (!ec) {
-                    readFromClient();
+                    readFromClient(req_id);
                 }else if(ec == asio::error::eof){
                     return;
                 }else {
-                    std::cerr << "Write to server failed: " << ec.message() << std::endl;
+                  printError(req_id,"Write to server failed: "+ec.message());
+                    //std::cerr << "Write to server failed: " << ec.message() << std::endl;
                 }
             });
     }
 
-    void readFromServer() {
+    void readFromServer(int req_id) {
         auto self(shared_from_this());
         server_stream_.async_read_some(asio::buffer(buffer_),
-            [this, self](boost::system::error_code ec, std::size_t length) {
+            [this, self, req_id](boost::system::error_code ec, std::size_t length) {
                 if (!ec) {
-                    writeToClient(length);
+                    writeToClient(length,req_id);
                 }else if(ec == asio::error::eof){
                     return;
                 } else {
-                std::cerr << "Read from server failed: " << ec.message() << std::endl;
+                  printError(req_id,"Read from server failed: "+ec.message());
+                //std::cerr << "Read from server failed: " << ec.message() << std::endl;
             }
             });
     }
 
-    void writeToClient(std::size_t length) {
+    void writeToClient(std::size_t length, int req_id) {
         auto self(shared_from_this());
         asio::async_write(client_stream_, asio::buffer(buffer_, length),
-            [this, self](boost::system::error_code ec, std::size_t /*length*/) {
+            [this, self, req_id](boost::system::error_code ec, std::size_t /*length*/) {
                 if (!ec) {
-                    readFromServer();
+                    readFromServer(req_id);
                 }else if(ec == asio::error::eof){
                     return;
                 } else {
-                    std::cerr << "Write to client failed: " << ec.message() << std::endl;
+                  printError(req_id,"Write to client failed: "+ec.message());
+                    //std::cerr << "Write to client failed: " << ec.message() << std::endl;
                 }
             });
     }
@@ -135,7 +143,9 @@ class Proxy
   static void* error404(int client_fd, int req_id);
 };
 std::string getFirstLine(std::string& str){
-  size_t pos = str.find("\r\n");
+  size_t pos1 = str.find("\r\n");
+  size_t pos2 = str.find("\n");
+  size_t pos = pos1<pos2?pos1:pos2;
   if(pos==std::string::npos){
     return str;
   }
@@ -191,11 +201,20 @@ void * Proxy::sendCONNECT( Request req, int client_fd, int req_id) {
     tcp::socket server_socket(ioc);
     asio::connect(server_socket, endpoints);
 
+    outRawMessage(std::to_string(req_id)+": Requesting \""+req.getRequestLine()+"\" from "+req.getHost());
+
     std::string res_msg = "HTTP/1.1 200 OK\r\n\r\n";
     int status = send(client_fd, res_msg.c_str(), res_msg.length(), 0);
+    if (status < 0)
+    {
+      printError(req_id,"fail to send 200 OK to client");
+      return nullptr;
+    }
+    outRawMessage(std::to_string(req_id)+": Responding \""+getFirstLine(res_msg)+"\"");//res_msg.substr(0, res_msg.find("\r\n"))+"\"");
+
 
     auto session = std::make_shared<Session>(ioc, std::move(server_socket), client_fd);
-    session->start();
+    session->start(req_id);
 
     ioc.run();
     return nullptr;
@@ -430,7 +449,7 @@ void* Proxy::recvRequest(void *args)
   std::tm* ctime_utc = std::gmtime(&ctime);
   std::string ctime_str = std::asctime(ctime_utc);
 
-  outRawMessage(std::to_string(req_id)+": \""+reqPtr.getRequestLine()+"\" from "+reqPtr.getHost()+" @ "+ctime_str);
+  outRawMessage(std::to_string(req_id)+": \""+reqPtr.getRequestLine()+"\" from "+reqPtr.getHost()+" @ "+getFirstLine(ctime_str));
 
   if(reqPtr.getMethod()=="GET"){
     sendGET(reqPtr, client_fd, req_id);
