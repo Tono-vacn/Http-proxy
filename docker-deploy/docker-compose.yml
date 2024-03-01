@@ -1,0 +1,14 @@
+version: '3.2'
+
+services:
+  proxy:
+    build: ./srmagc
+    image: myproxy
+    container_name: myproxy
+    command: bash -c "./run.sh"
+    volumes:
+      - type: bind
+        source: ./var
+        target: /var/log/erss
+    ports:
+      - "12345:12345"
