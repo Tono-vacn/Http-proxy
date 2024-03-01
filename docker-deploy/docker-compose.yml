@@ -2,9 +2,9 @@ version: '3.2'
 
 services:
   proxy:
-    build: ./srmagc
-    image: myproxy
-    container_name: myproxy
+    build: ./src
+    image: mproxy
+    container_name: mproxy
     command: bash -c "./run.sh"
     volumes:
       - type: bind
