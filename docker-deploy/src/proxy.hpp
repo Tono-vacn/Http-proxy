@@ -262,6 +262,7 @@ void * Proxy::sendPOST(Request req, int client_fd, int req_id){
   try{
   Response final_res(res_get);
   //outMessage("response recieved from server"+std::to_string(req_id)+" "+req.getHost()+": "+final_res.getResponse());
+  outRawMessage(std::to_string(req_id)+": Received \""+final_res.getResponseLine()+"\" from "+req.getHost());
   outRawMessage(std::to_string(req_id)+": Responding \""+final_res.getResponseLine()+"\"");
 
 
