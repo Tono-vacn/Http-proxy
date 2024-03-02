@@ -277,9 +277,10 @@ Response * Cache::getResponseFromCache(Request req, int fd, int req_id){
 
   //putError("Invalid response code in Cache::getResponseFromCache");
   printError(req_id, "Invalid response code in Cache::getResponseFromCache");
+  return nullptr;
 
   //this one should not be reached
-  exit(EXIT_FAILURE);
+  // exit(EXIT_FAILURE);
 
 }
   
