@@ -31,7 +31,6 @@ using tcp = asio::ip::tcp;
 
 class Cache{
   size_t max_size;
-  //std::ofstream & to_log;
   std::queue<std::string> cacheQueue;
   std::map<std::string, Response> cachePool;
 public:
@@ -216,14 +215,6 @@ Response * Cache::getResponseFromCache(Request req, int fd, int req_id){
     return nullptr;
   }
 
-
-  // do i need to implement a recv loop here?
-  // std::vector<char> char_buffer(1024);
-  // std::string response_recv;
-  // while((status = recv(fd, char_buffer.data(), char_buffer.size(), 0)) > 0){
-  //   response_recv.append(char_buffer.begin(), char_buffer.begin()+status);
-  // }
-
   // refactor this with boost
 
   std::string req_get;
@@ -289,11 +280,6 @@ Response * Cache::getResponseFromCache(Request req, int fd, int req_id){
 
   //this one should not be reached
   exit(EXIT_FAILURE);
-
-  // if(cachePool.find(k) == cachePool.end()){
-  //   return nullptr;
-  // }
-  // return &cachePool[k];
 }
   
 
