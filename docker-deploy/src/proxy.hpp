@@ -385,6 +385,8 @@ try{
       printNote(req_id,"cache failed");
     }
     pthread_mutex_unlock(&cache_lock);
+      }else{
+    printNote(req_id,"cache failed because chunked");
   }
   //outMessage("after cache");
   //close(client_fd);
