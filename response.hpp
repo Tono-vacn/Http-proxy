@@ -334,7 +334,7 @@ void Response::readCacheControl()
 
   if (cache_control.find("no-cache") != std::string::npos)
   {
-    no_cache = false;
+    no_cache = true;
   }
 
   if (cache_control.find("must-revalidate") != std::string::npos)

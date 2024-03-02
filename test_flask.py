@@ -13,10 +13,10 @@ def test_response():
     
     response = make_response(json.dumps({'message': 'Hello, World!'}))
     response.headers['Content-Type'] = 'application/json'
-    response.headers['Cache-Control'] = 'max-age=60, public, must-revalidate'
-    response.headers['Last-Modified'] = current_time.strftime('%a, %d %b %Y %H:%M:%S %Z')
+    response.headers['Cache-Control'] = 'max-age=15, must-revalidate'
+    # response.headers['Last-Modified'] = current_time.strftime('%a, %d %b %Y %H:%M:%S %Z')
     response.headers['Expires'] = expire_time.strftime('%a, %d %b %Y %H:%M:%S %Z')
-    response.headers["ETag"] = "3e6-160e3f3a5b8"
+    # response.headers["ETag"] = "3e6-160e3f3a5b8"
     
     
     return response

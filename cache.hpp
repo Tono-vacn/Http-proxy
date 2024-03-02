@@ -207,6 +207,7 @@ Response * Cache::getResponseFromCache(Request req, int fd, int req_id){
   //outMessage("Sending validate request in Cache::getResponseFromCache");
   //outMessage(validate_req.c_str());
   printNote(req_id, "Sending validate request in Cache::getResponseFromCache");
+  outRawMessage(std::to_string(req_id)+": Requesting"+validate_req.substr(0, validate_req.find("\r\n"))+" from "+req.getHost());
   int status = send(fd, validate_req.c_str(), validate_req.length(), 0);
   if(status<0){
     //putError("Failed to send validate request");
@@ -268,6 +269,7 @@ Response * Cache::getResponseFromCache(Request req, int fd, int req_id){
     return nullptr;
   }
   printNote(req_id, "Received response from Server in Cache::getResponseFromCache");
+  outRawMessage(std::to_string(req_id)+": Recieved"+new_res->getResponseLine()+" from "+req.getHost());
   printNote(req_id, "Etag: "+new_res->getEtag());
   //outMessage("Received response from Server in Cache::getResponseFromCache");
   //outMessage(new_res->getEtag().c_str());

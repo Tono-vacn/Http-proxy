@@ -1,0 +1,37 @@
+0: "GET http://run.mocky.io/v3/cd79f3cc-15f9-4b04-b767-ee2d64a25d3d HTTP/1.1" from run.mocky.io @ Sat Mar  2 03:23:35 2024
+0: NOTE start to seng GET
+0: not in cache
+0: Requesting "GET http://run.mocky.io/v3/cd79f3cc-15f9-4b04-b767-ee2d64a25d3d HTTP/1.1" from run.mocky.io
+0: Received "HTTP/1.1 400 Bad Request" from run.mocky.io
+0: Responding "HTTP/1.1 400 Bad Request"
+0: NOTE cache start
+0: not cacheable because no etag or last-modified
+0: NOTE cache failed
+0: Tunnel closed
+1: "CONNECT beacons.gcp.gvt2.com:443 HTTP/1.1" from beacons.gcp.gvt2.com @ Sat Mar  2 03:23:35 2024
+1: Requesting "CONNECT beacons.gcp.gvt2.com:443 HTTP/1.1" from beacons.gcp.gvt2.com
+1: Responding "HTTP/1.1 200 OK"
+2: "CONNECT www.google.com:443 HTTP/1.1" from www.google.com @ Sat Mar  2 03:24:02 2024
+2: Requesting "CONNECT www.google.com:443 HTTP/1.1" from www.google.com
+2: Responding "HTTP/1.1 200 OK"
+3: "CONNECT beacons.gcp.gvt2.com:443 HTTP/1.1" from beacons.gcp.gvt2.com @ Sat Mar  2 03:27:54 2024
+3: Requesting "CONNECT beacons.gcp.gvt2.com:443 HTTP/1.1" from beacons.gcp.gvt2.com
+3: Responding "HTTP/1.1 200 OK"
+4: "CONNECT mqtt-web.zhihu.com:443 HTTP/1.1" from mqtt-web.zhihu.com @ Sat Mar  2 03:28:25 2024
+4: Requesting "CONNECT mqtt-web.zhihu.com:443 HTTP/1.1" from mqtt-web.zhihu.com
+4: Responding "HTTP/1.1 200 OK"
+5: "CONNECT mqtt-web.zhihu.com:443 HTTP/1.1" from mqtt-web.zhihu.com @ Sat Mar  2 03:30:25 2024
+5: Requesting "CONNECT mqtt-web.zhihu.com:443 HTTP/1.1" from mqtt-web.zhihu.com
+5: Responding "HTTP/1.1 200 OK"
+6: "CONNECT mqtt-web.zhihu.com:443 HTTP/1.1" from mqtt-web.zhihu.com @ Sat Mar  2 03:32:25 2024
+6: Requesting "CONNECT mqtt-web.zhihu.com:443 HTTP/1.1" from mqtt-web.zhihu.com
+6: Responding "HTTP/1.1 200 OK"
+7: "CONNECT mqtt-web.zhihu.com:443 HTTP/1.1" from mqtt-web.zhihu.com @ Sat Mar  2 03:34:25 2024
+7: Requesting "CONNECT mqtt-web.zhihu.com:443 HTTP/1.1" from mqtt-web.zhihu.com
+7: Responding "HTTP/1.1 200 OK"
+8: "CONNECT mqtt-web.zhihu.com:443 HTTP/1.1" from mqtt-web.zhihu.com @ Sat Mar  2 03:36:25 2024
+8: Requesting "CONNECT mqtt-web.zhihu.com:443 HTTP/1.1" from mqtt-web.zhihu.com
+8: Responding "HTTP/1.1 200 OK"
+9: "CONNECT mqtt-web.zhihu.com:443 HTTP/1.1" from mqtt-web.zhihu.com @ Sat Mar  2 03:38:25 2024
+9: Requesting "CONNECT mqtt-web.zhihu.com:443 HTTP/1.1" from mqtt-web.zhihu.com
+9: Responding "HTTP/1.1 200 OK"

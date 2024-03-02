@@ -1,0 +1,245 @@
+1. testmethod: connect
+  https://www.google.com
+
+Results:
+0: "CONNECT www.google.com:443 HTTP/1.1" from www.google.com @ Sat Mar  2 00:22:46 2024
+0: Requesting "CONNECT www.google.com:443 HTTP/1.1" from www.google.com
+0: Responding "HTTP/1.1 200 OK"
+1: "CONNECT lh3.google.com:443 HTTP/1.1" from lh3.google.com @ Sat Mar  2 00:22:46 2024
+1: Requesting "CONNECT lh3.google.com:443 HTTP/1.1" from lh3.google.com
+1: Responding "HTTP/1.1 200 OK"
+2: "CONNECT lh3.googleusercontent.com:443 HTTP/1.1" from lh3.googleusercontent.com @ Sat Mar  2 00:22:47 2024
+2: Requesting "CONNECT lh3.googleusercontent.com:443 HTTP/1.1" from lh3.googleusercontent.com
+2: Responding "HTTP/1.1 200 OK"
+3: "CONNECT waa-pa.clients6.google.com:443 HTTP/1.1" from waa-pa.clients6.google.com @ Sat Mar  2 00:22:47 2024
+3: Requesting "CONNECT waa-pa.clients6.google.com:443 HTTP/1.1" from waa-pa.clients6.google.com
+3: Responding "HTTP/1.1 200 OK"
+4: "CONNECT adservice.google.com:443 HTTP/1.1" from adservice.google.com @ Sat Mar  2 00:22:47 2024
+5: "CONNECT accounts.google.com:443 HTTP/1.1" from accounts.google.com @ Sat Mar  2 00:22:47 2024
+4: Requesting "CONNECT adservice.google.com:443 HTTP/1.1" from adservice.google.com
+4: Responding "HTTP/1.1 200 OK"
+5: Requesting "CONNECT accounts.google.com:443 HTTP/1.1" from accounts.google.com
+5: Responding "HTTP/1.1 200 OK"
+6: "CONNECT ogs.google.com:443 HTTP/1.1" from ogs.google.com @ Sat Mar  2 00:22:52 2024
+6: Requesting "CONNECT ogs.google.com:443 HTTP/1.1" from ogs.google.com
+6: Responding "HTTP/1.1 200 OK"
+8: "CONNECT www.gstatic.com:443 HTTP/1.1" from www.gstatic.com @ Sat Mar  2 00:22:52 2024
+8: Requesting "CONNECT www.gstatic.com:443 HTTP/1.1" from www.gstatic.com
+8: Responding "HTTP/1.1 200 OK"
+
+2. testmethod: get
+  http://httpbin.org/forms/post
+  http://info.cern.ch/hypertext/WWW/TheProject.html
+
+Results (if there is CONNECT requests, they are from Chrome's preconnect):
+
+0: "GET http://info.cern.ch/hypertext/WWW/TheProject.html HTTP/1.1" from info.cern.ch @ Sat Mar  2 00:39:04 2024
+0: NOTE start to seng GET
+0: not in cache
+0: Requesting "GET http://info.cern.ch/hypertext/WWW/TheProject.html HTTP/1.1" from info.cern.ch
+0: Received "HTTP/1.1 304 Not Modified" from info.cern.ch
+0: Responding "HTTP/1.1 304 Not Modified"
+0: NOTE cache start
+0: NOTE after check response
+0: NOTE before get URI
+0: NOTE cache successfully
+0: Tunnel closed
+(refresh once)
+1: "GET http://info.cern.ch/hypertext/WWW/TheProject.html HTTP/1.1" from info.cern.ch @ Sat Mar  2 00:39:06 2024
+1: NOTE start to seng GET
+1: in cache, valid
+1: response sent from cache to client
+1: Tunnel closed
+
+-------------------------------------
+-------------------------------------
+
+9: "GET http://httpbin.org/forms/post HTTP/1.1" from httpbin.org @ Sat Mar  2 00:45:07 2024
+9: NOTE start to seng GET
+9: not in cache
+9: Requesting "GET http://httpbin.org/forms/post HTTP/1.1" from httpbin.org
+9: Received "HTTP/1.1 200 OK" from httpbin.org
+9: Responding "HTTP/1.1 200 OK"
+9: NOTE cache start
+9: not cacheable because no etag or last-modified
+9: NOTE cache failed
+9: Tunnel closed
+
+3. testmethod: post
+  http://httpbin.org/forms/post
+
+Results:
+2: "POST http://httpbin.org/post HTTP/1.1" from httpbin.org @ Sat Mar  2 00:46:46 2024
+2: NOTE start to send post
+2: Requesting "POST http://httpbin.org/post HTTP/1.1" from httpbin.org
+2: Responding "HTTP/1.1 200 OK"
+2: Tunnel closed
+
+
+4. testcache: in cache, valid:
+  http://info.cern.ch/hypertext/WWW/TheProject.html
+
+Results:
+1: "GET http://info.cern.ch/hypertext/WWW/TheProject.html HTTP/1.1" from info.cern.ch @ Sat Mar  2 00:54:52 2024
+1: NOTE start to seng GET
+1: not in cache
+1: Requesting "GET http://info.cern.ch/hypertext/WWW/TheProject.html HTTP/1.1" from info.cern.ch
+1: Received "HTTP/1.1 304 Not Modified" from info.cern.ch
+1: Responding "HTTP/1.1 304 Not Modified"
+1: NOTE cache start
+1: NOTE after check response
+1: NOTE before get URI
+1: NOTE cache successfully
+1: Tunnel closed
+0: "GET http://info.cern.ch/hypertext/WWW/TheProject.html HTTP/1.1" from info.cern.ch @ Sat Mar  2 00:55:03 2024
+0: NOTE start to seng GET
+0: in cache, valid
+0: response sent from cache to client
+0: Tunnel closed
+
+5. testchunked: chunked response
+  http://www.httpwatch.com/httpgallery/chunked/chunkedimage.aspx
+
+Results:
+1: "GET http://www.httpwatch.com/httpgallery/chunked/chunkedimage.aspx HTTP/1.1" from www.httpwatch.com @ Sat Mar  2 01:07:41 2024
+1: NOTE start to seng GET
+1: not in cache
+1: Requesting "GET http://www.httpwatch.com/httpgallery/chunked/chunkedimage.aspx HTTP/1.1" from www.httpwatch.com
+1: Received "HTTP/1.1 200 OK" from www.httpwatch.com
+1: Responding "HTTP/1.1 200 OK"
+1: NOTE cache failed because chunked
+1: Tunnel closed
+
+6. testcache: no-store
+  used flask to generate a no-store response
+
+Results:
+1: "GET http://vcm-37988.vm.duke.edu:5000/ HTTP/1.1" from vcm-37988.vm.duke.edu @ Sat Mar  2 01:14:33 2024
+1: NOTE start to seng GET
+1: not in cache
+1: Requesting "GET http://vcm-37988.vm.duke.edu:5000/ HTTP/1.1" from vcm-37988.vm.duke.edu
+1: Received "HTTP/1.1 200 OK" from vcm-37988.vm.duke.edu
+1: Responding "HTTP/1.1 200 OK"
+1: NOTE cache start
+1: not cacheable because no-store
+1: NOTE cache failed
+1: Tunnel closed
+
+7. testcache: no-cache
+  used flask to generate a no-cache response
+
+Results:
+1: "GET http://vcm-37988.vm.duke.edu:5000/ HTTP/1.1" from vcm-37988.vm.duke.edu @ Sat Mar  2 02:09:10 2024
+1: NOTE start to seng GET
+1: not in cache
+1: Requesting "GET http://vcm-37988.vm.duke.edu:5000/ HTTP/1.1" from vcm-37988.vm.duke.edu
+1: Received "HTTP/1.1 200 OK" from vcm-37988.vm.duke.edu
+1: Responding "HTTP/1.1 200 OK"
+1: NOTE cache start
+1: NOTE after check response
+1: NOTE before get URI
+1: cached, expires at Sat, 02 Mar 2024 02:10:10 GMT
+1: NOTE before cahce return
+1: NOTE cache successfully
+1: Tunnel closed
+0: "GET http://vcm-37988.vm.duke.edu:5000/ HTTP/1.1" from vcm-37988.vm.duke.edu @ Sat Mar  2 02:09:19 2024
+0: NOTE start to seng GET
+0: in cache, requires validation
+0: NOTE Sending validate request in Cache::getResponseFromCache
+0: RequestingGET http://vcm-37988.vm.duke.edu:5000/ HTTP/1.1 from vcm-37988.vm.duke.edu
+0: NOTE Received response from Server in Cache::getResponseFromCache
+0: RecievedHTTP/1.1 200 OK from vcm-37988.vm.duke.edu
+0: NOTE Etag: 3e6-160e3f3a5b8
+0 : Modified
+0: NOTE cache start
+0: NOTE after check response
+0: NOTE before get URI
+0: cached, expires at Sat, 02 Mar 2024 02:10:19 GMT
+0: NOTE before cahce return
+0: response sent from cache to client
+0: Tunnel closed
+
+8. testcache: max-age = 15, must-revalidate
+  used flask to generate a max-age = 15, must-revalidate response
+
+Results:
+0: "GET http://vcm-37988.vm.duke.edu:5000/ HTTP/1.1" from vcm-37988.vm.duke.edu @ Sat Mar  2 02:14:33 2024
+0: NOTE start to seng GET
+0: not in cache
+0: Requesting "GET http://vcm-37988.vm.duke.edu:5000/ HTTP/1.1" from vcm-37988.vm.duke.edu
+0: Received "HTTP/1.1 200 OK" from vcm-37988.vm.duke.edu
+0: Responding "HTTP/1.1 200 OK"
+0: NOTE cache start
+0: NOTE after check response
+0: NOTE before get URI
+0: cached, expires at Sat, 02 Mar 2024 02:15:34 GMT
+0: NOTE before cahce return
+0: NOTE cache successfully
+0: Tunnel closed
+1: "GET http://vcm-37988.vm.duke.edu:5000/ HTTP/1.1" from vcm-37988.vm.duke.edu @ Sat Mar  2 02:14:37 2024
+1: NOTE start to seng GET
+1: in cache, valid
+1: response sent from cache to client
+1: Tunnel closed
+3: "CONNECT www.google.com:443 HTTP/1.1" from www.google.com @ Sat Mar  2 02:14:58 2024
+3: Requesting "CONNECT www.google.com:443 HTTP/1.1" from www.google.com
+3: Responding "HTTP/1.1 200 OK"
+2: "GET http://vcm-37988.vm.duke.edu:5000/ HTTP/1.1" from vcm-37988.vm.duke.edu @ Sat Mar  2 02:15:01 2024
+2: NOTE start to seng GET
+2: in cache, but expired at Sat Mar  2 02:14:49 2024
+
+2: NOTE Sending validate request in Cache::getResponseFromCache
+2: RequestingGET http://vcm-37988.vm.duke.edu:5000/ HTTP/1.1 from vcm-37988.vm.duke.edu
+2: NOTE Received response from Server in Cache::getResponseFromCache
+2: RecievedHTTP/1.1 200 OK from vcm-37988.vm.duke.edu
+2: NOTE Etag: 3e6-160e3f3a5b8
+2 : Modified
+2: NOTE cache start
+2: NOTE after check response
+2: NOTE before get URI
+2: cached, expires at Sat, 02 Mar 2024 02:16:01 GMT
+2: NOTE before cahce return
+2: response sent from cache to client
+2: Tunnel closed
+
+9. testcache: max-age = 15, private
+  used flask to generate a max-age = 15, private response
+
+Results:
+1: "GET http://vcm-37988.vm.duke.edu:5000/ HTTP/1.1" from vcm-37988.vm.duke.edu @ Sat Mar  2 02:36:05 2024
+1: NOTE start to seng GET
+1: not in cache
+1: Requesting "GET http://vcm-37988.vm.duke.edu:5000/ HTTP/1.1" from vcm-37988.vm.duke.edu
+1: Received "HTTP/1.1 200 OK" from vcm-37988.vm.duke.edu
+1: Responding "HTTP/1.1 200 OK"
+1: NOTE cache start
+1: not cacheable because private
+1: NOTE cache failed
+1: Tunnel closed
+
+10. testcache: no etag, no last-modified
+  used flask to generate a response with no etag and no last-modified
+
+Results:
+1: "GET http://vcm-37988.vm.duke.edu:5000/ HTTP/1.1" from vcm-37988.vm.duke.edu @ Sat Mar  2 03:13:23 2024
+1: NOTE start to seng GET
+1: not in cache
+1: Requesting "GET http://vcm-37988.vm.duke.edu:5000/ HTTP/1.1" from vcm-37988.vm.duke.edu
+1: Received "HTTP/1.1 200 OK" from vcm-37988.vm.duke.edu
+1: Responding "HTTP/1.1 200 OK"
+1: NOTE cache start
+1: not cacheable because no etag or last-modified
+1: NOTE cache failed
+1: Tunnel closed
+
+11. test status: 400
+  used mocky.io to generate a 400 response
+
+Results:
+0: "GET http://run.mocky.io/v3/cd79f3cc-15f9-4b04-b767-ee2d64a25d3d HTTP/1.1" from run.mocky.io @ Sat Mar  2 03:23:35 2024
+0: not in cache
+0: Requesting "GET http://run.mocky.io/v3/cd79f3cc-15f9-4b04-b767-ee2d64a25d3d HTTP/1.1" from run.mocky.io
+0: Received "HTTP/1.1 400 Bad Request" from run.mocky.io
+0: Responding "HTTP/1.1 400 Bad Request"
+0: not cacheable because no etag or last-modified
+0: Tunnel closed
