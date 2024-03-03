@@ -36,11 +36,14 @@ class Session : public std::enable_shared_from_this<Session> {
     beast::tcp_stream server_stream_;
     asio::posix::stream_descriptor client_stream_;
     std::array<char, bufferSize> buffer_;
+    asio::io_context &ioc_;
 
 public:
     Session(asio::io_context& ioc, tcp::socket server_socket, int client_fd)
     : server_stream_(std::move(server_socket)),
-      client_stream_(ioc, client_fd) {}
+      client_stream_(ioc, client_fd) ,
+      ioc_(ioc)
+      {}
 
     void start(int req_id) {
         readFromClient(req_id);
@@ -52,16 +55,26 @@ private:
         auto self(shared_from_this());
         client_stream_.async_read_some(asio::buffer(buffer_),
             [this, self, req_id](boost::system::error_code ec, std::size_t length) {
+                // if(flag == 1){
+                //   return;
+                // }
                 if (!ec) {
                   // print
                     writeToServer(length, req_id);
-                }else if(ec == asio::error::eof){
+                }else if(ec == asio::error::eof||ec == boost::system::errc::connection_reset){
+                    // close(client_fd);
+                    //outMessage("test done"+std::to_string(req_id));
+                    // printNote(req_id,"thread done");
+                    // pthread_exit(NULL);
+                    //flag = 1;
+                    ioc_.stop();
                     return;
                 }
                 else {
                   printError(req_id,"Read from client failed: "+ec.message());
                     //std::cerr << "Read from client failed: " << ec.message() << std::endl;
                 }
+                return;
             });
 
     }
@@ -70,14 +83,17 @@ private:
         auto self(shared_from_this());
         asio::async_write(server_stream_, asio::buffer(buffer_, length),
             [this, self, req_id](boost::system::error_code ec, std::size_t length) {
+
                 if (!ec) {
                     readFromClient(req_id);
-                }else if(ec == asio::error::eof){
+                }else if(ec == asio::error::eof||ec == boost::system::errc::connection_reset){
+                    ioc_.stop();
                     return;
                 }else {
                   printError(req_id,"Write to server failed: "+ec.message());
                     //std::cerr << "Write to server failed: " << ec.message() << std::endl;
                 }
+                return;
             });
     }
 
@@ -87,12 +103,15 @@ private:
             [this, self, req_id](boost::system::error_code ec, std::size_t length) {
                 if (!ec) {
                     writeToClient(length,req_id);
-                }else if(ec == asio::error::eof){
+                }else if(ec == asio::error::eof||ec == boost::system::errc::connection_reset){
+                    //flag = 1;
+                    ioc_.stop();
                     return;
                 } else {
                   printError(req_id,"Read from server failed: "+ec.message());
                 //std::cerr << "Read from server failed: " << ec.message() << std::endl;
             }
+            return;
             });
     }
 
@@ -102,12 +121,14 @@ private:
             [this, self, req_id](boost::system::error_code ec, std::size_t /*length*/) {
                 if (!ec) {
                     readFromServer(req_id);
-                }else if(ec == asio::error::eof){
+                }else if(ec == asio::error::eof||ec == boost::system::errc::connection_reset){
+                    ioc_.stop();
                     return;
                 } else {
                   printError(req_id,"Write to client failed: "+ec.message());
                     //std::cerr << "Write to client failed: " << ec.message() << std::endl;
                 }
+              return;
             });
     }
 
@@ -196,6 +217,7 @@ void * Proxy::error502(int client_fd, int req_id){
 
 void * Proxy::sendCONNECT( Request req, int client_fd, int req_id) {
     asio::io_context ioc;
+    //std::unique_ptr<asio::io_context::work> work = std::make_unique<asio::io_context::work>(ioc);
     tcp::resolver resolver(ioc);
     auto endpoints = resolver.resolve(req.getHost(), req.getPort());
     tcp::socket server_socket(ioc);
@@ -262,6 +284,7 @@ void * Proxy::sendPOST(Request req, int client_fd, int req_id){
   try{
   Response final_res(res_get);
   //outMessage("response recieved from server"+std::to_string(req_id)+" "+req.getHost()+": "+final_res.getResponse());
+  outRawMessage(std::to_string(req_id)+": Received \""+final_res.getResponseLine()+"\" from "+req.getHost());
   outRawMessage(std::to_string(req_id)+": Responding \""+final_res.getResponseLine()+"\"");
 
 
@@ -385,7 +408,7 @@ try{
       printNote(req_id,"cache failed");
     }
     pthread_mutex_unlock(&cache_lock);
-  }else{
+      }else{
     printNote(req_id,"cache failed because chunked");
   }
   //outMessage("after cache");
@@ -461,6 +484,7 @@ void* Proxy::recvRequest(void *args)
   }
   if(reqPtr.getMethod()=="CONNECT"){
     sendCONNECT(reqPtr, client_fd, req_id);
+    outRawMessage(std::to_string(req_id)+": Tunnel closed");
   }
 
   if(reqPtr.getMethod()!="GET" && reqPtr.getMethod()!="POST" && reqPtr.getMethod()!="CONNECT"){
@@ -473,7 +497,7 @@ void* Proxy::recvRequest(void *args)
 
   close(client_fd);
   //outMessage("test done"+std::to_string(req_id));
-  outRawMessage(std::to_string(req_id)+": Tunnel closed");
+  printNote(req_id,"thread done");
   pthread_exit(NULL);
   return NULL;
   
